@@ -1,0 +1,50 @@
+create database msims;
+use msims;
+
+# General table
+CREATE TABLE user (
+    id INT(20) NOT NULL AUTO_INCREMENT,
+    userId INT(11) NOT NULL,
+    username VARCHAR(30) NOT NULL,
+    password VARCHAR(30) NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    faculty VARCHAR(10) NOT NULL,
+    phone VARCHAR(11) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    salt VARCHAR(50) NOT NULL
+)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+CREATE TABLE course (
+    id INT(20) NOT NULL AUTO_INCREMENT,
+    courseCode VARCHAR(10) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    credit INT(2) NOT NULL,
+    teacher VARCHAR(100) NOT NULL,
+    duration VARCHAR(50) NOT NULL,
+    time VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL
+)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+CREATE TABLE file (
+    id INT(20) NOT NULL AUTO_INCREMENT,
+    fileId VARCHAR(100) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    path VARCHAR(255) NOT NULL
+)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+# Moddle tables
+CREATE TABLE courseComponent (
+    id INT(20) NOT NULL AUTO_INCREMENT,
+    courseCode VARCHAR(10) NOT NULL,
+    component VARCHAR(255) NOT NULL,
+    fileId VARCHAR(100) NOT NULL
+)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+create table bulletinBoard(
+	id INT(20) NOT NULL AUTO_INCREMENT,
+    courseCode VARCHAR(10) NOT NULL,
+    content VARCHAR(10) NOT NULL,
+    date VARCHAR(10) NOT NULL
+) ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
