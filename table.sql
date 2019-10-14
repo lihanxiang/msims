@@ -4,12 +4,12 @@ use msims;
 # General table
 CREATE TABLE user (
     id INT(20) NOT NULL AUTO_INCREMENT,
-    userId INT(11) NOT NULL,
+    userId INT(20) NOT NULL,
     username VARCHAR(30) NOT NULL,
     password VARCHAR(30) NOT NULL,
-    gender VARCHAR(10) NOT NULL,
-    faculty VARCHAR(10) NOT NULL,
-    phone VARCHAR(11) NOT NULL,
+    gender VARCHAR(20) NOT NULL,
+    faculty VARCHAR(20) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
     email VARCHAR(50) NOT NULL,
     role VARCHAR(255) NOT NULL,
     salt VARCHAR(50) NOT NULL
@@ -17,34 +17,77 @@ CREATE TABLE user (
 
 CREATE TABLE course (
     id INT(20) NOT NULL AUTO_INCREMENT,
-    courseCode VARCHAR(10) NOT NULL,
+    courseCode VARCHAR(20) NOT NULL,
     name VARCHAR(50) NOT NULL,
     credit INT(2) NOT NULL,
     teacher VARCHAR(100) NOT NULL,
-    duration VARCHAR(50) NOT NULL,
+    duration VARCHAR(100) NOT NULL,
     time VARCHAR(255) NOT NULL,
     description TEXT NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
 CREATE TABLE file (
     id INT(20) NOT NULL AUTO_INCREMENT,
-    fileId VARCHAR(100) NOT NULL,
+    fileId VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     path VARCHAR(255) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
 # Moddle tables
-CREATE TABLE courseComponent (
+CREATE TABLE course_component (
     id INT(20) NOT NULL AUTO_INCREMENT,
-    courseCode VARCHAR(10) NOT NULL,
+    courseCode VARCHAR(20) NOT NULL,
     component VARCHAR(255) NOT NULL,
-    fileId VARCHAR(100) NOT NULL
+    fileId VARCHAR(255) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
-create table bulletinBoard(
-	id INT(20) NOT NULL AUTO_INCREMENT,
-    courseCode VARCHAR(10) NOT NULL,
-    content VARCHAR(10) NOT NULL,
-    date VARCHAR(10) NOT NULL
-) ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+CREATE TABLE bulletin_board (
+    id INT(20) NOT NULL AUTO_INCREMENT,
+    courseCode VARCHAR(20) NOT NULL,
+    size INT(20) NOT NULL
+)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+CREATE TABLE bulletin_board_message (
+    id INT(20) NOT NULL AUTO_INCREMENT,
+    bulletinBoardId INT(20) NOT NULL,
+    content text NOT NULL,
+    date VARCHAR(20) NOT NULL
+)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+CREATE TABLE discussion (
+    id INT(20) NOT NULL AUTO_INCREMENT,
+    courseCode VARCHAR(20) NOT NULL,
+    pid INT(20) NOT NULL,
+    content text NOT NULL,
+    userId INT(20) NOT NULL,
+    date VARCHAR(20) NOT NULL
+)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+#CREATE TABLE  (
+    
+#)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+CREATE TABLE submission (
+    id INT(20) NOT NULL AUTO_INCREMENT,
+    title VARCHAR(20) NOT NULL,
+    description VARCHAR(20) NOT NULL,
+    submissionStatus VARCHAR(20) NOT NULL,
+    gradingStatus VARCHAR(20) NOT NULL,
+    dueStatus VARCHAR(20) NOT NULL,
+    lastModified VARCHAR(20) NOT NULL,
+    fileId VARCHAR(20) NOT NULL,
+    submissionFileId VARCHAR(20) NOT NULL,
+    comment text NOT NULL
+)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+CREATE TABLE assessment (
+    id INT(20) NOT NULL AUTO_INCREMENT,
+    submissionId INT(20) NOT NULL,
+    score DOUBLE(5 , 2 ) NOT NULL,
+    comment TEXT NOT NULL
+)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+
+
+
 

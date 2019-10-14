@@ -8,5 +8,5 @@ public class CourseComponent {
     private int id;
     private String courseCode;
     private String component;        //Course Outline, Assignment...
-    private String fileId;          //1,2,3,4...
+    private String fileId;
 }

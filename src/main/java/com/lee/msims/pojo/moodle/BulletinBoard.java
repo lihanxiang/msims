@@ -10,6 +10,5 @@ public class BulletinBoard {
 
     private int id;
     private String courseCode;
-    private String content;
-    private String date;
+    private int size;
 }
