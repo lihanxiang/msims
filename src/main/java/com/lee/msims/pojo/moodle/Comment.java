@@ -2,8 +2,12 @@ package com.lee.msims.pojo.moodle;
 
 import lombok.Data;
 
+/**
+ * Comments in the discussion board
+ */
+
 @Data
-public class Discussion {
+public class Comment {
 
     private int id;
     private String courseCode;

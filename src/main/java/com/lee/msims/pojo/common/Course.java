@@ -1,4 +1,4 @@
-package com.lee.msims.pojo;
+package com.lee.msims.pojo.common;
 
 import lombok.Data;
 

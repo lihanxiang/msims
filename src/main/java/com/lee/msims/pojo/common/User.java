@@ -1,4 +1,4 @@
-package com.lee.msims.pojo;
+package com.lee.msims.pojo.common;
 
 import lombok.Data;
 
@@ -13,7 +13,5 @@ public class User {
     private String faculty;
     private String phone;
     private String email;
-    private String role;
-    private String salt;
-
+    private String roleSet;
 }

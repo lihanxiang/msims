@@ -1,10 +1,22 @@
 package com.lee.msims.service;
 
-import com.lee.msims.pojo.User;
+import com.lee.msims.pojo.common.User;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface UserService {
 
-    User getByName(String username);
+    void addUser(User user);
+
+    // Update
+    void updateUserInfo(User user);
+
+    // Select
+    User getUserById(int id);
+
+    User getUserByUserId(String userId);
+
+    User getUserByUsername(String username);
+
+    // Delete
+    void deleteUser(User user);
 }

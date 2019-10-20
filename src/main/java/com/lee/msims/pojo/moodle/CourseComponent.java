@@ -7,6 +7,6 @@ public class CourseComponent {
 
     private int id;
     private String courseCode;
-    private String component;        //Course Outline, Assignment...
+    private String componentType;        //Course Outline, Assignment...
     private String fileId;
 }
