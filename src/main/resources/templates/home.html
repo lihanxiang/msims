@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,7 @@
         <div class=" navbar-collapse">
             <div>
                 <a class="navbar-brand" href="/">&nbsp;
-                    <img src="2.png" width="30" height="30" alt="">
+                    <img src="image/2.png" width="30" height="30" alt="">
                 </a>
             </div>
             <div>
@@ -37,8 +37,7 @@
         <div>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">
-                        &nbsp;Sign In
+                    <a class="nav-link" href="#" th:text="${userId}">
                     </a>
                 </li>&nbsp;
             </ul>

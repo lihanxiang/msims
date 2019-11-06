@@ -6,7 +6,7 @@ import lombok.Data;
 public class BulletinBoardMessage {
 
     private int id;
-    private int bulletinBoardId;
+    private int boardId;
     private String content;
     private String date;
 }

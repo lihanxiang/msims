@@ -2,12 +2,10 @@ package com.lee.msims.pojo.moodle;
 
 import lombok.Data;
 
-/**
- * only post by teacher
- */
 @Data
-public class BulletinBoard {
+public class Component {
 
     private int id;
     private String courseCode;
+    private String type;        //Course Outline, Assignment...
 }

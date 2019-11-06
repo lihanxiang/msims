@@ -3,21 +3,29 @@ package com.lee.msims.service.impl;
 import com.lee.msims.mapper.UserMapper;
 import com.lee.msims.pojo.common.User;
 import com.lee.msims.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lee.msims.util.Encryption;
+import com.lee.msims.util.RoleConverter;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
+    private final Encryption encryption;
+    private final RoleConverter roleConverter;
 
-    public UserServiceImpl(UserMapper userMapper) {
+    public UserServiceImpl(UserMapper userMapper, Encryption encryption, RoleConverter roleConverter) {
         this.userMapper = userMapper;
+        this.encryption = encryption;
+        this.roleConverter = roleConverter;
     }
 
     @Override
     public void addUser(User user) {
-
+        encryption.encryptPassword(user);
+        userMapper.addUser(user);
     }
 
     @Override
@@ -38,6 +46,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByUsername(String username) {
         return userMapper.getUserByUsername(username);
+    }
+
+    @Override
+    public Set<String> getRoles(String userId) {
+        return roleConverter.convertRolesIntoRoleSet(userMapper.getUserByUserId(userId).getRoles());
     }
 
     @Override

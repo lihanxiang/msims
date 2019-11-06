@@ -2,46 +2,58 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8c0aa33-d3c9-4821-ad04-6a4f9e7e9eda" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_cache_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_config_core_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_config_ogdl_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_cipher_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_core_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_hash_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_event_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_lang_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_spring_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_spring_boot_starter_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_spring_boot_web_starter_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_web_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/mapper/CourseMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/common/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/CourseComponentFileSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/shiro/ShiroConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_8_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_7_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_core_1_3_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_core_1_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/mapper/BulletinBoardMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/mapper/CommentMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/mapper/ComponentMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/service/CourseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/service/impl/CourseServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/util/CourseTimeConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/util/FileIDBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/util/RoleConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/8.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_thymeleaf_extras_thymeleaf_extras_springsecurity4_unknown.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msims.iml" beforeDir="false" afterPath="$PROJECT_DIR$/msims.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/MsimsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/MsimsApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/controller/ForwardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/controller/ForwardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/common/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/common/File.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/common/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/CourseComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/CourseComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/Discussion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/controller/UploadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/controller/UploadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/mapper/CourseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/mapper/CourseMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/common/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/common/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/common/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/common/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/common/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/BulletinBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/BulletinBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/BulletinBoardMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/BulletinBoardMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/CourseComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/pojo/moodle/CourseComponentFileSet.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/shiro/CustomizeRealm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/shiro/CustomizeRealm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/shiro/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/shiro/ShiroConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lee/msims/util/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lee/msims/util/Encryption.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fileUpload.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fileUpload.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/success.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lee/msims/MsimsApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lee/msims/MsimsApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/table.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/error.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/fileUpload.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/fileUpload.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/success.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,17 +61,22 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="HTML File" />
         <option value="Class" />
+        <option value="Interface" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -81,20 +98,23 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Shiro" />
+    <property name="last_opened_file_path" value="F:/Git/bin/git.exe" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\static\image" />
       <recent name="C:\Users\94545\Desktop\msims\src\main\resources\templates" />
       <recent name="C:\Users\94545\Desktop\msims\src\main\java\com\lee\msims" />
     </key>
@@ -111,14 +131,60 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="MsimsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <component name="RunManager" selected="JUnit.MsimsApplicationTests.addUser">
+    <configuration name="MsimsApplicationTests.addUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msims" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lee.msims.MsimsApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lee.msims.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lee.msims" />
+      <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
+      <option name="METHOD_NAME" value="addUser" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MsimsApplicationTests.generateID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="msims" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lee.msims.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lee.msims" />
+      <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
+      <option name="METHOD_NAME" value="generateID" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MsimsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="msims" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lee.msims.MsimsApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
+      <item itemvalue="JUnit.MsimsApplicationTests.generateID" />
+      <item itemvalue="Spring Boot.MsimsApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
+        <item itemvalue="JUnit.MsimsApplicationTests.generateID" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -140,7 +206,26 @@
       <workItem from="1571056646064" duration="1196000" />
       <workItem from="1571370274970" duration="2780000" />
       <workItem from="1571388325681" duration="562000" />
-      <workItem from="1571543664749" duration="8037000" />
+      <workItem from="1571543664749" duration="12260000" />
+      <workItem from="1571625015683" duration="5238000" />
+      <workItem from="1571637496727" duration="12456000" />
+      <workItem from="1571704322903" duration="8179000" />
+      <workItem from="1571745613431" duration="3508000" />
+      <workItem from="1571820896693" duration="512000" />
+      <workItem from="1571830016300" duration="598000" />
+      <workItem from="1571874493714" duration="591000" />
+      <workItem from="1571908732547" duration="1803000" />
+      <workItem from="1571913221539" duration="651000" />
+      <workItem from="1571922998205" duration="3200000" />
+      <workItem from="1571965656547" duration="5936000" />
+      <workItem from="1572168681534" duration="180000" />
+      <workItem from="1572185112584" duration="1759000" />
+      <workItem from="1572228525129" duration="596000" />
+      <workItem from="1572242458702" duration="2433000" />
+      <workItem from="1572528839136" duration="2267000" />
+      <workItem from="1572570608067" duration="3925000" />
+      <workItem from="1572781697477" duration="616000" />
+      <workItem from="1573003156781" duration="542000" />
     </task>
     <servers />
   </component>

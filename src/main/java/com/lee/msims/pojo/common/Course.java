@@ -7,6 +7,7 @@ public class Course {
 
     private int id;
     private String courseCode;
+    private String faculty;
     private String name;
     private double credit;
     private String teacher;

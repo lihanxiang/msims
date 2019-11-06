@@ -7,9 +7,14 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Set;
+
 
 public class CustomizeRealm extends AuthorizingRealm {
 
@@ -18,16 +23,21 @@ public class CustomizeRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        String userId = (String)principalCollection.getPrimaryPrincipal();
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        Set<String> role = userService.getRoles(userId);
+        authorizationInfo.setRoles(role);
+        return authorizationInfo;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        String username = (String)authenticationToken.getPrincipal();
-        User user = userService.getUserByUsername(username);
+        String userId = authenticationToken.getPrincipal().toString();
+        User user = userService.getUserByUserId(userId);
         return new SimpleAuthenticationInfo(
-                user.getUsername(),
+                user.getUserId(),
                 user.getPassword(),
+                ByteSource.Util.bytes(user.getSalt()),
                 getName()
         );
     }

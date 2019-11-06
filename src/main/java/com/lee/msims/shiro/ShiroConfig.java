@@ -1,5 +1,9 @@
 package com.lee.msims.shiro;
 
+import com.lee.msims.util.Encryption;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -10,22 +14,40 @@ import org.springframework.context.annotation.Configuration;
 public class ShiroConfig {
 
     @Bean
-    CustomizeRealm customizeRealm(){
-        return new CustomizeRealm();
+    public CustomizeRealm customizeRealm(){
+        CustomizeRealm realm = new CustomizeRealm();
+        realm.setCredentialsMatcher(hashedCredentialsMatcher());
+        return realm;
     }
 
     @Bean
-    DefaultWebSecurityManager securityManager(){
+    public DefaultWebSecurityManager securityManager(){
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(customizeRealm());
         return manager;
     }
 
     @Bean
-    ShiroFilterChainDefinition shiroFilterChainDefinition(){
+    public ShiroFilterChainDefinition shiroFilterChainDefinition(){
         DefaultShiroFilterChainDefinition definition = new DefaultShiroFilterChainDefinition();
-        definition.addPathDefinition("/login", "anon");
-        definition.addPathDefinition("/**", "authc");
+        definition.addPathDefinition("/user/pre-login", "anon");
+        //definition.addPathDefinition("/user/**", "authc");
         return definition;
+    }
+
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher(){
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        Encryption encryption = new Encryption();
+        hashedCredentialsMatcher.setHashAlgorithmName(encryption.getAlgorithmName());
+        hashedCredentialsMatcher.setHashIterations(encryption.getIterationTime());
+        return hashedCredentialsMatcher;
+    }
+
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
+        advisor.setSecurityManager(securityManager);
+        return advisor;
     }
 }

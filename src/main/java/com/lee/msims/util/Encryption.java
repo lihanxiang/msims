@@ -1,6 +1,7 @@
 package com.lee.msims.util;
 
-/*
+
+import com.lee.msims.pojo.common.User;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
@@ -13,15 +14,7 @@ public class Encryption {
 
     private String algorithmName = "MD5";
 
-    private int iterationTimes = 5;
-
-    public SecureRandomNumberGenerator getRandomNumberGenerator() {
-        return randomNumberGenerator;
-    }
-
-    public void setRandomNumberGenerator(SecureRandomNumberGenerator randomNumberGenerator) {
-        this.randomNumberGenerator = randomNumberGenerator;
-    }
+    public int iterationTime = 5;
 
     public String getAlgorithmName() {
         return algorithmName;
@@ -31,21 +24,28 @@ public class Encryption {
         this.algorithmName = algorithmName;
     }
 
-    public int getIterationTimes() {
-        return iterationTimes;
+    public int getIterationTime() {
+        return iterationTime;
     }
 
-    public void setIterationTimes(int iterationTimes) {
-        this.iterationTimes = iterationTimes;
+    public void setIterationTime(int iterationTime) {
+        this.iterationTime = iterationTime;
+    }
+
+    public SecureRandomNumberGenerator getRandomNumberGenerator() {
+        return randomNumberGenerator;
+    }
+
+    public void setRandomNumberGenerator(SecureRandomNumberGenerator randomNumberGenerator) {
+        this.randomNumberGenerator = randomNumberGenerator;
     }
 
     public void encryptPassword(User user){
         if (user.getPassword() != null){
             user.setSalt(randomNumberGenerator.nextBytes().toHex());
-            String password = new SimpleHash(algorithmName, user.getPassword(),
-                    ByteSource.Util.bytes(user.getSalt()), iterationTimes).toHex();
+            String password = new SimpleHash(getAlgorithmName(), user.getPassword(),
+                    ByteSource.Util.bytes(user.getSalt()), getIterationTime()).toHex();
             user.setPassword(password);
         }
     }
 }
-*/

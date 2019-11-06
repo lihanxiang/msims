@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 
     // Insert
-    @Insert("INSERT INTO user (userId, username, password, gender, faculty, phone, email, roleSet)" +
-            "VALUES(#{userId}, #{username}, #{password}, #{gender}, #{faculty}, #{phone}, #{email}, #{roleSet})")
+    @Insert("INSERT INTO user (userId, username, password, gender, faculty, phone, email, roles, salt)" +
+            "VALUES(#{userId}, #{username}, #{password}, #{gender}, #{faculty}, #{phone}, #{email}, #{roles}, #{salt})")
     void addUser(User user);
 
     // Update
@@ -18,13 +18,13 @@ public interface UserMapper {
     void updateUserInfo(User user);
 
     // Select
-    @Select("SELECT FROM user WHERE id = #{id}")
+    @Select("SELECT * FROM user WHERE id = #{id}")
     User getUserById(int id);
 
-    @Select("SELECT FROM user WHERE userId = #{userId}")
+    @Select("SELECT * FROM user WHERE userId = #{userId}")
     User getUserByUserId(String userId);
 
-    @Select("SELECT FROM user WHERE username = #{username}")
+    @Select("SELECT * FROM user WHERE username = #{username}")
     User getUserByUsername(String username);
 
     // Delete

@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 
-@RestController
+@Controller
+@RequestMapping("upload")
 public class UploadController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)

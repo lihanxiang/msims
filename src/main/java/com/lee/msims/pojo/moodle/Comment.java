@@ -12,7 +12,9 @@ public class Comment {
     private int id;
     private String courseCode;
     private int pid;
+    private int commenterId;
+    private int respondentId;
     private String content;
-    private int userId;
+    private String type;
     private String date;
 }

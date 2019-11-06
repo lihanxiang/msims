@@ -1,7 +1,8 @@
 package com.lee.msims.service;
 
 import com.lee.msims.pojo.common.User;
-import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 public interface UserService {
 
@@ -16,6 +17,8 @@ public interface UserService {
     User getUserByUserId(String userId);
 
     User getUserByUsername(String username);
+
+    Set<String> getRoles(String userId);
 
     // Delete
     void deleteUser(User user);
