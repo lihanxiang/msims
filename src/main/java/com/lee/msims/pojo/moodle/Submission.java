@@ -6,13 +6,10 @@ import lombok.Data;
 public class Submission {
 
     private int id;
-    private String title;
-    private String description;
-    private String submissionStatus;
-    private String gradingStatus;
-    private String dueStatus;
-    private String lastModified;
+    private int assignmentId;
+    private String userId;
     private String fileId;
-    private String submissionFileId;
+    private String author;
     private String comment;
+    private int isGraded;
 }

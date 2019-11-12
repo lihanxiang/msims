@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("user")
-public class ForwardController {
+public class UserController {
 
     private final UserService userService;
 
-    public ForwardController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
