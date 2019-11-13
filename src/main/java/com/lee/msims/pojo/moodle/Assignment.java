@@ -8,9 +8,7 @@ public class Assignment {
 
     private int id;
     private int componentId;
+    private String title;
     private String description;
-    private String submissionStatus;
-    private String gradingStatus;
     private String dueStatus;
-    private String lastModified;
 }

@@ -68,10 +68,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Interface" />
         <option value="CSS File" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -228,6 +228,8 @@
       <workItem from="1572781697477" duration="616000" />
       <workItem from="1573003156781" duration="542000" />
       <workItem from="1573519005871" duration="1492000" />
+      <workItem from="1573559514329" duration="362000" />
+      <workItem from="1573608602420" duration="6004000" />
     </task>
     <servers />
   </component>

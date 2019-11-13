@@ -1,4 +1,4 @@
-package com.lee.msims.mapper;
+package com.lee.msims.mapper.moodle;
 
 import com.lee.msims.pojo.moodle.Comment;
 import org.apache.ibatis.annotations.*;

@@ -1,4 +1,4 @@
-package com.lee.msims.mapper;
+package com.lee.msims.mapper.moodle;
 
 import com.lee.msims.pojo.moodle.BulletinBoard;
 import com.lee.msims.pojo.moodle.BulletinBoardMessage;
