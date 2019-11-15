@@ -10,4 +10,8 @@ public class BulletinBoard {
 
     private int id;
     private String courseCode;
+
+    public BulletinBoard(String courseCode) {
+        this.courseCode = courseCode;
+    }
 }

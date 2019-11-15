@@ -10,5 +10,14 @@ public class Assignment {
     private int componentId;
     private String title;
     private String description;
+    private String deadline;
     private String dueStatus;
+
+    public Assignment(int componentId, String title, String description, String deadline, String dueStatus) {
+        this.componentId = componentId;
+        this.title = title;
+        this.description = description;
+        this.deadline = deadline;
+        this.dueStatus = dueStatus;
+    }
 }

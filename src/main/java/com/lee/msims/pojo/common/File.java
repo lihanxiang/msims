@@ -10,4 +10,11 @@ public class File {
     private String fileId;  //faculty_file_id
     private String name;
     private String path;
+
+    public File(String faculty, String fileId, String name, String path) {
+        this.faculty = faculty;
+        this.fileId = fileId;
+        this.name = name;
+        this.path = path;
+    }
 }

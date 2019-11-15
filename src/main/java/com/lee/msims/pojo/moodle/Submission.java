@@ -12,4 +12,13 @@ public class Submission {
     private String author;
     private String comment;
     private int isGraded;
+
+    public Submission(int assignmentId, String userId, String fileId, String author, String comment, int isGraded) {
+        this.assignmentId = assignmentId;
+        this.userId = userId;
+        this.fileId = fileId;
+        this.author = author;
+        this.comment = comment;
+        this.isGraded = isGraded;
+    }
 }

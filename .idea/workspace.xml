@@ -80,6 +80,11 @@
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:/Program Files/apache-maven-3.6.2" />
+      </MavenGeneralSettings>
+    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
@@ -111,7 +116,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -230,6 +235,9 @@
       <workItem from="1573519005871" duration="1492000" />
       <workItem from="1573559514329" duration="362000" />
       <workItem from="1573608602420" duration="7351000" />
+      <workItem from="1573780801447" duration="488000" />
+      <workItem from="1573781296601" duration="1333000" />
+      <workItem from="1573787647969" duration="1370000" />
     </task>
     <servers />
   </component>

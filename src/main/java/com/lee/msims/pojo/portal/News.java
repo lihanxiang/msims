@@ -9,4 +9,11 @@ public class News {
     private String faculty;
     private String content;
     private String date;
+
+    public News(String title, String faculty, String content, String date) {
+        this.title = title;
+        this.faculty = faculty;
+        this.content = content;
+        this.date = date;
+    }
 }
