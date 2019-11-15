@@ -1,4 +1,4 @@
-package com.lee.msims.mapper;
+package com.lee.msims.mapper.common;
 
 import com.lee.msims.pojo.common.Course;
 import org.apache.ibatis.annotations.*;
@@ -36,8 +36,6 @@ public interface CourseMapper {
 
     @Select("SELECT * FROM student_course WHERE studentId = #{studentId}")
     List<Course> getCourseListByStudent(String studentId);
-
-
 
     // Delete
     @Delete("DELETE FROM student_course WHERE userId = #{userId} AND courseCode = #{courseCode}")

@@ -1,4 +1,4 @@
-package com.lee.msims.mapper;
+package com.lee.msims.mapper.common;
 
 import com.lee.msims.pojo.common.User;
 import org.apache.ibatis.annotations.*;

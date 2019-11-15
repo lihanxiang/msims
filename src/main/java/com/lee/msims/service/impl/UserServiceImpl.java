@@ -1,6 +1,6 @@
 package com.lee.msims.service.impl;
 
-import com.lee.msims.mapper.UserMapper;
+import com.lee.msims.mapper.common.UserMapper;
 import com.lee.msims.pojo.common.User;
 import com.lee.msims.service.UserService;
 import com.lee.msims.util.Encryption;

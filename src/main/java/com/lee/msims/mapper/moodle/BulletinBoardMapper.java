@@ -32,4 +32,7 @@ public interface BulletinBoardMapper {
     // Delete
     @Delete("Delete FROM bulletin_board_message WHERE id = #{id}")
     void deleteMessageOnBoard(int id);
+
+    @Delete("Delete FROM bulletin_board WHERE id = #{id}")
+    void deleteBoard(int id);
 }

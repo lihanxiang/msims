@@ -1,9 +1,8 @@
 package com.lee.msims.service.impl;
 
-import com.lee.msims.mapper.CourseMapper;
+import com.lee.msims.mapper.common.CourseMapper;
 import com.lee.msims.pojo.common.Course;
 import com.lee.msims.service.CourseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
