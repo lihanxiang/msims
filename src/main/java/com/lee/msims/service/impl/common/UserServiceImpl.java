@@ -1,8 +1,8 @@
-package com.lee.msims.service.impl;
+package com.lee.msims.service.impl.common;
 
 import com.lee.msims.mapper.common.UserMapper;
 import com.lee.msims.pojo.common.User;
-import com.lee.msims.service.UserService;
+import com.lee.msims.service.common.UserService;
 import com.lee.msims.util.Encryption;
 import com.lee.msims.util.RoleConverter;
 import org.springframework.stereotype.Service;

@@ -26,5 +26,5 @@ public interface FileMapper {
 
     // Delete
     @Delete("DELETE FROM file WHERE id = #{id}")
-    void DeleteFile(File file);
+    void deleteFile(File file);
 }

@@ -1,4 +1,4 @@
-package com.lee.msims.service;
+package com.lee.msims.service.common;
 
 import com.lee.msims.pojo.common.Course;
 import org.apache.ibatis.annotations.*;

@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface ComponentMapper {
@@ -21,10 +23,10 @@ public interface ComponentMapper {
 
     // Select
     @Select("SELECT * FROM component WHERE courseCode = #{courseCode}")
-    void getAllComponentsOfCourse(String courseCode);
+    List<Component> getAllComponentsOfCourse(String courseCode);
 
-    @Select("SELECT * FROM component_file WHERE componentId = #{componentId}")
-    void getAllFilesOfComponent(int componentId);
+    @Select("SELECT fileId FROM component_file WHERE componentId = #{componentId}")
+    List<String> getAllFilesOfComponent(int componentId);
 
     // Delete
     @Delete("DELETE FROM component WHERE id = #{id}")

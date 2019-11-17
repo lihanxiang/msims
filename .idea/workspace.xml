@@ -70,8 +70,8 @@
         <option value="HTML File" />
         <option value="CSS File" />
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -237,7 +237,8 @@
       <workItem from="1573608602420" duration="7351000" />
       <workItem from="1573780801447" duration="488000" />
       <workItem from="1573781296601" duration="1333000" />
-      <workItem from="1573787647969" duration="5025000" />
+      <workItem from="1573787647969" duration="5193000" />
+      <workItem from="1573954451813" duration="4827000" />
     </task>
     <servers />
   </component>

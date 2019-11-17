@@ -30,6 +30,6 @@ public interface SubmissionMapper {
     List<Submission> getSubmissionByUserId(int userId);
 
     // Delete
-    @Delete("DELETE FROM submission WHERE ")
+    @Delete("DELETE FROM submission WHERE id = #{id}")
     void deleteSubmission(int id);
 }

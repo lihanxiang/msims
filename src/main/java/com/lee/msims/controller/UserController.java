@@ -1,7 +1,7 @@
 package com.lee.msims.controller;
 
 import com.lee.msims.pojo.common.User;
-import com.lee.msims.service.UserService;
+import com.lee.msims.service.common.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
