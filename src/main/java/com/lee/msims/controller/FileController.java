@@ -5,7 +5,6 @@ import com.lee.msims.service.common.FileService;
 import com.lee.msims.service.common.UserService;
 import com.lee.msims.util.FileIDBuilder;
 import org.apache.shiro.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +30,7 @@ public class FileController {
 
     @RequestMapping(value = "pre-upload", method = RequestMethod.GET)
     public String preUpload(){
-        return "fileUpload";
+        return "fileSubmission";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)

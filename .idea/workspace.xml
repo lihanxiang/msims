@@ -67,12 +67,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="FxmlFile" />
         <option value="Interface" />
         <option value="Class" />
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
         <option value="HTML4 File" />
       </list>
     </option>
@@ -121,13 +121,15 @@
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\工作\msims\src\main\resources\templates" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\94545\Desktop\msims\src\main\resources\static\image" />
       <recent name="C:\Users\94545\Desktop\msims\src\main\resources\templates" />
       <recent name="C:\Users\94545\Desktop\msims\src\main\java\com\lee\msims" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\工作\msims\src\main\resources\templates\student" />
+      <recent name="C:\工作\msims\src\main\resources\templates\common" />
+      <recent name="C:\工作\msims\src\main\resources\templates" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -263,7 +265,7 @@
       <workItem from="1573787647969" duration="5193000" />
       <workItem from="1573954451813" duration="7736000" />
       <workItem from="1574058041740" duration="2502000" />
-      <workItem from="1574060599115" duration="5020000" />
+      <workItem from="1574060599115" duration="8361000" />
     </task>
     <servers />
   </component>
