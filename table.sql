@@ -83,15 +83,6 @@ CREATE TABLE comment (
 
 CREATE TABLE submission (
     id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    componentId INT(32) NOT NULL,
-    title VARCHAR(32) NOT NULL,
-    description TEXT NOT NULL,
-    deadline VARCHAR(32) NOT NULL,
-    dueStatus VARCHAR(32) NOT NULL
-)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
-
-CREATE TABLE submission (
-    id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     assignmentId INT(32) NOT NULL,
     userId VARCHAR(32) NOT NULL,
     fileId VARCHAR(32) NOT NULL,
@@ -123,6 +114,8 @@ CREATE TABLE news_file (
     newsId INT(32) NOT NULL,
     fileId VARCHAR(32) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
+
 
 
 
