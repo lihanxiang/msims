@@ -9,3 +9,7 @@ VALUES ("CN102", "FIT", "COMPUTER NETWORKS APPLIED TECHNOLOGIES", 2, "鄭澤峰"
 
 INSERT INTO course (courseCode, faculty, name, credit, teacher, duration, time, description) 
 VALUES ("CN106", "FIT", "NETWORK PROGRAMMING", 4, "趙慶林", "September 4th - December 17", "Thursday@09:00-12:35", "description");
+
+update user set faculty = "FIT" WHERE id = 2;
+
+delete FROM file where id = 1;

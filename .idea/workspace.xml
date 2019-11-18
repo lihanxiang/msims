@@ -72,8 +72,8 @@
         <option value="Interface" />
         <option value="Class" />
         <option value="HTML File" />
-        <option value="HTML4 File" />
         <option value="JavaScript File" />
+        <option value="HTML4 File" />
       </list>
     </option>
   </component>
@@ -106,7 +106,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../blog" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -118,7 +118,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -175,6 +175,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MsimsApplicationTests.getUserByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="msims" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lee.msims.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lee.msims" />
+      <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
+      <option name="METHOD_NAME" value="getUserByUserId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MsimsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="msims" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.lee.msims.MsimsApplication" />
@@ -189,10 +205,12 @@
       <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
       <item itemvalue="JUnit.MsimsApplicationTests.generateID" />
       <item itemvalue="Spring Boot.MsimsApplication" />
+      <item itemvalue="JUnit.MsimsApplicationTests.getUserByUserId" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
+        <item itemvalue="JUnit.MsimsApplicationTests.getUserByUserId" />
         <item itemvalue="JUnit.MsimsApplicationTests.generateID" />
       </list>
     </recent_temporary>
@@ -244,6 +262,8 @@
       <workItem from="1573781296601" duration="1333000" />
       <workItem from="1573787647969" duration="5193000" />
       <workItem from="1573954451813" duration="7736000" />
+      <workItem from="1574058041740" duration="2502000" />
+      <workItem from="1574060599115" duration="5020000" />
     </task>
     <servers />
   </component>

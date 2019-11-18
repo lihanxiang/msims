@@ -18,13 +18,22 @@ public class MsimsApplicationTests {
 
     @Test
     public void addUser(){
-        User user = new User("testUserId", "testUsername","testPassword", "testMale",
+        /*User user = new User("testUserId", "testUsername","testPassword", "testMale",
                 "testFaculty", "testPhone", "testEmail", "testRoles");
-        userService.addUser(user);
+        userService.addUser(user);*/
+
+        User user1 = new User("123", "123","123", "123",
+                "123", "123", "123", "123");
+        userService.addUser(user1);
     }
 
     @Test
     public void generateID(){
         System.out.println(new FileIDBuilder().generateFileId());
+    }
+
+    @Test
+    public void getUserByUserId(){
+        System.out.println(userService.getUserByUserId("testUserId").getUsername());
     }
 }

@@ -22,7 +22,7 @@ public interface UserMapper {
     User getUserById(int id);
 
     @Select("SELECT * FROM user WHERE userId = #{userId}")
-    User getUserByUserId(String userId);
+    User getUserByUserId(@Param("userId") String userId);
 
     @Select("SELECT * FROM user WHERE username = #{username}")
     User getUserByUsername(String username);

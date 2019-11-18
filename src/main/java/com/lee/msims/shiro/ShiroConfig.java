@@ -30,8 +30,9 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition(){
         DefaultShiroFilterChainDefinition definition = new DefaultShiroFilterChainDefinition();
-        definition.addPathDefinition("/user/pre-login", "anon");
-        //definition.addPathDefinition("/user/**", "authc");
+        definition.addPathDefinition("/user/login-page", "anon");
+        definition.addPathDefinition("/user/login", "anon");
+        definition.addPathDefinition("/user/**", "authc");
         return definition;
     }
 
