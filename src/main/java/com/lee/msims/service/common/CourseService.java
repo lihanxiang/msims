@@ -22,7 +22,7 @@ public interface CourseService {
 
     List<Course> getCourseListByTeacher(String teacher);
 
-    List<Course> getCourseListByStudent(String studentId);
+    List<String> getCourseListByStudent(String studentId);
 
     // Delete
     void deleteStudentOfCourse(@Param("userId")String userId, @Param("courseCode")String courseCode);

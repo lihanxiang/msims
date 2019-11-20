@@ -10,6 +10,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Set;
@@ -39,7 +40,7 @@ public class UserController {
             model.addAttribute("userId", _user.getUserId());
         } catch (AuthenticationException e){
             model.addAttribute("message", "Invalid Username of Password");
-            return "common/login";
+            return "login";
         }
         if (roleSet.contains("student")){
             return "student/home";
@@ -48,6 +49,7 @@ public class UserController {
         } else {
             return "admin/home";
         }
+        //return "index";
     }
 
     @RequestMapping(value = "upload")
@@ -61,9 +63,16 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping(value = "home")
-    public String home(){
-        return "home";
+    @RequestMapping(value = "home/{userId}")
+    public String home(@PathVariable("userId") String userId, Model model){
+        User user = userService.getUserByUserId(userId);
+        Set<String> roleSet = roleConverter.convertRolesIntoRoleSet(user.getRoles());
+        if (roleSet.contains("student")){
+            return "student/home";
+        } else if (roleSet.contains("teacher")){
+            return "teacher/home";
+        } else {
+            return "admin/home";
+        }
     }
-
 }

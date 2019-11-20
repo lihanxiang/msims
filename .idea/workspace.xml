@@ -69,11 +69,11 @@
       <list>
         <option value="FxmlFile" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
-        <option value="JavaScript File" />
-        <option value="CSS File" />
         <option value="HTML4 File" />
+        <option value="CSS File" />
+        <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -106,7 +106,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../blog" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GradingSystem" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -121,15 +121,15 @@
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\工作\msims\src\main\resources\templates" />
+      <recent name="C:\工作\msims\src\main\resources\templates\student" />
+      <recent name="C:\工作\msims\src\main\resources\templates\common" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\94545\Desktop\msims\src\main\resources\static\image" />
       <recent name="C:\Users\94545\Desktop\msims\src\main\resources\templates" />
       <recent name="C:\Users\94545\Desktop\msims\src\main\java\com\lee\msims" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\工作\msims\src\main\resources\templates\student" />
-      <recent name="C:\工作\msims\src\main\resources\templates\common" />
-      <recent name="C:\工作\msims\src\main\resources\templates" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -206,8 +206,8 @@
     <list>
       <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
       <item itemvalue="JUnit.MsimsApplicationTests.generateID" />
-      <item itemvalue="Spring Boot.MsimsApplication" />
       <item itemvalue="JUnit.MsimsApplicationTests.getUserByUserId" />
+      <item itemvalue="Spring Boot.MsimsApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -266,6 +266,8 @@
       <workItem from="1573954451813" duration="7736000" />
       <workItem from="1574058041740" duration="2502000" />
       <workItem from="1574060599115" duration="8361000" />
+      <workItem from="1574212785726" duration="370000" />
+      <workItem from="1574213477820" duration="7096000" />
     </task>
     <servers />
   </component>

@@ -34,8 +34,8 @@ public interface CourseMapper {
     @Select("SELECT * FROM course WHERE teacher = #{teacher}")
     List<Course> getCourseListByTeacher(String teacher);
 
-    @Select("SELECT * FROM student_course WHERE studentId = #{studentId}")
-    List<Course> getCourseListByStudent(String studentId);
+    @Select("SELECT courseCode FROM student_course WHERE studentId = #{studentId}")
+    List<String> getCourseListByStudent(String studentId);
 
     // Delete
     @Delete("DELETE FROM student_course WHERE userId = #{userId} AND courseCode = #{courseCode}")

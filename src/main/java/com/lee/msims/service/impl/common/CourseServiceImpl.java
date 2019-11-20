@@ -47,7 +47,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getCourseListByStudent(String studentId) {
+    public List<String> getCourseListByStudent(String studentId) {
         return courseMapper.getCourseListByStudent(studentId);
     }
 

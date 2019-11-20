@@ -36,7 +36,8 @@ CREATE TABLE file (
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
 # Moddle tables
-create table student_course(
+
+create table user_course(
 	id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     userId VARCHAR(32) NOT NULL,
     courseCode VARCHAR(32) NOT NULL

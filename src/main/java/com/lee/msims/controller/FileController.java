@@ -30,10 +30,10 @@ public class FileController {
 
     @RequestMapping(value = "pre-upload", method = RequestMethod.GET)
     public String preUpload(){
-        return "fileSubmission";
+        return "student/fileSubmission";
     }
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "upload", method = RequestMethod.POST)
     public String upload(@RequestParam("file") MultipartFile file, Model model){
         User user = userService.getUserByUserId(
                 (String)SecurityUtils.getSubject().getSession().getAttribute("userId"));
