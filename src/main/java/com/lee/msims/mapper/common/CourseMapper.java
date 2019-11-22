@@ -11,7 +11,7 @@ import java.util.List;
 public interface CourseMapper {
 
     // Insert
-    @Insert("INSERT INTO course (courseCode, faculty, name, credit, teacher, duration, time, description" +
+    @Insert("INSERT INTO course (courseCode, faculty, courseName, credit, teacher, duration, time, description" +
             "VALUES (#{courseCode}, #{faculty}, #{name}, #{credit}, #[teacher}, #{duration}, #{time}, #{description})")
     void addCourse(Course course);
 
@@ -20,7 +20,7 @@ public interface CourseMapper {
 
     // Update
     @Update("UPDATE course SET courseCode = #{courseCode}, faculty = #{faculty}, " +
-            "name = #{name}, credit = #{credit}, teacher = #{teacher}, " +
+            "courseName = #{courseName}, credit = #{credit}, teacher = #{teacher}, " +
             "duration = #{duration},time = #{time}, description = #{description}")
     void updateCourseInfo(Course course);
 

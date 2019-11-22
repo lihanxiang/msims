@@ -14,13 +14,13 @@ CREATE TABLE user (
     roles VARCHAR(255) NOT NULL,
     salt VARCHAR(32) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
-
+drop table course;
 CREATE TABLE course (
     id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     courseCode VARCHAR(32) NOT NULL,
     faculty varchar(32) not null,
-    name VARCHAR(32) NOT NULL,
-    credit INT(2) NOT NULL,
+    courseName VARCHAR(255) NOT NULL,
+    credit VARCHAR(10) NOT NULL,
     teacher VARCHAR(100) NOT NULL,
     duration VARCHAR(100) NOT NULL,
     time VARCHAR(255) NOT NULL,
@@ -36,10 +36,9 @@ CREATE TABLE file (
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
 # Moddle tables
-
-create table user_course(
+create table student_course(
 	id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    userId VARCHAR(32) NOT NULL,
+    studentId VARCHAR(32) NOT NULL,
     courseCode VARCHAR(32) NOT NULL
 ) ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 

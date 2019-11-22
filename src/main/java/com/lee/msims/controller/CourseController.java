@@ -28,8 +28,8 @@ public class CourseController {
         List<String> courseCode = courseService.getCourseListByStudent(userId);
         List<Course> courses = new ArrayList<>();
         for (String code : courseCode){
-            System.out.println(code);
-            courses.add(courseService.getCourseInfoByCourseCode(code));
+            Course course = courseService.getCourseInfoByCourseCode(code);
+            courses.add(course);
         }
         model.addAttribute("courses", courses);
         model.addAttribute("userId", userId);

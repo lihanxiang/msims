@@ -118,7 +118,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -267,7 +267,9 @@
       <workItem from="1574058041740" duration="2502000" />
       <workItem from="1574060599115" duration="8361000" />
       <workItem from="1574212785726" duration="370000" />
-      <workItem from="1574213477820" duration="7096000" />
+      <workItem from="1574213477820" duration="7665000" />
+      <workItem from="1574240419969" duration="602000" />
+      <workItem from="1574294752295" duration="1137000" />
     </task>
     <servers />
   </component>
