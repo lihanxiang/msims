@@ -13,3 +13,6 @@ VALUES ("CN106", "FIT", "NETWORK PROGRAMMING", "4", "趙慶林", "September 4th 
 INSERT into student_course (studentId, courseCode) VALUES ("123", "CS003");
 
 INSERT into student_course (studentId, courseCode) VALUES ("123", "CS014");
+
+insert into gpa (courseCode, courseName, userId, credit, grade) VALUES ("CS003", "SOFTWARE ENGINEERING", "123", "4", "A");
+insert into gpa (courseCode, courseName, userId, credit, grade) VALUES ("CS014", "PROJECTS ON SOFTWARE ENGINEERING", "123", "4", "B+");

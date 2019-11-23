@@ -1,6 +1,6 @@
 package com.lee.msims.util;
-/*
-import entity.result.CourseScoreSet;
+
+import com.lee.msims.pojo.coes.GPA;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
@@ -73,18 +73,16 @@ public class GPACalculator {
         return null;
     }
 
-    public String calculateGPA(List<CourseScoreSet> sets){
+    public String calculateGPA(List<GPA> sets){
         double sumCredit = 0.0, sumPoints = 0.0;
         DecimalFormat format = new DecimalFormat("0.00");
-        for (CourseScoreSet c:
+        for (GPA c:
                 sets) {
             if (c.getGrade() != null || convertGradeToPoint(c.getGrade()) != null){
                 sumCredit += c.getCredit();
                 sumPoints += convertGradeToPoint(c.getGrade()) * c.getCredit();
             }
-
         }
         return format.format(sumPoints / sumCredit);
     }
 }
-*/

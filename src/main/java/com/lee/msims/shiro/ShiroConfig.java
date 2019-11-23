@@ -33,6 +33,7 @@ public class ShiroConfig {
         definition.addPathDefinition("/user/login-page", "anon");
         definition.addPathDefinition("/user/login", "anon");
         definition.addPathDefinition("/user/**", "authc");
+        definition.addPathDefinition("/user/logout", "logout");
         return definition;
     }
 

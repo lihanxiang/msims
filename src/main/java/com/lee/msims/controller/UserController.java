@@ -52,6 +52,12 @@ public class UserController {
         //return "index";
     }
 
+    @RequestMapping(value = "logout")
+    public String logout(){
+        SecurityUtils.getSubject().logout();
+        return "index";
+    }
+
     @RequestMapping(value = "upload")
     public String fileUpload(){
         return "fileSubmission";
