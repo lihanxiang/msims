@@ -9,16 +9,24 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!--<link rel="stylesheet" href="/css/student/home.css">-->
     <style>
-        #inbox {
+        #home{
+
+        }
+        #left {
+            float: left;
             margin-top: 5%;
             margin-left: 5%;
+            margin-bottom: 10%;
         }
-        #timeline {
-            margin-top: 5%;
-            margin-left: 5%;
-            margin-bottom: 5%;
+        html {
+            position: relative;
+            min-height: 100%;
         }
+
         footer{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
             background-color: #99A3A4;
         }
     </style>
@@ -66,7 +74,7 @@
         </div>
     </div>
 
-    <div id="home">
+    <div id="left">
         <div id="inbox">
             <div class="card border-secondary mb-3" style="max-width: 20rem;">
                 <div class="card-header">Inbox</div>
@@ -99,7 +107,7 @@
         </div>
     </div>
 
-    <footer class="page-footer font-small blue pt-4">
+    <footer class="navbar-fixed-bottom page-footer font-small blue pt-4">
         <div class="container text-center text-md-left">
             <div class="row">
                 <div class="col-md-6 mt-md-0 mt-3">
