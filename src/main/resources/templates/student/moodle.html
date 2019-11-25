@@ -27,7 +27,9 @@
                                 Course
                             </a>
                             <div class="dropdown-menu" aria-labelledby="course">
-                                <a class="dropdown-item" href="/course/courses">My Course</a>
+                                <a class="dropdown-item" href="/student/courses">My Course</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/student/gpa">My GPA</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/course/gpa">My Homework</a>
                                 <div class="dropdown-divider"></div>
@@ -55,19 +57,17 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userId}">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userIdDropdown">
-                            <a class="dropdown-item" href="#">User Info</a>
+                            <a class="dropdown-item text" href="#">User Info</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Back to MSIMS Home</a>
+                            <a class="dropdown-item text" href="#">Back to MSIMS Home</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/user/logout">Logout</a>
+                            <a class="dropdown-item text" href="/auth/logout">Logout</a>
                         </div>
                     </li>&nbsp;
                 </ul>
             </div>
         </nav>
     </header>
-
-
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

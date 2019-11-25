@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Moodle Home</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>File Submission</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MUST SIMS</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/student/text_align-right.css">
 </head>
 <body>
     <header>
@@ -27,9 +27,7 @@
                                 Course
                             </a>
                             <div class="dropdown-menu" aria-labelledby="course">
-                                <a class="dropdown-item" href="/student/courses">My Course</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/student/gpa">My GPA</a>
+                                <a class="dropdown-item" href="/course/courses">My Course</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/course/gpa">My Homework</a>
                                 <div class="dropdown-divider"></div>
@@ -69,14 +67,9 @@
         </nav>
     </header>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"
-            integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9+4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+    <form action="/file/upload" method="post" enctype="multipart/form-data">
+        file: <input type="file" name="file">
+        <input type="submit">
+    </form>
 </body>
 </html>

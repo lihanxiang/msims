@@ -28,11 +28,6 @@ public class FileController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "pre-upload", method = RequestMethod.GET)
-    public String preUpload(){
-        return "student/fileSubmission";
-    }
-
     @RequestMapping(value = "upload", method = RequestMethod.POST)
     public String upload(@RequestParam("file") MultipartFile file, Model model){
         User user = userService.getUserByUserId(

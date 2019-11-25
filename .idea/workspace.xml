@@ -82,12 +82,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
         <option value="Interface" />
-        <option value="HTML4 File" />
-        <option value="CSS File" />
         <option value="Class" />
+        <option value="HTML4 File" />
+        <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -112,7 +112,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DefaultHtmlFileTemplate" value="HTML4 File" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -290,7 +290,8 @@
       <workItem from="1574385455008" duration="7965000" />
       <workItem from="1574492047089" duration="12316000" />
       <workItem from="1574580106310" duration="3345000" />
-      <workItem from="1574663004025" duration="3164000" />
+      <workItem from="1574663004025" duration="3198000" />
+      <workItem from="1574666482854" duration="8177000" />
     </task>
     <servers />
   </component>

@@ -24,6 +24,12 @@ public class AuthController {
     @Autowired
     private  UserService userService;
 
+    @RequestMapping(value = "login-page")
+    public String preLogin(Model model){
+        model.addAttribute("user", new User());
+        return "login";
+    }
+
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(@ModelAttribute User user, Model model){
         Subject subject = SecurityUtils.getSubject();
@@ -53,4 +59,5 @@ public class AuthController {
         SecurityUtils.getSubject().logout();
         return "index";
     }
+
 }

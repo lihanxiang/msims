@@ -50,6 +50,6 @@ public class CourseController {
         model.addAttribute("userId", userId);
         model.addAttribute("gradeList", gradeList);
         model.addAttribute("GPA", gpaCalculator.calculateGPA(gradeList));
-        return "student/GPA";
+        return "gpa";
     }
 }
