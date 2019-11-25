@@ -1,5 +1,16 @@
-#inbox {
+#right {
+    float: right;
     margin-top: 5%;
-    margin-left: 5%;
-    position: fixed;
+    margin-right: 5%;
+    margin-bottom: 10%;
+}
+html {
+    position: relative;
+    min-height: 100%;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #99A3A4;
 }
