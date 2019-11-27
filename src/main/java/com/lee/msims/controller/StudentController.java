@@ -83,6 +83,8 @@ public class StudentController {
         return "student/gpa";
     }
 
+
+
     @RequestMapping(value = "my-info", method = RequestMethod.GET)
     public String myInfo(Model model){
         String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");

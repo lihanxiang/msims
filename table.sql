@@ -32,7 +32,8 @@ CREATE TABLE file (
     faculty VARCHAR(32) NOT NULL,
     fileId VARCHAR(32) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    path VARCHAR(255) NOT NULL
+    path VARCHAR(255) NOT NULL,
+    time VARCHAR(32) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
 # Moddle tables
@@ -45,7 +46,8 @@ create table student_course(
 CREATE TABLE component (
     id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     courseCode VARCHAR(32) NOT NULL,
-    type VARCHAR(32) NOT NULL
+    type VARCHAR(32) NOT NULL,
+    time VARCHAR(32) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
 CREATE TABLE component_file (

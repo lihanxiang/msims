@@ -10,11 +10,13 @@ public class File {
     private String fileId;  //faculty_file_id
     private String name;
     private String path;
+    private String time;
 
-    public File(String faculty, String fileId, String name, String path) {
+    public File(String faculty, String fileId, String name, String path, String time) {
         this.faculty = faculty;
         this.fileId = fileId;
         this.name = name;
         this.path = path;
+        this.time = time;
     }
 }

@@ -10,7 +10,8 @@ import java.util.List;
 public interface FileMapper {
 
     // Insert
-    @Insert("INSERT INTO file (faculty, fileId, name, path) VALUES (#{faculty}, #{fileId}, #{name}, #{path})")
+    @Insert("INSERT INTO file (faculty, fileId, name, path, time) " +
+            "VALUES (#{faculty}, #{fileId}, #{name}, #{path}, #{time})")
     void createFile(File file);
 
     // Update
@@ -18,7 +19,7 @@ public interface FileMapper {
     void editFileInfo(File file);
 
     // Select
-    @Select("SELECT * FROM file WHERE fileId = #{fileId}")
+    @Select("SELECT * FROM file WHERE fileId = #{fileId} ORDER BY time DESC")
     File getFileByFileId(String fileId);
 
     @Select("SELECT * FROM file WHERE faculty = #{faculty}")

@@ -8,12 +8,13 @@ public class Component {
     private int id;
     private String courseCode;
     private String type;        //Course Outline, Assignment...
+    private String time;
 
-    public void setCourseCode(String courseCode) {
+    public Component() {}
+
+    public Component(String courseCode, String type, String time) {
         this.courseCode = courseCode;
-    }
-
-    public void setType(String type) {
         this.type = type;
+        this.time = time;
     }
 }

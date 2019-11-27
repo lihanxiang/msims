@@ -15,14 +15,14 @@ import java.util.List;
 public interface ComponentMapper {
 
     // Insert
-    @Insert("INSERT INTO component (courseCode, type) VALUES (#{courseCode}, #{type})")
+    @Insert("INSERT INTO component (courseCode, type, time) VALUES (#{courseCode}, #{type}, #{time})")
     void addComponentToCourse(Component component);
 
     @Insert("INSERT INTO component_file (componentId, fileId) VALUES (#{componentId}, #{fileId})")
     void addFileToComponent(int componentId, String fileId);
 
     // Select
-    @Select("SELECT * FROM component WHERE courseCode = #{courseCode}")
+    @Select("SELECT * FROM component WHERE courseCode = #{courseCode} ORDER BY time DESC")
     List<Component> getAllComponentsOfCourse(String courseCode);
 
     @Select("SELECT fileId FROM component_file WHERE componentId = #{componentId}")

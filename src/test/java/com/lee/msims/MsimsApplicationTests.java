@@ -18,7 +18,7 @@ public class MsimsApplicationTests {
 
     @Test
     public void addUser(){
-        User user = new User("teacherID", "Subrota","Subrota", "male",
+        /*User user = new User("teacherID", "Subrota","Subrota", "male",
                 "FIT", "88973007", "skmondal@must.edu.mo", "teacher");
         userService.addUser(user);
 
@@ -28,7 +28,10 @@ public class MsimsApplicationTests {
 
         User admin = new User("admin", "admin","admin", "admin",
                 "admin", "admin", "admin", "admin");
-        userService.addUser(admin);
+        userService.addUser(admin);*/
+        User user = new User("teacher", "teacher","teacher", "male",
+                "FIT", "teacher", "teacher", "teacher");
+        userService.addUser(user);
     }
 
     @Test

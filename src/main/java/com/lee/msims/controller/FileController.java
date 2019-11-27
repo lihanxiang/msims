@@ -3,6 +3,7 @@ package com.lee.msims.controller;
 import com.lee.msims.pojo.common.User;
 import com.lee.msims.service.common.FileService;
 import com.lee.msims.service.common.UserService;
+import com.lee.msims.util.DateFormatter;
 import com.lee.msims.util.FileIDBuilder;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
@@ -13,19 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 @Controller
 @RequestMapping("file")
 public class FileController {
 
+    private final DateFormatter dateFormatter;
     private final FileIDBuilder fileIDBuilder;
     private final FileService fileService;
     private final UserService userService;
 
-    public FileController(FileIDBuilder fileIDBuilder, FileService fileService, UserService userService) {
+    public FileController(FileIDBuilder fileIDBuilder, FileService fileService, UserService userService, DateFormatter dateFormatter) {
         this.fileIDBuilder = fileIDBuilder;
         this.fileService = fileService;
         this.userService = userService;
+        this.dateFormatter = dateFormatter;
     }
 
     @RequestMapping(value = "upload", method = RequestMethod.POST)
@@ -46,7 +50,8 @@ public class FileController {
             try {
                 file.transferTo(new File(storePath + File.separator + fileName));
                 com.lee.msims.pojo.common.File databaseFile =
-                        new com.lee.msims.pojo.common.File(faculty, fileId, fileName, storePath);
+                        new com.lee.msims.pojo.common.File(faculty, fileId, fileName, storePath,
+                                dateFormatter.formatDateToString(new Date()));
                 fileService.createFile(databaseFile);
             } catch (IOException e){
                 e.printStackTrace();

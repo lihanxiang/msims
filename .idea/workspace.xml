@@ -84,10 +84,10 @@
         <option value="FxmlFile" />
         <option value="JavaScript File" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTML4 File" />
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -120,7 +120,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/image" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/teacher" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -135,18 +135,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\工作\msims\src\main\resources\static\image" />
-      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\static\image" />
-      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\templates" />
-      <recent name="C:\Users\94545\Desktop\msims\src\main\java\com\lee\msims" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\工作\msims\src\main\resources\static\image" />
       <recent name="C:\工作\msims\src\main\resources\static\css\error" />
       <recent name="C:\工作\msims\src\main\resources\templates" />
       <recent name="C:\工作\msims\src\main\resources\templates\student" />
       <recent name="C:\工作\msims\src\main\resources\templates\common" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\工作\msims\src\main\resources\templates\teacher" />
+      <recent name="C:\工作\msims\src\main\resources\static\image" />
+      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\static\image" />
+      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\templates" />
+      <recent name="C:\Users\94545\Desktop\msims\src\main\java\com\lee\msims" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -292,6 +293,7 @@
       <workItem from="1574580106310" duration="3345000" />
       <workItem from="1574663004025" duration="3198000" />
       <workItem from="1574666482854" duration="8177000" />
+      <workItem from="1574818439647" duration="8144000" />
     </task>
     <servers />
   </component>
