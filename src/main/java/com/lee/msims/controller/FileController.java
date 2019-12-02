@@ -32,6 +32,11 @@ public class FileController {
         this.dateFormatter = dateFormatter;
     }
 
+    @RequestMapping(value = "upload-page", method = RequestMethod.GET)
+    public String uploadPage(Model model){
+        return "student/file_submission";
+    }
+
     @RequestMapping(value = "upload", method = RequestMethod.POST)
     public String upload(@RequestParam("file") MultipartFile file, Model model){
         User user = userService.getUserByUserId(
@@ -61,5 +66,10 @@ public class FileController {
         } else {
             return "file/uploadFail";
         }
+    }
+
+    @RequestMapping(value = "download")
+    public String download(){
+        return "";
     }
 }

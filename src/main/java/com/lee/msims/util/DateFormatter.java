@@ -8,6 +8,6 @@ import java.util.Date;
 public class DateFormatter {
 
     public String formatDateToString(Date now){
-        return new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss").format(now);
+        return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(now);
     }
 }

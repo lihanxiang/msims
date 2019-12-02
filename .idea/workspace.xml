@@ -137,10 +137,10 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\工作\msims\src\main\resources\static\image" />
+      <recent name="C:\工作\msims\src\main\resources\templates\admin" />
       <recent name="C:\工作\msims\src\main\resources\static\css\error" />
       <recent name="C:\工作\msims\src\main\resources\templates" />
       <recent name="C:\工作\msims\src\main\resources\templates\student" />
-      <recent name="C:\工作\msims\src\main\resources\templates\common" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\工作\msims\src\main\resources\templates\teacher" />
@@ -294,6 +294,10 @@
       <workItem from="1574663004025" duration="3198000" />
       <workItem from="1574666482854" duration="8177000" />
       <workItem from="1574818439647" duration="8144000" />
+      <workItem from="1574991379567" duration="6006000" />
+      <workItem from="1575109567801" duration="76000" />
+      <workItem from="1575188390643" duration="5916000" />
+      <workItem from="1575268845759" duration="5404000" />
     </task>
     <servers />
   </component>

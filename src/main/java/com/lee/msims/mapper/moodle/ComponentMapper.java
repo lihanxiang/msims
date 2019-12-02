@@ -22,7 +22,7 @@ public interface ComponentMapper {
     void addFileToComponent(int componentId, String fileId);
 
     // Select
-    @Select("SELECT * FROM component WHERE courseCode = #{courseCode} ORDER BY time DESC")
+    @Select("SELECT * FROM component WHERE courseCode = #{courseCode} ORDER BY time")
     List<Component> getAllComponentsOfCourse(String courseCode);
 
     @Select("SELECT fileId FROM component_file WHERE componentId = #{componentId}")
