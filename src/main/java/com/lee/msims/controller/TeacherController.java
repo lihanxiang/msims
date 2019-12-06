@@ -3,10 +3,12 @@ package com.lee.msims.controller;
 import com.lee.msims.pojo.common.Course;
 import com.lee.msims.pojo.common.File;
 import com.lee.msims.pojo.common.User;
+import com.lee.msims.pojo.moodle.BulletinBoardMessage;
 import com.lee.msims.pojo.moodle.Component;
 import com.lee.msims.service.common.CourseService;
 import com.lee.msims.service.common.FileService;
 import com.lee.msims.service.common.UserService;
+import com.lee.msims.service.moodle.BulletinBoardService;
 import com.lee.msims.service.moodle.ComponentService;
 import com.lee.msims.util.DateFormatter;
 import org.apache.shiro.SecurityUtils;
@@ -33,6 +35,8 @@ public class TeacherController {
     private ComponentService componentService;
     @Autowired
     private FileService fileService;
+    @Autowired
+    private BulletinBoardService bulletinBoardService;
 
     @RequestMapping(value = "home")
     public String home(Model model){
@@ -83,6 +87,18 @@ public class TeacherController {
         model.addAttribute("fileMap", fileMap);
         return "teacher/course_detail";
     }
+
+    /*@RequestMapping(value = "#{courseCode}/bulletin-board", method = RequestMethod.GET)
+    public String bulletinBoard(@PathVariable String courseCode, Model model){
+        model.addAttribute("bulletin-board", bulletinBoardService.getBoard(courseCode));
+        return "";
+    }
+
+    @RequestMapping(value = "post-message-on-board", method = RequestMethod.POST)
+    public String postMessageOnBoard(@ModelAttribute BulletinBoardMessage bulletinBoardMessage){
+        bulletinBoardService.postMessageOnBoard(bulletinBoardMessage);
+        return "";
+    }*/
 
     @RequestMapping(value = "my-info", method = RequestMethod.GET)
     public String myInfo(Model model){

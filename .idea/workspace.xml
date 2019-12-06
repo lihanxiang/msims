@@ -211,6 +211,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MsimsApplicationTests.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="msims" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lee.msims.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lee.msims" />
+      <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MsimsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="msims" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.lee.msims.MsimsApplication" />
@@ -226,9 +242,11 @@
       <item itemvalue="JUnit.MsimsApplicationTests.generateID" />
       <item itemvalue="JUnit.MsimsApplicationTests.getUserByUserId" />
       <item itemvalue="Spring Boot.MsimsApplication" />
+      <item itemvalue="JUnit.MsimsApplicationTests.test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MsimsApplicationTests.test" />
         <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
         <item itemvalue="JUnit.MsimsApplicationTests.getUserByUserId" />
         <item itemvalue="JUnit.MsimsApplicationTests.generateID" />
@@ -297,7 +315,8 @@
       <workItem from="1574991379567" duration="6006000" />
       <workItem from="1575109567801" duration="76000" />
       <workItem from="1575188390643" duration="5916000" />
-      <workItem from="1575268845759" duration="5404000" />
+      <workItem from="1575268845759" duration="7150000" />
+      <workItem from="1575595535624" duration="9585000" />
     </task>
     <servers />
   </component>

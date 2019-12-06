@@ -107,12 +107,9 @@
             <ul class="list-group" th:each="component : ${fileMap}">
                 <li class="list-group-item">
                     <h5 class="mb-2" th:text="${component.getKey().type}"></h5>
-                    <!--<ul class="list-group list-group-flush" th:each="file : ${fileMap}">
-                        <li class="list-group-item" th:text="${file.getValue().getName()}"></li>
-                    </ul>-->
                     <ul class="list-group file-group" th:each="file : ${component.getValue()}">
                         <li class="list-group-item">
-                            <a href="#">
+                            <a th:href="@{'/file/download/' + ${file.getFileId()}}">
                                 <img src="/image/1.png" width="20" height="20" alt="file"
                                      th:text="${' ' + file.getName()}">
                             </a>
@@ -132,7 +129,7 @@
                         </div>
                     </div>-->
                 </li>
-            </ul><br>
+            </ul>
 
             <!--<ul class="list-group list-group-flush" th:each="component : ${components}">
                 <li class="list-group-item">
