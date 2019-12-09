@@ -8,20 +8,14 @@ import java.util.List;
 public interface BulletinBoardService {
 
     // Insert
-    void createBoard(String courseCode);
-
     void postMessageOnBoard(BulletinBoardMessage message);
 
     // Update
     void editMessage(BulletinBoardMessage message);
 
     // Select
-    BulletinBoard getBoard(String courseCode);
-
-    List<BulletinBoardMessage> getAllMessagesOnBoard(int boardId);
+    List<BulletinBoardMessage> getAllMessagesOnBoard(String courseCode);
 
     // Delete
     void deleteMessageOnBoard(int id);
-
-    void deleteBoard(int id);
 }

@@ -3,8 +3,6 @@ package com.lee.msims.service.impl.common;
 import com.lee.msims.mapper.common.CourseMapper;
 import com.lee.msims.pojo.common.Course;
 import com.lee.msims.service.common.CourseService;
-import com.lee.msims.service.moodle.BulletinBoardService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,17 +11,14 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService {
 
     private final CourseMapper courseMapper;
-    private final BulletinBoardService bulletinBoardService;
 
-    public CourseServiceImpl(CourseMapper courseMapper, BulletinBoardService bulletinBoardService) {
+    public CourseServiceImpl(CourseMapper courseMapper) {
         this.courseMapper = courseMapper;
-        this.bulletinBoardService = bulletinBoardService;
     }
 
     @Override
     public void addCourse(Course course) {
         courseMapper.addCourse(course);
-        bulletinBoardService.createBoard(course.getCourseCode());
     }
 
     @Override

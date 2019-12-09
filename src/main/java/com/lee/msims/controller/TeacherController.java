@@ -13,6 +13,7 @@ import com.lee.msims.service.moodle.ComponentService;
 import com.lee.msims.util.DateFormatter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import java.util.*;
 
 @Controller
@@ -69,7 +71,7 @@ public class TeacherController {
         return "redirect:/teacher/" + courseCode + "/course-detail";
     }
 
-    @RequestMapping(value = "{courseCode}/course-detail", method = RequestMethod.GET)
+    /*@RequestMapping(value = "{courseCode}/course-detail", method = RequestMethod.GET)
     public String courseDetail(Model model, @PathVariable("courseCode") String courseCode){
         List<Component> components = componentService.getAllComponentsOfCourse(courseCode);
         Map<Component, List<File>> fileMap = new LinkedHashMap<>();
@@ -86,7 +88,7 @@ public class TeacherController {
         model.addAttribute("course", courseService.getCourseInfoByCourseCode(courseCode));
         model.addAttribute("fileMap", fileMap);
         return "teacher/course_detail";
-    }
+    }*/
 
     /*@RequestMapping(value = "#{courseCode}/bulletin-board", method = RequestMethod.GET)
     public String bulletinBoard(@PathVariable String courseCode, Model model){

@@ -1,0 +1,23 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+.file-group{
+    margin-top: 5%;
+}
+#component{
+    margin-left: 5%;
+    margin-bottom: 10%;
+}
+#side{
+
+}
+#table {
+    margin-top: 5%;
+}
+#footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #99A3A4;
+}

@@ -6,12 +6,12 @@ import lombok.Data;
 public class BulletinBoardMessage {
 
     private int id;
-    private int boardId;
+    private String courseCode;
     private String content;
     private String date;
 
-    public BulletinBoardMessage(int boardId, String content, String date) {
-        this.boardId = boardId;
+    public BulletinBoardMessage(String courseCode, String content, String date) {
+        this.courseCode = courseCode;
         this.content = content;
         this.date = date;
     }

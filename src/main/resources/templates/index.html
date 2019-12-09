@@ -18,6 +18,45 @@
                 </a>
             </div>
         </div>
+        <!--<div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Sign In
+            </button>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+                            <form class="form-signin" action="#" th:action="@{/auth/login}" th:object="${user}" method="post">
+                                <p class="form-signin-heading" style="text-align: center" th:text="${message}"></p>
+                                <div class="form-group">
+                                    <label for="userId" class="col-form-label">User ID:</label>
+                                    <input type="text" class="form-control" id="userId" name="userId" required
+                                            th:field="*{userId}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-form-label">Password:</label>
+                                    <input type="password" class="form-control" name="password" id="password" required
+                                           th:field="*{password}">
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Sign In</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
         <div>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -28,6 +67,8 @@
             </ul>
         </div>
     </nav>
+
+
 <!--
     <div class="row">
         <div class="col-sm-3">

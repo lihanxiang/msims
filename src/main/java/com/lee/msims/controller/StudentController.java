@@ -2,10 +2,13 @@ package com.lee.msims.controller;
 
 import com.lee.msims.pojo.coes.GPA;
 import com.lee.msims.pojo.common.Course;
+import com.lee.msims.pojo.common.File;
 import com.lee.msims.pojo.common.User;
+import com.lee.msims.pojo.moodle.Component;
 import com.lee.msims.service.coes.GPAService;
 import com.lee.msims.service.common.CourseService;
 import com.lee.msims.service.common.UserService;
+import com.lee.msims.service.moodle.ComponentService;
 import com.lee.msims.util.GPACalculator;
 import com.lee.msims.util.RoleConverter;
 import org.apache.shiro.SecurityUtils;
@@ -13,11 +16,14 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("student")

@@ -12,10 +12,7 @@ import java.util.List;
 public interface BulletinBoardMapper {
 
     // Insert
-    @Insert("INSERT INTO bulletin_board (courseCode) VALUES (#{courseCode})")
-    void createBoard(String courseCode);
-
-    @Insert("INSERT INTO bulletin_board_message (boardId, content, date) VALUES (#{boardId}, #{content}, #{date})")
+    @Insert("INSERT INTO bulletin_board_message (courseCode, content, date) VALUES (#{courseCode}, #{content}, #{date})")
     void postMessageOnBoard(BulletinBoardMessage message);
 
     // Update
@@ -23,16 +20,10 @@ public interface BulletinBoardMapper {
     void editMessage(BulletinBoardMessage message);
 
     // Select
-    @Select("SELECT * FROM bulletin_board WHERE courseCode = #{courseCode}")
-    BulletinBoard getBoard(String courseCode);
-
-    @Select("SELECT * FROM bulletin_board_message WHERE boardId = #{boardId}")
-    List<BulletinBoardMessage> getAllMessagesOnBoard(int boardId);
+    @Select("SELECT * FROM bulletin_board_message WHERE courseCode = #{courseCode}")
+    List<BulletinBoardMessage> getAllMessagesOnBoard(String courseCode);
 
     // Delete
     @Delete("Delete FROM bulletin_board_message WHERE id = #{id}")
     void deleteMessageOnBoard(int id);
-
-    @Delete("Delete FROM bulletin_board WHERE id = #{id}")
-    void deleteBoard(int id);
 }

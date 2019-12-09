@@ -18,11 +18,6 @@ public class BulletinBoardServiceImpl implements BulletinBoardService {
     }
 
     @Override
-    public void createBoard(String courseCode) {
-        bulletinBoardMapper.createBoard(courseCode);
-    }
-
-    @Override
     public void postMessageOnBoard(BulletinBoardMessage message) {
         bulletinBoardMapper.postMessageOnBoard(message);
     }
@@ -33,22 +28,12 @@ public class BulletinBoardServiceImpl implements BulletinBoardService {
     }
 
     @Override
-    public BulletinBoard getBoard(String courseCode) {
-        return bulletinBoardMapper.getBoard(courseCode);
-    }
-
-    @Override
-    public List<BulletinBoardMessage> getAllMessagesOnBoard(int boardId) {
-        return bulletinBoardMapper.getAllMessagesOnBoard(boardId);
+    public List<BulletinBoardMessage> getAllMessagesOnBoard(String courseCode) {
+        return bulletinBoardMapper.getAllMessagesOnBoard(courseCode);
     }
 
     @Override
     public void deleteMessageOnBoard(int id) {
         bulletinBoardMapper.deleteMessageOnBoard(id);
-    }
-
-    @Override
-    public void deleteBoard(int id) {
-        bulletinBoardMapper.deleteBoard(id);
     }
 }

@@ -15,10 +15,11 @@
             <div class="row myCenter">
                 <div class="col-xs-6 col-md-4 col-center-block">
                     <form class="form-signin" action="#" th:action="@{/auth/login}" th:object="${user}" method="post">
-                        <h2 class="form-signin-heading" style="text-align: center">Sign in</h2><br>
+                        <h2 class="form-signin-heading" style="text-align: center">Sign In</h2><br>
                         <p class="form-signin-heading" style="text-align: center" th:text="${message}"></p>
-                        <label for="userId" class="sr-only">userId</label>
-                        <input type="text" id="userId" name="userId" class="form-control" placeholder="userId"
+                        <p class="form-signin-heading" style="text-align: center"></p>
+                        <label for="userId" class="sr-only">User ID</label>
+                        <input type="text" id="userId" name="userId" class="form-control" placeholder="User ID"
                                required th:field="*{userId}"><br>
                         <label for="password" class="sr-only">Password</label>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password"

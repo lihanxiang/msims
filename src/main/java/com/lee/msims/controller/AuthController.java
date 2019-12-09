@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.Set;
 
 @Controller
@@ -24,8 +26,8 @@ public class AuthController {
     @Autowired
     private  UserService userService;
 
-    @RequestMapping(value = "login-page")
-    public String preLogin(Model model){
+    @RequestMapping(value = "login-page", method = RequestMethod.GET)
+    public String loginPage(Model model){
         model.addAttribute("user", new User());
         return "login";
     }

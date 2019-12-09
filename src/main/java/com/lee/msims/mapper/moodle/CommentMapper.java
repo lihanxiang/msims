@@ -12,7 +12,7 @@ public interface CommentMapper {
 
     //Insert
     @Insert("INSERT INTO comment (courseCode, pid, commenterId, respondentId, content, type, date)" +
-            "VALUES (#{courseCode}, 0, #{commenterId}, #{respondentId}, #{content}, 'comment', #{date})")
+            "VALUES (#{courseCode}, 0, #{commenterId}, 0, #{content}, 'comment', #{date})")
     void createComment(Comment comment);
 
     @Insert("INSERT INTO comment (courseCode, pid, commenterId, respondentId, content, type, date)" +
@@ -25,10 +25,10 @@ public interface CommentMapper {
     void editComment(Comment comment);
 
     //Select
-    @Select("SELECT * FROM comment WHERE courseCode = #{courseCode}")
+    @Select("SELECT * FROM comment WHERE courseCode = #{courseCode} AND pid = 0 ORDER BY date")
     List<Comment> getAllCommentsOfCourse(String courseCode);
 
-    @Select("SELECT * FROM comment WHERE pid = #{pid}")
+    @Select("SELECT * FROM comment WHERE courseCode = #{courseCode} AND pid = #{pid} ORDER BY date")
     List<Comment> getAllRepliesOfComment(int pid);
 
     //Delete

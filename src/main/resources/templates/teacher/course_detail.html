@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Course Detail</title>
     <meta charset="utf-8">
@@ -7,13 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/student/course.css">
-    <link rel="stylesheet" href="/css/student/text_align-right.css">
-    <style>
-        .file-group{
-            margin-top: 5%;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/teacher/course_detail.css">
 </head>
 <body>
     <header>
@@ -83,71 +77,57 @@
             </div>
         </div>
 
-        <div id="table">
-            <!--<table>
-                <tbody>
-                    <tr th:each="component : ${components}">
-                        <div id="inbox">
-                            <div class="card border-secondary mb-3" style="max-width: 50rem;">
-                                <div class="card-header" th:text="${component.type}"></div>
-                                <div class="card-body text-secondary">
-                                    <div>&nbsp;
-                                        <h5 class="card-title"></h5>
-                                        <ul class="list-group list-group-flush" th:each="file : ${fileMap}">
-                                            <li class="list-group-item" th:text="${file.getValue().getName()}"></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>-->
-
-            <ul class="list-group" th:each="component : ${fileMap}">
-                <li class="list-group-item">
-                    <h5 class="mb-2" th:text="${component.getKey().type}"></h5>
-                    <ul class="list-group file-group" th:each="file : ${component.getValue()}">
+        <div id="table" class="container-fluid">
+            <div class="row">
+                <div id="component" class="col-6">
+                    <ul class="list-group" th:each="component : ${fileMap}">
                         <li class="list-group-item">
-                            <a th:href="@{'/file/download/' + ${file.getFileId()}}">
-                                <img src="/image/1.png" width="20" height="20" alt="file"
-                                     th:text="${' ' + file.getName()}">
-                            </a>
-                        </li>
+                            <h5 class="mb-2" th:text="${component.getKey().type}"></h5>
+                            <ul class="list-group file-group" th:each="file : ${component.getValue()}">
+                                <li class="list-group-item">
+                                    <a th:href="@{'/file/download/' + ${file.getFileId()}}">
+                                        <img src="/image/1.png" width="20" height="20" alt="file"
+                                             th:text="${' ' + file.getName()}">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>&nbsp;
                     </ul>
-                    <!--<div id="inbox">
-                        <div class="card border-secondary mb-3" style="max-width: 50rem;">
-                            <div class="card-header" th:text="${component.type}"></div>
-                            <div class="card-body text-secondary">
-                                <div>&nbsp;
-                                    <h5 class="card-title"></h5>
-                                    <ul class="list-group list-group-flush" th:each="file : ${fileMap}">
-                                        <li class="list-group-item" th:text="${file.getValue().getName()}"></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
-                </li>
-            </ul>
-
-            <!--<ul class="list-group list-group-flush" th:each="component : ${components}">
-                <li class="list-group-item">
+                </div>
+                <div class="col-3"></div>
+                <div id="side" class="col">
                     <div id="inbox">
-                        <div class="card border-secondary mb-3" style="max-width: 50rem;">
-                            <div class="card-header" th:text="${component.type}"></div>
+                        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                            <div class="card-header">Inbox</div>
                             <div class="card-body text-secondary">
                                 <div>&nbsp;
-                                    <h5 class="card-title"></h5>
-                                    <ul class="list-group list-group-flush" th:each="file : ${fileMap}">
-                                        <li class="list-group-item" th:text="${file.getValue().getName()}"></li>
-                                    </ul>
+                                    <h5 class="card-title">Check your unread message</h5>
+                                    <h5>Student Portal</h5>
+                                    <p>XXX</p>
+                                    <h5>Moodle</h5>
+                                    <p>XXX</p>
+                                    <h5>COES</h5>
+                                    <p>XXX</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
-            </ul>-->
+
+                    <div id="timeline">
+                        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                            <div class="card-header">Timeline</div>
+                            <div class="card-body text-secondary">
+                                <div>&nbsp;
+                                    <h5>Assignment xxx</h5>
+                                    <p>XXX</p>
+                                    <h5>Project xxx</h5>
+                                    <p>XXX</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -159,6 +139,15 @@
                     <p>Something to say</p>
                 </div>
                 <hr class="clearfix w-100 d-md-none pb-3">
+
+                <div class="col-md-6 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Contact Me</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="mailto:l945457758@email.com">Email</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
