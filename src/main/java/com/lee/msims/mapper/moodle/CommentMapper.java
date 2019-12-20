@@ -11,12 +11,12 @@ import java.util.List;
 public interface CommentMapper {
 
     //Insert
-    @Insert("INSERT INTO comment (courseCode, pid, commenterId, respondentId, content, type, date)" +
-            "VALUES (#{courseCode}, 0, #{commenterId}, 0, #{content}, 'comment', #{date})")
+    @Insert("INSERT INTO comment (courseCode, discussionId, pid, commenter, commenterId, respondent, respondentId, content, date)" +
+            "VALUES (#{courseCode}, #{discussionId}, 0, #{commenter}, #{commenterId}, 'null' , 0, #{content}, #{date})")
     void createComment(Comment comment);
 
-    @Insert("INSERT INTO comment (courseCode, pid, commenterId, respondentId, content, type, date)" +
-            "VALUES (#{courseCode}, #{pid}, #{commenterId}, #{respondentId}, #{content}, 'reply', #{date})")
+    @Insert("INSERT INTO comment (courseCode, discussionId, pid, commenter, commenterId, respondent, respondentId, content, date)" +
+            "VALUES (#{courseCode}, #{discussionId}, #{pid}, #{commenter}, #{commenterId}, #{respondent} , #{respondentId}, #{content}, #{date})")
     void replyComment(Comment comment);
 
     //Update

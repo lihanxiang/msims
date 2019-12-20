@@ -18,3 +18,14 @@ INSERT into student_course (studentId, courseCode) VALUES ("123", "CS014");
 
 insert into gpa (courseCode, courseName, userId, credit, grade) VALUES ("CS003", "SOFTWARE ENGINEERING", "123", "4", "A");
 insert into gpa (courseCode, courseName, userId, credit, grade) VALUES ("CS014", "PROJECTS ON SOFTWARE ENGINEERING", "123", "4", "B+");
+
+insert into discussion(courseCode, sponsorId, sponsor, title, content, snapshot, date
+
+insert into comment(courseCode, pid, commenterId, commenter, respondentId, content, type, date)
+values ('CS003', 0, 6, 'teacher', 0, 'first comment', 'comment', '2019-12-09 21:39:00');
+insert into comment(courseCode, pid, commenterId, commenter, respondentId, content, type, date)
+values ('CS003', 0, 6, 'teacher', 0, 'second comment', 'comment', '2019-12-09 21:39:10');
+insert into comment(courseCode, pid, commenterId, commenter, respondentId, content, type, date)
+values ('CS003', 1, 2, '123', 6, 'first reply', 'reply', '2019-12-09 21:39:30');
+insert into comment(courseCode, pid, commenterId, commenter, respondentId, content, type, date)
+values ('CS003', 1, 2, '123', 6, 'second reply', 'reply', '2019-12-09 21:39:40');

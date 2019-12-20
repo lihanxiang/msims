@@ -61,16 +61,29 @@ CREATE TABLE bulletin_board_message (
     courseCode VARCHAR(32) NOT NULL,
     content text NOT NULL,
     date VARCHAR(32) NOT NULL
-)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+) ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
+CREATE TABLE discussion (
+    id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    courseCode VARCHAR(32) NOT NULL,
+    sponsorId VARCHAR(32) NOT NULL,
+    sponsor VARCHAR(32) NOT NULL,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    snapshot TEXT NOT NULL,
+    date VARCHAR(32) NOT NULL
+)  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+drop table comment;
 CREATE TABLE comment (
     id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     courseCode VARCHAR(32) NOT NULL,
+    discussionId INT(32) NOT NULL,
     pid INT(32) NOT NULL,
+    commenter VARCHAR(32),
     commenterId INT(32) NOT NULL,
+    respondent VARCHAR(32) NOT NULL,
     respondentId INT(32) NOT NULL,
     content TEXT NOT NULL,
-    type VARCHAR(32) NOT NULL,
     date VARCHAR(32) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 

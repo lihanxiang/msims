@@ -9,6 +9,7 @@ import com.lee.msims.pojo.moodle.Component;
 import com.lee.msims.service.coes.GPAService;
 import com.lee.msims.service.common.CourseService;
 import com.lee.msims.service.common.FileService;
+import com.lee.msims.service.common.UserService;
 import com.lee.msims.service.moodle.BulletinBoardService;
 import com.lee.msims.service.moodle.CommentService;
 import com.lee.msims.service.moodle.ComponentService;
@@ -46,6 +47,8 @@ public class CourseController {
     private BulletinBoardService bulletinBoardService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private UserService userService;
 
     // Common action
     @RequestMapping(value = "courses", method = RequestMethod.GET)

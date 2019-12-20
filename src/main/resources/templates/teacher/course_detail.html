@@ -94,11 +94,11 @@
                         </li>&nbsp;
                     </ul>
                 </div>
-                <div class="col-3"></div>
+                <div class="col-2"></div>
                 <div id="side" class="col">
-                    <div id="inbox">
-                        <div class="card border-secondary mb-3" style="max-width: 20rem;">
-                            <div class="card-header">Inbox</div>
+                    <div id="bulletin-board">
+                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                            <div class="card-header">Bulletin Board</div>
                             <div class="card-body text-secondary">
                                 <div>&nbsp;
                                     <h5 class="card-title">Check your unread message</h5>
@@ -113,8 +113,79 @@
                         </div>
                     </div>
 
-                    <div id="timeline">
+                    <div class="list-group">
+                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                            <div class="card-header">Discussion</div>
+                            <div class="card-body text-secondary">
+                                <ul th:each="comment : ${comments}">
+                                    <li>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Topic xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</h5>
+                                            <small>3 days ago</small>
+                                        </div>
+                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                        <small>Donec id elit non mi porta.</small>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Sign In
+                        </button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <form class="form-signin" action="#" th:action="@{/auth/login}" th:object="${user}" method="post">
+                                            <p class="form-signin-heading" style="text-align: center" th:text="${message}"></p>
+                                            <div class="form-group">
+                                                <label for="userId" class="col-form-label">User ID:</label>
+                                                <input type="text" class="form-control" id="userId" name="userId" required
+                                                        th:field="*{userId}">
+                                            </div>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <!--<div id="discussion">
                         <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                            <div class="card-header">Discussion</div>
+                            <div class="card-body text-secondary">
+                                <div>&nbsp;
+                                    <ul th:each="comment : ${comments}">
+                                        <li>
+                                            <ul th:each="content : ${comment.value}">
+                                                <li >
+                                                    <p th:text="${content.commenter} + ' : ' + ${content.content}"></p>
+                                                </li>
+                                            </ul>
+                                        </li>&nbsp;
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div id="timeline">
+                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
                             <div class="card-header">Timeline</div>
                             <div class="card-body text-secondary">
                                 <div>&nbsp;
