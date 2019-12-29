@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Course Detail</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>Discussion</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/teacher/course_detail.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
     <header>
@@ -27,7 +26,7 @@
                                 Course
                             </a>
                             <div class="dropdown-menu" aria-labelledby="course">
-                                <a class="dropdown-item" href="/teacher/courses">My Course</a>
+                                <a class="dropdown-item" href="/student/courses">My Course</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/student/gpa">My GPA</a>
                                 <div class="dropdown-divider"></div>
@@ -57,9 +56,9 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userId}">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userIdDropdown">
-                            <a class="dropdown-item text" href="#">User Info</a>
+                            <a class="dropdown-item text" href="/student/my-info">User Info</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text" href="#">Back to MSIMS Home</a>
+                            <a class="dropdown-item text" href="/student/home">Back to Home Page</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text" href="/auth/logout">Logout</a>
                         </div>
@@ -114,78 +113,22 @@
                     </div>
 
                     <div class="list-group">
-                        <div class="card border-secondary mb-3" style="max-width: 30rem;">
-                            <div class="card-header">
-                                Discussion
-                                <a style="text-align: right" th:href="@{'/course/' + ${courseCode} + '/discussion'}">111</a>
-                            </div>
+                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                            <div class="card-header">Discussion</div>
                             <div class="card-body text-secondary">
-                                <ul th:each="dis : ${discussion}">
+                                <ul th:each="comment : ${comments}">
                                     <li>
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1" th:text="${dis.title}"></h5>
-                                            <small th:text="${dis.date}"></small>
+                                            <h5 class="mb-1">Topic xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</h5>
+                                            <small>3 days ago</small>
                                         </div>
-                                        <p class="mb-1" th:text="${dis.snapshot}"></p>
-                                        <small></small>
+                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                        <small>Donec id elit non mi porta.</small>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-
-                    <!--<div>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Sign In
-                        </button>
-
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <form class="form-signin" action="#" th:action="@{/auth/login}" th:object="${user}" method="post">
-                                            <p class="form-signin-heading" style="text-align: center" th:text="${message}"></p>
-                                            <div class="form-group">
-                                                <label for="userId" class="col-form-label">User ID:</label>
-                                                <input type="text" class="form-control" id="userId" name="userId" required
-                                                        th:field="*{userId}">
-                                            </div>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
-
-                    <!--<div id="discussion">
-                        <div class="card border-secondary mb-3" style="max-width: 20rem;">
-                            <div class="card-header">Discussion</div>
-                            <div class="card-body text-secondary">
-                                <div>&nbsp;
-                                    <ul th:each="comment : ${comments}">
-                                        <li>
-                                            <ul th:each="content : ${comment.value}">
-                                                <li >
-                                                    <p th:text="${content.commenter} + ' : ' + ${content.content}"></p>
-                                                </li>
-                                            </ul>
-                                        </li>&nbsp;
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
 
                     <div id="timeline">
                         <div class="card border-secondary mb-3" style="max-width: 38rem;">
@@ -204,41 +147,5 @@
             </div>
         </div>
     </main>
-
-    <footer class="navbar-fixed-bottom page-footer font-small blue pt-4">
-        <div class="container text-center text-md-left">
-            <div class="row">
-                <div class="col-md-6 mt-md-0 mt-3">
-                    <h5 class="text-uppercase">MUST Student Information Management System</h5>
-                    <p>Something to say</p>
-                </div>
-                <hr class="clearfix w-100 d-md-none pb-3">
-
-                <div class="col-md-6 mb-md-0 mb-3">
-                    <h5 class="text-uppercase">Contact Me</h5>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="mailto:l945457758@email.com">Email</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2019 Copyright:
-            <a href="https://lihanxiang.github.io"> LiHanxiang</a>
-        </div>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"
-            integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9+4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
 </body>
 </html>

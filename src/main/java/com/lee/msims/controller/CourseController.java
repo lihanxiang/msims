@@ -6,6 +6,7 @@ import com.lee.msims.pojo.common.File;
 import com.lee.msims.pojo.moodle.BulletinBoardMessage;
 import com.lee.msims.pojo.moodle.Comment;
 import com.lee.msims.pojo.moodle.Component;
+import com.lee.msims.pojo.moodle.Discussion;
 import com.lee.msims.service.coes.GPAService;
 import com.lee.msims.service.common.CourseService;
 import com.lee.msims.service.common.FileService;
@@ -13,6 +14,8 @@ import com.lee.msims.service.common.UserService;
 import com.lee.msims.service.moodle.BulletinBoardService;
 import com.lee.msims.service.moodle.CommentService;
 import com.lee.msims.service.moodle.ComponentService;
+import com.lee.msims.service.moodle.DiscussionService;
+import com.lee.msims.util.DateFormatter;
 import com.lee.msims.util.GPACalculator;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -49,6 +49,10 @@ public class CourseController {
     private CommentService commentService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private DiscussionService discussionService;
+    @Autowired
+    private DateFormatter dateFormatter;
 
     // Common action
     @RequestMapping(value = "courses", method = RequestMethod.GET)
@@ -98,7 +102,13 @@ public class CourseController {
         model.addAttribute("board-messages", bulletinBoardService.getAllMessagesOnBoard(courseCode));
 
         //discussion
-        List<Comment> comments = commentService.getAllCommentsOfCourse(courseCode);
+        model.addAttribute("discussion", discussionService.getLatestFiveDiscussion(courseCode));
+
+        return "teacher/course_detail";
+    }
+
+    /*
+        List<Comment> comments = commentService.getAllCommentsOfDiscussion();
         Map<Comment, List<Comment>> commentMap = new LinkedHashMap<>();
         for (Comment comment : comments){
             List<Comment> replies = commentService.getAllRepliesOfComment(comment.getPid());
@@ -108,8 +118,31 @@ public class CourseController {
             model.addAttribute("replies", 1);
         }
         model.addAttribute("comments", commentMap);
+     */
 
-        return "teacher/course_detail";
+    @RequestMapping(value = "{courseCode}/discussion", method = RequestMethod.GET)
+    public String discussion(Model model, @PathVariable("courseCode") String courseCode) {
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("discussion", discussionService.getAllDiscussionOfCourse(courseCode));
+        return "teacher/discussion";
+    }
+
+    @RequestMapping(value = "{courseCode}/create-discussion", method = RequestMethod.GET)
+    public String publishDiscussion(Model model, @ModelAttribute("discussion") Discussion discussion,
+                                    @PathVariable("courseCode") String courseCode){
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        discussion.setSponsor(userService.getUserByUserId(userId).getUsername());
+        discussion.setSponsorId(userId);
+        discussion.setCourseCode(courseCode);
+        if (discussion.getContent().length() > 20){
+            StringBuffer sb = new StringBuffer(discussion.getContent().indexOf(0, 20));
+            sb.append("...");
+            discussion.setSnapshot(sb.toString());
+        }
+        discussion.setDate(dateFormatter.formatDateToString(new Date()));
+        model.addAttribute("courseCode", courseCode);
+        model.addAttribute("msg", "Successfully initiated discussion");
+        return "redirect:/course/" + courseCode + "/discussion";
     }
 
     @RequestMapping(value = "post-message-on-board", method = RequestMethod.POST)

@@ -31,13 +31,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> getAllCommentsOfCourse(String courseCode) {
-        return commentMapper.getAllCommentsOfCourse(courseCode);
+    public List<Comment> getAllCommentsOfDiscussion(String discussionId) {
+        return commentMapper.getAllCommentsOfDiscussion(discussionId);
     }
 
     @Override
-    public List<Comment> getAllRepliesOfComment(int pid) {
-        return commentMapper.getAllRepliesOfComment(pid);
+    public List<Comment> getAllRepliesOfComment(String discussionId, int pid) {
+        return commentMapper.getAllRepliesOfComment(discussionId, pid);
     }
 
     @Override

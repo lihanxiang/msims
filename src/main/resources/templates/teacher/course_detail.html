@@ -100,8 +100,8 @@
                         <div class="card border-secondary mb-3" style="max-width: 38rem;">
                             <div class="card-header">Bulletin Board</div>
                             <div class="card-body text-secondary">
-                                <div>&nbsp;
-                                    <h5 class="card-title">Check your unread message</h5>
+                                <div>
+                                    <h5 class="card-title">Check your unread message</h5>&nbsp;
                                     <h5>Student Portal</h5>
                                     <p>XXX</p>
                                     <h5>Moodle</h5>
@@ -114,17 +114,20 @@
                     </div>
 
                     <div class="list-group">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
-                            <div class="card-header">Discussion</div>
+                        <div class="card border-secondary mb-3" style="max-width: 30rem;">
+                            <div class="card-header">
+                                Discussion
+                                <a style="text-align: right" th:href="@{'/course/' + ${courseCode} + '/discussion'}">111</a>
+                            </div>
                             <div class="card-body text-secondary">
-                                <ul th:each="comment : ${comments}">
+                                <ul th:each="dis : ${discussion}">
                                     <li>
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Topic xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</h5>
-                                            <small>3 days ago</small>
+                                            <h5 class="mb-1" th:text="${dis.title}"></h5>
+                                            <small th:text="${dis.date}"></small>
                                         </div>
-                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                        <small>Donec id elit non mi porta.</small>
+                                        <p class="mb-1" th:text="${dis.snapshot}"></p>
+                                        <small></small>
                                     </li>
                                 </ul>
                             </div>

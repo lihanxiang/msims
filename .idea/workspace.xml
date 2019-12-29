@@ -83,11 +83,11 @@
       <list>
         <option value="FxmlFile" />
         <option value="JavaScript File" />
-        <option value="Interface" />
         <option value="HTML4 File" />
         <option value="CSS File" />
-        <option value="HTML File" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -163,6 +163,22 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.MsimsApplication">
+    <configuration name="MsimsApplicationTests.addDiscussion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="msims" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lee.msims.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lee.msims" />
+      <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
+      <option name="METHOD_NAME" value="addDiscussion" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MsimsApplicationTests.addUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msims" />
       <extension name="coverage">
@@ -179,7 +195,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MsimsApplicationTests.generateID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MsimsApplicationTests.createComment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msims" />
       <extension name="coverage">
         <pattern>
@@ -189,7 +205,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.lee.msims" />
       <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
-      <option name="METHOD_NAME" value="generateID" />
+      <option name="METHOD_NAME" value="createComment" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -239,17 +255,19 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
-      <item itemvalue="JUnit.MsimsApplicationTests.generateID" />
       <item itemvalue="JUnit.MsimsApplicationTests.getUserByUserId" />
       <item itemvalue="JUnit.MsimsApplicationTests.test" />
       <item itemvalue="Spring Boot.MsimsApplication" />
+      <item itemvalue="JUnit.MsimsApplicationTests.addDiscussion" />
+      <item itemvalue="JUnit.MsimsApplicationTests.createComment" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MsimsApplicationTests.createComment" />
+        <item itemvalue="JUnit.MsimsApplicationTests.addDiscussion" />
         <item itemvalue="JUnit.MsimsApplicationTests.test" />
         <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
         <item itemvalue="JUnit.MsimsApplicationTests.getUserByUserId" />
-        <item itemvalue="JUnit.MsimsApplicationTests.generateID" />
       </list>
     </recent_temporary>
   </component>
@@ -320,6 +338,8 @@
       <workItem from="1575785451353" duration="5884000" />
       <workItem from="1575893785633" duration="6078000" />
       <workItem from="1576201583590" duration="6161000" />
+      <workItem from="1577072133653" duration="1934000" />
+      <workItem from="1577613921504" duration="5492000" />
     </task>
     <servers />
   </component>

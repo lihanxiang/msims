@@ -25,11 +25,11 @@ public interface CommentMapper {
     void editComment(Comment comment);
 
     //Select
-    @Select("SELECT * FROM comment WHERE courseCode = #{courseCode} AND pid = 0 ORDER BY date")
-    List<Comment> getAllCommentsOfCourse(String courseCode);
+    @Select("SELECT * FROM comment WHERE discussionId = #{discussionId} AND pid = 0 ORDER BY date")
+    List<Comment> getAllCommentsOfDiscussion(String discussionId);
 
-    @Select("SELECT * FROM comment WHERE courseCode = #{courseCode} AND pid = #{pid} ORDER BY date")
-    List<Comment> getAllRepliesOfComment(int pid);
+    @Select("SELECT * FROM comment WHERE discussionId = #{discussionId} AND pid = #{pid} ORDER BY date")
+    List<Comment> getAllRepliesOfComment(@Param("discussionId") String discussionId, @Param("pid") int pid);
 
     //Delete
     @Delete("DELETE FROM comment WHERE id = #{id}")

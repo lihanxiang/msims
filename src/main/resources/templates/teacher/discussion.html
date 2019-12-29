@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Course Detail</title>
+    <title>Discussion</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,25 +72,16 @@
     <main>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4" th:text="${course.getCourseName()}"></h1>
-                <p class="lead" th:text="${course.getDescription()}"></p>
+                <h1 class="display-4">Discussion Area</h1>
+                <p class="lead" th:text="'You are now browsing the discussion area of ' + ${courseCode}"></p>
             </div>
         </div>
 
         <div id="table" class="container-fluid">
             <div class="row">
                 <div id="component" class="col-6">
-                    <ul class="list-group" th:each="component : ${fileMap}">
-                        <li class="list-group-item">
-                            <h5 class="mb-2" th:text="${component.getKey().type}"></h5>
-                            <ul class="list-group file-group" th:each="file : ${component.getValue()}">
-                                <li class="list-group-item">
-                                    <a th:href="@{'/file/download/' + ${file.getFileId()}}">
-                                        <img src="/image/1.png" width="20" height="20" alt="file"
-                                             th:text="${' ' + file.getName()}">
-                                    </a>
-                                </li>
-                            </ul>
+                    <ul class="list-group" th:each="discussion : ${discussion}">
+                        <li class="list-group-item" >
                         </li>&nbsp;
                     </ul>
                 </div>
@@ -114,20 +105,17 @@
                     </div>
 
                     <div class="list-group">
-                        <div class="card border-secondary mb-3" style="max-width: 30rem;">
-                            <div class="card-header">
-                                Discussion
-                                <a style="text-align: right" th:href="@{'/course/' + ${courseCode} + '/discussion'}">111</a>
-                            </div>
+                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                            <div class="card-header">Discussion</div>
                             <div class="card-body text-secondary">
-                                <ul th:each="dis : ${discussion}">
+                                <ul th:each="comment : ${comments}">
                                     <li>
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1" th:text="${dis.title}"></h5>
-                                            <small th:text="${dis.date}"></small>
+                                            <h5 class="mb-1">Topic xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</h5>
+                                            <small>3 days ago</small>
                                         </div>
-                                        <p class="mb-1" th:text="${dis.snapshot}"></p>
-                                        <small></small>
+                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                        <small>Donec id elit non mi porta.</small>
                                     </li>
                                 </ul>
                             </div>

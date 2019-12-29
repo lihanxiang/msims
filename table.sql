@@ -73,6 +73,7 @@ CREATE TABLE discussion (
     snapshot TEXT NOT NULL,
     date VARCHAR(32) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
+
 drop table comment;
 CREATE TABLE comment (
     id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
