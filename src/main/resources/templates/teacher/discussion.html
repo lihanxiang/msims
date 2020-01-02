@@ -80,15 +80,41 @@
         <div id="table" class="container-fluid">
             <div class="row">
                 <div id="component" class="col-6">
-                    <ul class="list-group" th:each="discussion : ${discussion}">
-                        <li class="list-group-item" >
-                        </li>&nbsp;
+                    <ul class="list-group list-group-flush" th:each="dis : ${discussionMap}">
+                        <li class="list-group-item">
+                            <div class="card">
+                                <div class="card-header" th:text="'Proposed by ' + ${dis.getKey().sponsor}"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${dis.getKey().title}"></h5>
+                                    <p class="card-text" th:text="${dis.getKey().content}"></p>
+                                    <p class="card-text"><small class="text-muted" th:text="${dis.getKey().date}"></small></p>
+                                    <a class="btn btn-primary" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}"
+                                       th:if="${haveComment} eq 1" role="button" aria-expanded="false">
+                                        Show comments
+                                    </a>
+                                    <a href="#" class="btn btn-primary" >Write comment</a>
+                                </div>
+                                <div class="collapse multi-collapse" th:id="'collapse' + ${disStat.index}">
+                                    <ul class="list-group list-group-flush" th:each="comment : ${dis.getValue()}">
+                                        <li class="list-group-item" th:text=" + ${comment.content}"></li>
+                                        <li class="list-group-item">
+                                            <ul class="list-group list-group-flush" th:each="reply : ${commentMap.get(comment)}">
+                                                <li class="list-group-item" th:text="'      ' + ${reply.content}"></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </li>
                     </ul>
                 </div>
+
                 <div class="col-2"></div>
+
                 <div id="side" class="col">
                     <div id="bulletin-board">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                        <div class="card border-secondary mb-3" style="max-width: 35rem;">
                             <div class="card-header">Bulletin Board</div>
                             <div class="card-body text-secondary">
                                 <div>
@@ -100,24 +126,6 @@
                                     <h5>COES</h5>
                                     <p>XXX</p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="list-group">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
-                            <div class="card-header">Discussion</div>
-                            <div class="card-body text-secondary">
-                                <ul th:each="comment : ${comments}">
-                                    <li>
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Topic xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</h5>
-                                            <small>3 days ago</small>
-                                        </div>
-                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                        <small>Donec id elit non mi porta.</small>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -176,7 +184,7 @@
                     </div>-->
 
                     <div id="timeline">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                        <div class="card border-secondary mb-3" style="max-width: 35rem;">
                             <div class="card-header">Timeline</div>
                             <div class="card-body text-secondary">
                                 <div>&nbsp;

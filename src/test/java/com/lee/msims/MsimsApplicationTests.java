@@ -18,9 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -71,20 +69,58 @@ public class MsimsApplicationTests {
 
     @Test
     public void createComment(){
-        Comment comment1 = new Comment("CS003", 1, 0, "123", 2,
-                "null", 0, "first comment on discussion 1", dateFormatter.formatDateToString(new Date()));
-        Comment comment2 = new Comment("CS003", 1, 0, "123", 2,
-                "null", 0, "second comment on discussion 1", dateFormatter.formatDateToString(new Date()));
-        Comment comment3 = new Comment("CS003", 2, 0, "123", 2,
-                "null", 0, "first comment on discussion 2", dateFormatter.formatDateToString(new Date()));
-        commentService.createComment(comment1);
-        commentService.createComment(comment2);
-        commentService.createComment(comment3);
+        Comment comment1 = new Comment("CS003", 1, 2, "123", 2,
+                "123", 2, "first reply 111", dateFormatter.formatDateToString(new Date()));
+        Comment comment2 = new Comment("CS003", 1, 2, "123", 2,
+                "123", 2, "second reply 222", dateFormatter.formatDateToString(new Date()));
+        Comment comment3 = new Comment("CS003", 2, 3, "123", 2,
+                "123", 2, "third reply 333", dateFormatter.formatDateToString(new Date()));
+        commentService.replyComment(comment1);
+        commentService.replyComment(comment2);
+        commentService.replyComment(comment3);
     }
 
     @Test
     public void generateID(){
         System.out.println(new FileIDBuilder().generateFileId());
+    }
+
+    @Test
+    public void select(){
+        List<Discussion> discussions = discussionService.getAllDiscussionOfCourse("CS003");
+        Map<Comment, List<Comment>> commentMap = new LinkedHashMap<>();
+        Map<Discussion, Map<Comment, List<Comment>>> discussionMap = new LinkedHashMap<>();
+        List<Comment> comments;
+        for(Discussion discussion : discussions) {
+            //System.out.println(discussion.getTitle());
+            comments = commentService.getAllCommentsOfDiscussion(discussion.getId());
+            for (Comment comment : comments){
+                //System.out.println("    comment: " + comment.getContent());
+                List<Comment> replies = commentService.getAllRepliesOfComment(discussion.getId(), comment.getId());
+                commentMap.put(comment, replies);
+                for (Comment reply : replies){
+                    //System.out.println("        reply: " + reply.getContent());
+                }
+            }
+            discussionMap.put(discussion, commentMap);
+            //System.out.println();
+        }
+
+        Set<Discussion> set = discussionMap.keySet();
+        for (Iterator<Discussion> iterator = set.iterator(); iterator.hasNext();){
+            Discussion d = iterator.next();
+            System.out.println(d.getTitle());
+            Map<Comment, List<Comment>> commentMap1 = discussionMap.get(d);
+            Set<Map.Entry<Comment, List<Comment>>> entrySet = commentMap.entrySet();
+            for (Iterator<Map.Entry<Comment, List<Comment>>> iterator1 = entrySet.iterator(); iterator1.hasNext();){
+                Map.Entry<Comment, List<Comment>> entry = iterator1.next();
+                System.out.println("    comment: " + entry.getKey().getContent());
+                for (Comment c : entry.getValue()){
+                    System.out.println("        reply:" + c.getContent());
+                }
+            }
+            System.out.println();
+        }
     }
 
     @Test

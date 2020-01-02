@@ -26,10 +26,10 @@ public interface CommentMapper {
 
     //Select
     @Select("SELECT * FROM comment WHERE discussionId = #{discussionId} AND pid = 0 ORDER BY date")
-    List<Comment> getAllCommentsOfDiscussion(String discussionId);
+    List<Comment> getAllCommentsOfDiscussion(int discussionId);
 
     @Select("SELECT * FROM comment WHERE discussionId = #{discussionId} AND pid = #{pid} ORDER BY date")
-    List<Comment> getAllRepliesOfComment(@Param("discussionId") String discussionId, @Param("pid") int pid);
+    List<Comment> getAllRepliesOfComment(int discussionId, int pid);
 
     //Delete
     @Delete("DELETE FROM comment WHERE id = #{id}")

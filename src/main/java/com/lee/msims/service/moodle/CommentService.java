@@ -14,9 +14,9 @@ public interface CommentService {
     void editComment(Comment comment);
 
     //Select
-    List<Comment> getAllCommentsOfDiscussion(String discussionId);
+    List<Comment> getAllCommentsOfDiscussion(int discussionId);
 
-    List<Comment> getAllRepliesOfComment(String discussionId, int pid);
+    List<Comment> getAllRepliesOfComment(int discussionId, int pid);
 
     //Delete
     void deleteComment(int id);

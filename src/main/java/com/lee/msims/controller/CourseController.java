@@ -122,8 +122,24 @@ public class CourseController {
 
     @RequestMapping(value = "{courseCode}/discussion", method = RequestMethod.GET)
     public String discussion(Model model, @PathVariable("courseCode") String courseCode) {
+        List<Discussion> discussions = discussionService.getAllDiscussionOfCourse(courseCode);
+        Map<Comment, List<Comment>> commentMap = new LinkedHashMap<>();
+        Map<Discussion, List<Comment>> discussionMap = new LinkedHashMap<>();
+        for(Discussion discussion : discussions) {
+            List<Comment> comments = commentService.getAllCommentsOfDiscussion(discussion.getId());
+            discussionMap.put(discussion, comments);
+            for (Comment comment : comments){
+                List<Comment> replies = commentService.getAllRepliesOfComment(discussion.getId(), comment.getId());
+                commentMap.put(comment, replies);
+            }
+            if (!discussionMap.values().isEmpty()){
+                model.addAttribute("haveComment", 1);
+            }
+        }
+
         model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
-        model.addAttribute("discussion", discussionService.getAllDiscussionOfCourse(courseCode));
+        model.addAttribute("discussionMap", discussionMap);
+        model.addAttribute("commentMap", commentMap);
         return "teacher/discussion";
     }
 

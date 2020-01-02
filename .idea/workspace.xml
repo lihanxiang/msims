@@ -120,7 +120,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/teacher" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/student" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -135,19 +135,19 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\工作\msims\src\main\resources\templates\student" />
+      <recent name="C:\工作\msims\src\main\resources\templates\teacher" />
+      <recent name="C:\工作\msims\src\main\resources\static\image" />
+      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\static\image" />
+      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\templates" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\工作\msims\src\main\resources\static\image" />
       <recent name="C:\工作\msims\src\main\resources\templates\admin" />
       <recent name="C:\工作\msims\src\main\resources\static\css\error" />
       <recent name="C:\工作\msims\src\main\resources\templates" />
       <recent name="C:\工作\msims\src\main\resources\templates\student" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\工作\msims\src\main\resources\templates\teacher" />
-      <recent name="C:\工作\msims\src\main\resources\static\image" />
-      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\static\image" />
-      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\templates" />
-      <recent name="C:\Users\94545\Desktop\msims\src\main\java\com\lee\msims" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -211,7 +211,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MsimsApplicationTests.getUserByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MsimsApplicationTests.select" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msims" />
       <extension name="coverage">
         <pattern>
@@ -221,7 +221,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.lee.msims" />
       <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
-      <option name="METHOD_NAME" value="getUserByUserId" />
+      <option name="METHOD_NAME" value="select" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -255,19 +255,19 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
-      <item itemvalue="JUnit.MsimsApplicationTests.getUserByUserId" />
       <item itemvalue="JUnit.MsimsApplicationTests.test" />
-      <item itemvalue="Spring Boot.MsimsApplication" />
       <item itemvalue="JUnit.MsimsApplicationTests.addDiscussion" />
       <item itemvalue="JUnit.MsimsApplicationTests.createComment" />
+      <item itemvalue="JUnit.MsimsApplicationTests.select" />
+      <item itemvalue="Spring Boot.MsimsApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MsimsApplicationTests.select" />
         <item itemvalue="JUnit.MsimsApplicationTests.createComment" />
         <item itemvalue="JUnit.MsimsApplicationTests.addDiscussion" />
         <item itemvalue="JUnit.MsimsApplicationTests.test" />
         <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
-        <item itemvalue="JUnit.MsimsApplicationTests.getUserByUserId" />
       </list>
     </recent_temporary>
   </component>
@@ -340,6 +340,7 @@
       <workItem from="1576201583590" duration="6161000" />
       <workItem from="1577072133653" duration="1934000" />
       <workItem from="1577613921504" duration="5492000" />
+      <workItem from="1577855672667" duration="17153000" />
     </task>
     <servers />
   </component>
@@ -358,5 +359,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/msims$MsimsApplication.ic" NAME="MsimsApplication Coverage Results" MODIFIED="1577876148098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
