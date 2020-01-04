@@ -62,12 +62,12 @@ CREATE TABLE bulletin_board_message (
     content text NOT NULL,
     date VARCHAR(32) NOT NULL
 ) ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
-
+drop table discussion;
 CREATE TABLE discussion (
     id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     courseCode VARCHAR(32) NOT NULL,
-    sponsorId VARCHAR(32) NOT NULL,
     sponsor VARCHAR(32) NOT NULL,
+    sponsorId INT(32) NOT NULL,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
     snapshot TEXT NOT NULL,

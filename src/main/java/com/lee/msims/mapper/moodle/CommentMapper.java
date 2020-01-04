@@ -3,7 +3,6 @@ package com.lee.msims.mapper.moodle;
 import com.lee.msims.pojo.moodle.Comment;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Mapper
@@ -25,10 +24,10 @@ public interface CommentMapper {
     void editComment(Comment comment);
 
     //Select
-    @Select("SELECT * FROM comment WHERE discussionId = #{discussionId} AND pid = 0 ORDER BY date")
+    @Select("SELECT * FROM comment WHERE discussionId = #{discussionId} AND pid = 0 ORDER BY date DESC")
     List<Comment> getAllCommentsOfDiscussion(int discussionId);
 
-    @Select("SELECT * FROM comment WHERE discussionId = #{discussionId} AND pid = #{pid} ORDER BY date")
+    @Select("SELECT * FROM comment WHERE discussionId = #{discussionId} AND pid = #{pid} ORDER BY date DESC")
     List<Comment> getAllRepliesOfComment(int discussionId, int pid);
 
     //Delete

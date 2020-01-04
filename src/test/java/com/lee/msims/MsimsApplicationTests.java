@@ -50,34 +50,41 @@ public class MsimsApplicationTests {
         User admin = new User("admin", "admin","admin", "admin",
                 "admin", "admin", "admin", "admin");
         userService.addUser(admin);*/
-        User user = new User("teacher", "teacher","teacher", "male",
-                "FIT", "teacher", "teacher", "teacher");
+        User user = new User("lee", "lee","lee", "male",
+                "FIT", "lee", "lee", "student");
         userService.addUser(user);
     }
 
     @Test
     public void addDiscussion(){
-        Discussion discussion1 = new Discussion("CS003", "teacher", "teacher",
-                "first discussion", "111xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" +
-                "xxxxxxxxxxxxxx", "111xxxxxxxxxxxxxxxxx", dateFormatter.formatDateToString(new Date()));
-        Discussion discussion2 = new Discussion("CS003", "teacher", "teacher",
+        Discussion discussion1 = new Discussion("CS003", "lee", 7,
+                "lee's discussion", "discussion created by lee", "discussion created by...",
+                dateFormatter.formatDateToString(new Date()));
+        Discussion discussion2 = new Discussion("CS003", "teacher", 6,
                 "second discussion", "111xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" +
                 "xxxxxxxxxxxxxx", "222xxxxxxxxxxxxxxxxx", dateFormatter.formatDateToString(new Date()));
-        discussionService.createDiscussion(discussion1);
         discussionService.createDiscussion(discussion2);
+        discussionService.createDiscussion(discussion1);
+    }
+
+    @Test
+    public void createReply(){
+        Comment comment1 = new Comment("CS003", 3, 14, "lee", 7,
+                "lee", 7, "reply by lee", dateFormatter.formatDateToString(new Date()));
+        /*Comment comment2 = new Comment("CS003", 1, 2, "123", 2,
+                "123", 2, "second reply 222", dateFormatter.formatDateToString(new Date()));
+        Comment comment3 = new Comment("CS003", 2, 3, "123", 2,
+                "123", 2, "third reply 333", dateFormatter.formatDateToString(new Date()));*/
+        commentService.replyComment(comment1);
+        /*commentService.replyComment(comment2);
+        commentService.replyComment(comment3);*/
     }
 
     @Test
     public void createComment(){
-        Comment comment1 = new Comment("CS003", 1, 2, "123", 2,
-                "123", 2, "first reply 111", dateFormatter.formatDateToString(new Date()));
-        Comment comment2 = new Comment("CS003", 1, 2, "123", 2,
-                "123", 2, "second reply 222", dateFormatter.formatDateToString(new Date()));
-        Comment comment3 = new Comment("CS003", 2, 3, "123", 2,
-                "123", 2, "third reply 333", dateFormatter.formatDateToString(new Date()));
-        commentService.replyComment(comment1);
-        commentService.replyComment(comment2);
-        commentService.replyComment(comment3);
+        Comment comment1 = new Comment("CS003", 3, 0, "lee", 7,
+                "null", 0, "comment by lee", dateFormatter.formatDateToString(new Date()));
+        commentService.createComment(comment1);
     }
 
     @Test

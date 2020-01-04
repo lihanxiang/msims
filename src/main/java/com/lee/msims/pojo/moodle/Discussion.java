@@ -7,8 +7,8 @@ public class Discussion {
 
     private int id;
     private String courseCode;
-    private String sponsorId;
     private String sponsor;
+    private int sponsorId;
     private String title;
     private String content;
     private String snapshot;
@@ -17,11 +17,11 @@ public class Discussion {
     public Discussion() {
     }
 
-    public Discussion(String courseCode, String sponsorId, String sponsor, String title,
+    public Discussion(String courseCode, String sponsor, int sponsorId, String title,
                       String content, String snapshot, String date) {
         this.courseCode = courseCode;
-        this.sponsorId = sponsorId;
         this.sponsor = sponsor;
+        this.sponsorId = sponsorId;
         this.title = title;
         this.content = content;
         this.snapshot = snapshot;

@@ -12,8 +12,8 @@ import java.util.List;
 public interface DiscussionMapper {
 
     // Insert
-    @Insert("INSERT INTO discussion (courseCode, sponsorId, sponsor, title, content, snapshot, date)" +
-            "VALUES (#{courseCode}, #{sponsorId}, #{sponsor}, #{title}, #{content}, #{snapshot}, #{date})")
+    @Insert("INSERT INTO discussion (courseCode, sponsor, sponsorId, title, content, snapshot, date)" +
+            "VALUES (#{courseCode}, #{sponsor}, #{sponsorId}, #{title}, #{content}, #{snapshot}, #{date})")
     void createDiscussion(Discussion discussion);
 
     // Update

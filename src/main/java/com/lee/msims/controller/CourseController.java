@@ -3,6 +3,7 @@ package com.lee.msims.controller;
 import com.lee.msims.pojo.coes.GPA;
 import com.lee.msims.pojo.common.Course;
 import com.lee.msims.pojo.common.File;
+import com.lee.msims.pojo.common.User;
 import com.lee.msims.pojo.moodle.BulletinBoardMessage;
 import com.lee.msims.pojo.moodle.Comment;
 import com.lee.msims.pojo.moodle.Component;
@@ -18,6 +19,8 @@ import com.lee.msims.service.moodle.DiscussionService;
 import com.lee.msims.util.DateFormatter;
 import com.lee.msims.util.GPACalculator;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +72,7 @@ public class CourseController {
         return "student/course";
     }
 
-    // Student
+    @RequiresRoles(value = "student")
     @RequestMapping(value = "gpa", method = RequestMethod.GET)
     public String gpa(Model model){
         String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
@@ -80,6 +83,7 @@ public class CourseController {
         return "gpa";
     }
 
+    @RequiresRoles(value = {"student", "teacher"}, logical = Logical.OR)
     @RequestMapping(value = "{courseCode}/course-detail", method = RequestMethod.GET)
     public String courseDetail(Model model, @PathVariable("courseCode") String courseCode){
         // course detail
@@ -120,6 +124,39 @@ public class CourseController {
         model.addAttribute("comments", commentMap);
      */
 
+    @RequestMapping(value = "{courseCode}/discussion-detail")
+    public String discussionDetail(Model model, @PathVariable("courseCode") String courseCode){
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("courseCode", courseCode);
+        model.addAttribute("discussion", new Discussion());
+        return "teacher/create_discussion";
+    }
+
+    @RequiresRoles(value = {"student", "teacher"}, logical = Logical.OR)
+    @RequestMapping(value = "{courseCode}/create-discussion")
+    public String createDiscussion(Model model, @ModelAttribute("discussion") Discussion discussion,
+                                    @PathVariable("courseCode") String courseCode){
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        User user = userService.getUserByUserId(userId);
+        discussion.setSponsor(user.getUsername());
+        discussion.setSponsorId(user.getId());
+        discussion.setCourseCode(courseCode);
+        String snapshot = discussion.getContent();
+        if (snapshot.length() > 20){
+            discussion.setSnapshot(snapshot.substring(0, 19));
+        } else {
+            discussion.setSnapshot(snapshot);
+        }
+        discussion.setDate(dateFormatter.formatDateToString(new Date()));
+        discussionService.createDiscussion(discussion);
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("courseCode", courseCode);
+        model.addAttribute("msg", "Successfully create a discussion");
+        return "redirect:/course/" + courseCode + "/discussion";
+    }
+
+
+    @RequiresRoles(value = {"student", "teacher"}, logical = Logical.OR)
     @RequestMapping(value = "{courseCode}/discussion", method = RequestMethod.GET)
     public String discussion(Model model, @PathVariable("courseCode") String courseCode) {
         List<Discussion> discussions = discussionService.getAllDiscussionOfCourse(courseCode);
@@ -132,34 +169,50 @@ public class CourseController {
                 List<Comment> replies = commentService.getAllRepliesOfComment(discussion.getId(), comment.getId());
                 commentMap.put(comment, replies);
             }
-            if (!discussionMap.values().isEmpty()){
+            /*if (!comments.isEmpty()){
                 model.addAttribute("haveComment", 1);
-            }
+            }*/
         }
 
         model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
         model.addAttribute("discussionMap", discussionMap);
         model.addAttribute("commentMap", commentMap);
+        model.addAttribute("courseCode", courseCode);
+        model.addAttribute("newComment", new Comment());
+        model.addAttribute("newDiscussion", new Discussion());
         return "teacher/discussion";
     }
 
-    @RequestMapping(value = "{courseCode}/create-discussion", method = RequestMethod.GET)
-    public String publishDiscussion(Model model, @ModelAttribute("discussion") Discussion discussion,
-                                    @PathVariable("courseCode") String courseCode){
+    @RequiresRoles(value = {"student", "teacher"}, logical = Logical.OR)
+    @RequestMapping(value = "{courseCode}/create-comment")
+    public String createComment(Model model, @ModelAttribute Comment comment,
+                                @PathVariable("courseCode") String courseCode){
         String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
-        discussion.setSponsor(userService.getUserByUserId(userId).getUsername());
-        discussion.setSponsorId(userId);
-        discussion.setCourseCode(courseCode);
-        if (discussion.getContent().length() > 20){
-            StringBuffer sb = new StringBuffer(discussion.getContent().indexOf(0, 20));
-            sb.append("...");
-            discussion.setSnapshot(sb.toString());
-        }
-        discussion.setDate(dateFormatter.formatDateToString(new Date()));
-        model.addAttribute("courseCode", courseCode);
-        model.addAttribute("msg", "Successfully initiated discussion");
+        User user = userService.getUserByUserId(userId);
+        comment.setCommenter(user.getUsername());
+        comment.setCommenterId(user.getId());
+        comment.setDate(dateFormatter.formatDateToString(new Date()));
+        commentService.createComment(comment);
         return "redirect:/course/" + courseCode + "/discussion";
     }
+
+    @RequiresRoles(value = {"student", "teacher"}, logical = Logical.OR)
+    @RequestMapping(value = "{courseCode}/reply-comment")
+    public String replyComment(Model model, @ModelAttribute Comment comment,
+                                @PathVariable("courseCode") String courseCode){
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        User user = userService.getUserByUserId(userId);
+        comment.setCommenter(user.getUsername());
+        comment.setCommenterId(user.getId());
+        comment.setDate(dateFormatter.formatDateToString(new Date()));
+        commentService.replyComment(comment);
+
+        return "redirect:/course/" + courseCode + "/discussion";
+    }
+
+
+
+
 
     @RequestMapping(value = "post-message-on-board", method = RequestMethod.POST)
     public String postMessageOnBoard(@ModelAttribute BulletinBoardMessage bulletinBoardMessage){

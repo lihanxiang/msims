@@ -211,6 +211,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MsimsApplicationTests.createReply" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="msims" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lee.msims.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lee.msims" />
+      <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
+      <option name="METHOD_NAME" value="createReply" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MsimsApplicationTests.select" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msims" />
       <extension name="coverage">
@@ -222,22 +238,6 @@
       <option name="PACKAGE_NAME" value="com.lee.msims" />
       <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
       <option name="METHOD_NAME" value="select" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MsimsApplicationTests.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="msims" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.lee.msims.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.lee.msims" />
-      <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
-      <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -255,19 +255,19 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
-      <item itemvalue="JUnit.MsimsApplicationTests.test" />
       <item itemvalue="JUnit.MsimsApplicationTests.addDiscussion" />
       <item itemvalue="JUnit.MsimsApplicationTests.createComment" />
       <item itemvalue="JUnit.MsimsApplicationTests.select" />
+      <item itemvalue="JUnit.MsimsApplicationTests.createReply" />
       <item itemvalue="Spring Boot.MsimsApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MsimsApplicationTests.select" />
-        <item itemvalue="JUnit.MsimsApplicationTests.createComment" />
         <item itemvalue="JUnit.MsimsApplicationTests.addDiscussion" />
-        <item itemvalue="JUnit.MsimsApplicationTests.test" />
+        <item itemvalue="JUnit.MsimsApplicationTests.createReply" />
+        <item itemvalue="JUnit.MsimsApplicationTests.createComment" />
         <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
+        <item itemvalue="JUnit.MsimsApplicationTests.select" />
       </list>
     </recent_temporary>
   </component>
@@ -341,6 +341,9 @@
       <workItem from="1577072133653" duration="1934000" />
       <workItem from="1577613921504" duration="5492000" />
       <workItem from="1577855672667" duration="17153000" />
+      <workItem from="1577940715735" duration="11273000" />
+      <workItem from="1577957505897" duration="8521000" />
+      <workItem from="1578038357044" duration="6976000" />
     </task>
     <servers />
   </component>

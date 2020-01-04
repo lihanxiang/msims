@@ -1,4 +1,4 @@
-commentcommentdelete from course where id = 2;
+delete from course where id = 2;
 
 INSERT INTO course (courseCode, faculty, courseName, credit, teacher, duration, time, description) 
 VALUES ("CS003", "FIT", "SOFTWARE ENGINEERING", "4", "teacher", "September 4th - December 17", "Monday@16:00-17:45, Friday@11:00-12:45", "description");

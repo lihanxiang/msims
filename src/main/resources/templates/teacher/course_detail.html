@@ -114,10 +114,9 @@
                     </div>
 
                     <div class="list-group">
-                        <div class="card border-secondary mb-3" style="max-width: 30rem;">
+                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
                             <div class="card-header">
-                                Discussion
-                                <a style="text-align: right" th:href="@{'/course/' + ${courseCode} + '/discussion'}">111</a>
+                                <a th:href="@{'/course/' + ${courseCode} + '/discussion'}">Discussion</a>
                             </div>
                             <div class="card-body text-secondary">
                                 <ul th:each="dis : ${discussion}">
