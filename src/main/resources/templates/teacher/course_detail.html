@@ -97,7 +97,7 @@
                 <div class="col-2"></div>
                 <div id="side" class="col">
                     <div id="bulletin-board">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                        <div class="card border-secondary mb-3" style="width: 30rem;">
                             <div class="card-header">Bulletin Board</div>
                             <div class="card-body text-secondary">
                                 <div>
@@ -114,19 +114,18 @@
                     </div>
 
                     <div class="list-group">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                        <div class="card border-secondary mb-3" style="width: 30rem;">
                             <div class="card-header">
                                 <a th:href="@{'/course/' + ${courseCode} + '/discussion'}">Discussion</a>
                             </div>
                             <div class="card-body text-secondary">
                                 <ul th:each="dis : ${discussion}">
                                     <li>
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1" th:text="${dis.title}"></h5>
-                                            <small th:text="${dis.date}"></small>
-                                        </div>
+                                        <div>
+                                            <p class="card-text" th:text="${dis.title}"></p>
+                                        </div><br>
                                         <p class="mb-1" th:text="${dis.snapshot}"></p>
-                                        <small></small>
+                                        <p class="text-right" th:text="${dis.date}"></p><br>
                                     </li>
                                 </ul>
                             </div>
@@ -187,7 +186,7 @@
                     </div>-->
 
                     <div id="timeline">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                        <div class="card border-secondary mb-3" style="width: 30rem;">
                             <div class="card-header">Timeline</div>
                             <div class="card-body text-secondary">
                                 <div>&nbsp;

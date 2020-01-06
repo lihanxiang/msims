@@ -24,6 +24,8 @@ public interface CourseService {
 
     List<String> getCourseListByStudent(String studentId);
 
+    List<String> getStudentsOfCourse(String courseCode);
+
     // Delete
     void deleteStudentOfCourse(@Param("userId")String userId, @Param("courseCode")String courseCode);
 

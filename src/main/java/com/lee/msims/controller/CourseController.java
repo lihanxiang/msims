@@ -4,10 +4,7 @@ import com.lee.msims.pojo.coes.GPA;
 import com.lee.msims.pojo.common.Course;
 import com.lee.msims.pojo.common.File;
 import com.lee.msims.pojo.common.User;
-import com.lee.msims.pojo.moodle.BulletinBoardMessage;
-import com.lee.msims.pojo.moodle.Comment;
-import com.lee.msims.pojo.moodle.Component;
-import com.lee.msims.pojo.moodle.Discussion;
+import com.lee.msims.pojo.moodle.*;
 import com.lee.msims.service.coes.GPAService;
 import com.lee.msims.service.common.CourseService;
 import com.lee.msims.service.common.FileService;
@@ -142,10 +139,10 @@ public class CourseController {
         discussion.setSponsorId(user.getId());
         discussion.setCourseCode(courseCode);
         String snapshot = discussion.getContent();
-        if (snapshot.length() > 20){
-            discussion.setSnapshot(snapshot.substring(0, 19));
+        if (snapshot.length() > 50){
+            discussion.setSnapshot(snapshot.substring(0, 49));
         } else {
-            discussion.setSnapshot(snapshot);
+            discussion.setSnapshot(snapshot + "...");
         }
         discussion.setDate(dateFormatter.formatDateToString(new Date()));
         discussionService.createDiscussion(discussion);
@@ -210,8 +207,24 @@ public class CourseController {
         return "redirect:/course/" + courseCode + "/discussion";
     }
 
+    @RequestMapping("{courseCode}/assessment")
+    public String assessment(Model model, @PathVariable("courseCode") String courseCode){
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("courseCode", courseCode);
+        List<String> studentIdSet = courseService.getStudentsOfCourse(courseCode);
+        List<User> students = new ArrayList<>();
+        for (String userId : studentIdSet){
+            students.add(userService.getUserByUserId(userId));
+        }
+        model.addAttribute("students", students);
+        model.addAttribute("assessment", new Assessment());
 
+        return "teacher/assessment";
+    }
 
+    @RequestMapping("{courseCode}/write-assessment")
+    public String writeAssessment(Model model, @ModelAttribute Assessment assessment,
+                                  @PathVariable("courseCode") String courseCode)
 
 
     @RequestMapping(value = "post-message-on-board", method = RequestMethod.POST)

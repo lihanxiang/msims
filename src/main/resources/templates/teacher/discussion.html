@@ -101,56 +101,71 @@
                                     <ul class="list-group list-group-flush" th:each="comment : ${dis.getValue()}">
                                         <li class="list-group-item">
                                             <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index} + ${commentStat.index}"
-                                               aria-expanded="false" th:text="'   ' + ${comment.commenter} + ': ' + ${comment.content}"></a>
-                                            <p th:text="'posted by ' + ${comment.commenter} + ' in ' + ${comment.date}"></p>
+                                               aria-expanded="false" th:text="${comment.commenter} + ': '"></a>
+                                            <p class="text-justify" style="white-space: pre-wrap; margin-left: 2%; margin-right: 2%"
+                                               th:text="${comment.content}"></p>
+                                            <p class="text-right" style="margin-right: 2%" th:text="'posted by ' + ${comment.commenter} + ' in ' + ${comment.date}"></p>
                                             <div class="collapse multi-collapse" th:id="'collapse' + ${disStat.index} + ${commentStat.index}">
-                                                <form th:action="@{'/course/' + ${courseCode} + '/reply-comment'}"
-                                                      th:object="${newComment}">
-                                                    <input type="hidden" class="form-control" name="discussionId"
-                                                            th:value="${comment.getDiscussionId()}">
-                                                    <input type="hidden" class="form-control" name="pid"
-                                                           th:value="${comment.getId()}">
-                                                    <input type="hidden" class="form-control" name="respondent"
-                                                           th:value="${comment.getCommenter()}">
-                                                    <input type="hidden" class="form-control" name="respondentId"
-                                                           th:value="${comment.getCommenterId()}">
-                                                    <label for="content2"></label>
-                                                    <textarea class="form-control" name="content" id="content2" th:field="*{content}"
-                                                              rows="3" placeholder="Write your comment" required="required">
-                                                    </textarea><br>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </form>
+                                                <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                                    <form th:action="@{'/course/' + ${courseCode} + '/reply-comment'}"
+                                                          th:object="${newComment}">
+                                                        <input type="hidden" class="form-control" name="discussionId"
+                                                                th:value="${comment.getDiscussionId()}">
+                                                        <input type="hidden" class="form-control" name="pid"
+                                                               th:value="${comment.getId()}">
+                                                        <input type="hidden" class="form-control" name="respondent"
+                                                               th:value="${comment.getCommenter()}">
+                                                        <input type="hidden" class="form-control" name="respondentId"
+                                                               th:value="${comment.getCommenterId()}">
+                                                        <label for="content2"></label>
+                                                        <textarea class="form-control" name="content" id="content2"
+                                                                  th:field="*{content}" style="white-space: pre-wrap;"
+                                                                  rows="3" placeholder="Write your comment" required="required">
+                                                        </textarea><br>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div>
                                                 <ul class="list-group list-group-flush" th:each="reply : ${commentMap.get(comment)}">
                                                     <li class="list-group-item">
-                                                        <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}
-                                                    + ${commentStat.index} + ${replyStat.index}"
-                                                           aria-expanded="false" th:text="'   ' + ${reply.commenter} +
-                                                       ' @' +${reply.respondent}+ ': ' + ${reply.content}"></a>
-                                                        <p th:text="'posted by ' + ${comment.commenter} + ' in ' + ${comment.date}"></p>
+                                                        <p>
+                                                            <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}
+                                                            + ${commentStat.index} + ${replyStat.index}"
+                                                               aria-expanded="false" th:text="'   ' + ${reply.commenter}"></a>
+                                                            &nbsp;@&nbsp;
+                                                            <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}
+                                                            + ${commentStat.index} + ${replyStat.index}"
+                                                               aria-expanded="false" th:text="${reply.respondent}"></a>
+                                                        </p>
+                                                        <p class="text-justify" style="white-space: pre-wrap; margin-left: 2%; margin-right: 2%"
+                                                           th:text="${reply.content}"></p>
+                                                        <p class="text-right" th:text="'posted by ' + ${comment.commenter} + ' in ' + ${comment.date}"></p>
                                                         <div class="collapse multi-collapse" th:id="'collapse'  + ${disStat.index}
                                                      + ${commentStat.index} + ${replyStat.index}">
-                                                            <form th:action="@{'/course/' + ${courseCode} + '/reply-comment'}"
-                                                                  th:object="${newComment}">
-                                                                <input type="hidden" class="form-control" name="discussionId"
-                                                                       th:value="${reply.discussionId}">
-                                                                <input type="hidden" class="form-control" name="pid"
-                                                                       th:value="${comment.getId()}">
-                                                                <input type="hidden" class="form-control" name="respondent"
-                                                                       th:value="${reply.commenter}">
-                                                                <input type="hidden" class="form-control" name="respondentId"
-                                                                       th:value="${reply.commenterId}">
-                                                                <label for="content3"></label>
-                                                                <textarea class="form-control" id="content3" rows="3" th:field="*{content}"
-                                                                          placeholder="Write your comment" required="required">
-                                                                </textarea><br>
-                                                                <button type="submit" class="btn btn-primary">
-                                                                    Submit
-                                                                </button>
-                                                            </form>
+                                                            <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                                                <form th:action="@{'/course/' + ${courseCode} + '/reply-comment'}"
+                                                                      th:object="${newComment}">
+                                                                    <input type="hidden" class="form-control" name="discussionId"
+                                                                           th:value="${reply.discussionId}">
+                                                                    <input type="hidden" class="form-control" name="pid"
+                                                                           th:value="${comment.getId()}">
+                                                                    <input type="hidden" class="form-control" name="respondent"
+                                                                           th:value="${reply.commenter}">
+                                                                    <input type="hidden" class="form-control" name="respondentId"
+                                                                           th:value="${reply.commenterId}">
+                                                                    <label for="content3"></label>
+                                                                    <textarea class="form-control" id="content3" rows="3"
+                                                                              th:field="*{content}" style="white-space: pre-wrap;"
+                                                                              placeholder="Write your comment" required="required">
+                                                                    </textarea><br>
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        Submit
+                                                                    </button>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -160,20 +175,23 @@
                                 </div>
 
                                 <div class="collapse multi-collapse" th:id="'collapse2' + ${disStat.index}">
-                                    <form th:action="@{'/course/' + ${courseCode} + '/create-comment'}"
-                                          th:object="${newComment}">
-                                        <input type="hidden" class="form-control" name="discussionId"
-                                               th:value="${dis.getKey().getId()}">
-                                        <input type="hidden" class="form-control" name="commenter"
-                                               th:value="${dis.getKey().getSponsor()}">
-                                        <input type="hidden" class="form-control" name="commenterId"
-                                               th:value="${dis.getKey().getSponsorId()}">
-                                        <label for="content1"></label>
-                                        <textarea class="form-control" name="content" id="content1" th:field="*{content}"
-                                                  rows="3" placeholder="Write your comment" required="required">
+                                    <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                        <form th:action="@{'/course/' + ${courseCode} + '/create-comment'}"
+                                              th:object="${newComment}">
+                                            <input type="hidden" class="form-control" name="discussionId"
+                                                   th:value="${dis.getKey().getId()}">
+                                            <input type="hidden" class="form-control" name="commenter"
+                                                   th:value="${dis.getKey().getSponsor()}">
+                                            <input type="hidden" class="form-control" name="commenterId"
+                                                   th:value="${dis.getKey().getSponsorId()}">
+                                            <label for="content1"></label>
+                                            <textarea class="form-control" style="white-space: pre-wrap;" name="content"
+                                                      id="content1" th:field="*{content}" rows="3"
+                                                      placeholder="Write your comment" required="required">
                                                     </textarea><br>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form><br>
+                                    </div>
                                 </div>
 
                                 <!--<div class="collapse multi-collapse" th:id="'collapse2' + ${disStat.index}">
@@ -191,7 +209,7 @@
                     </ul>
                 </div>
 
-                <div class="col-2"></div>
+                <div class="col-1"></div>
 
                 <div class="col">
                     <div class="card border-secondary mb-3" style="max-width: 38rem;">
@@ -201,13 +219,13 @@
                         <div class="card-body text-secondary">
                             <form th:action="@{'/course/' + ${courseCode} + '/create-discussion'}"
                                   th:object="${newDiscussion}">
-                                <div class="form-group">
-                                    <label for="title">Title</label>
-                                    <input type="text" class="form-control" id="title" placeholder="Title" name="title">
-                                </div>
-                                <label for="content4"></label>
+                                <label for="content5">Title</label>
+                                <textarea class="form-control" name="title" id="content5" rows="3" th:field="*{title}"
+                                          placeholder="Title" required="required">
+                                </textarea><br>
+                                <label for="content4">Detail</label>
                                 <textarea class="form-control" name="content" id="content4" rows="3" th:field="*{content}"
-                                          placeholder="Write your comment" required="required">
+                                          placeholder="Detail" required="required">
                                 </textarea><br>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>

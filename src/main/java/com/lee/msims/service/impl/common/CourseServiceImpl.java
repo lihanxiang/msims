@@ -52,6 +52,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<String> getStudentsOfCourse(String courseCode) {
+        return courseMapper.getStudentsOfCourse(courseCode);
+    }
+
+    @Override
     public void deleteStudentOfCourse(String userId, String courseCode) {
         courseMapper.deleteStudentOfCourse(userId, courseCode);
     }

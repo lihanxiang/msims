@@ -11,13 +11,11 @@ public class Assignment {
     private String title;
     private String description;
     private String deadline;
-    private String dueStatus;
 
-    public Assignment(int componentId, String title, String description, String deadline, String dueStatus) {
+    public Assignment(int componentId, String title, String description, String deadline) {
         this.componentId = componentId;
         this.title = title;
         this.description = description;
         this.deadline = deadline;
-        this.dueStatus = dueStatus;
     }
 }
