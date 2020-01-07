@@ -11,8 +11,8 @@ import java.util.List;
 public interface SubmissionMapper {
 
     // Insert
-    @Insert("INSERT INTO submission (id, assignmentId, userId, fileId, author, comment, isGraded) " +
-            "VALUES (#{id}, #{assignmentId}, #{userId}, #{fileId}, #{author}, #{comment}, #{isGraded})")
+    @Insert("INSERT INTO submission (id, assignmentId, userId, fileId, author, comment, date, isGraded) " +
+            "VALUES (#{id}, #{assignmentId}, #{userId}, #{fileId}, #{author}, #{comment}, #{date}, #{isGraded})")
     void createSubmission(Submission submission);
 
     // Update

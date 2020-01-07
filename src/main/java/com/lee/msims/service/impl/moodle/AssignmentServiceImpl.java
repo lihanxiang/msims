@@ -33,8 +33,23 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
-    public List<Assignment> getAssignmentsInComponent(int componentId) {
-        return assignmentMapper.getAssignmentsInComponent(componentId);
+    public List<Assignment> getAssignmentsOfCourse(String courseCode) {
+        return assignmentMapper.getAssignmentsOfCourse(courseCode);
+    }
+
+    @Override
+    public List<String> getAssignmentsByStudentId(int studentId) {
+        return assignmentMapper.getAssignmentsByStudentId(studentId);
+    }
+
+    @Override
+    public List<String> getStudentsWhoAreSubmitted(int assignmentId) {
+        return assignmentMapper.getStudentsWhoAreSubmitted(assignmentId);
+    }
+
+    @Override
+    public int checkIfSubmitted(int studentId, int assignmentId) {
+        return assignmentMapper.checkIfSubmitted(studentId, assignmentId);
     }
 
     @Override

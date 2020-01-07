@@ -50,9 +50,26 @@ public class MsimsApplicationTests {
         User admin = new User("admin", "admin","admin", "admin",
                 "admin", "admin", "admin", "admin");
         userService.addUser(admin);*/
-        User user = new User("lee", "lee","lee", "male",
+        /*User user = new User("lee", "lee","lee", "male",
                 "FIT", "lee", "lee", "student");
-        userService.addUser(user);
+        userService.addUser(user);*/
+        for (int i = 1; i <= 10; i++){
+            User user = new User("student" + i, "student" + i,"student" + i, "male",
+                    "FIT", "phone" + i, "email" + i, "student");
+            userService.addUser(user);
+        }
+        for (int i = 1; i <= 10; i++){
+            User user = new User("teacher" + i, "teacher" + i,"teacher" + i, "male",
+                    "FIT", "phone" + i, "email" + i, "teacher");
+            userService.addUser(user);
+        }
+    }
+
+    @Test
+    public void addStudentToCourse(){
+        for (int i = 1; i <= 10; i++){
+
+        }
     }
 
     @Test

@@ -11,6 +11,8 @@ public class Assessment {
     private String comment;
     private String date;
 
+    public Assessment(){}
+
     public Assessment(int assignmentId, int submissionId, double score, String comment, String date) {
         this.assignmentId = assignmentId;
         this.submissionId = submissionId;

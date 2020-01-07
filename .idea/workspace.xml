@@ -263,10 +263,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
         <item itemvalue="JUnit.MsimsApplicationTests.addDiscussion" />
         <item itemvalue="JUnit.MsimsApplicationTests.createReply" />
         <item itemvalue="JUnit.MsimsApplicationTests.createComment" />
-        <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
         <item itemvalue="JUnit.MsimsApplicationTests.select" />
       </list>
     </recent_temporary>
@@ -345,7 +345,8 @@
       <workItem from="1577957505897" duration="8521000" />
       <workItem from="1578038357044" duration="6976000" />
       <workItem from="1578117176983" duration="4884000" />
-      <workItem from="1578317514187" duration="1822000" />
+      <workItem from="1578317514187" duration="11192000" />
+      <workItem from="1578358115327" duration="401000" />
     </task>
     <servers />
   </component>

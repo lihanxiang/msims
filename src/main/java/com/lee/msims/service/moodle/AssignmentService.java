@@ -14,7 +14,13 @@ public interface AssignmentService {
     // Select
     Assignment getAssignmentById(int id);
 
-    List<Assignment> getAssignmentsInComponent(int componentId);
+    List<Assignment> getAssignmentsOfCourse(String courseCode);
+
+    List<String> getAssignmentsByStudentId(int studentId);
+
+    List<String> getStudentsWhoAreSubmitted(int assignmentId);
+
+    int checkIfSubmitted(int studentId, int assignmentId);
 
     // Delete
     void deleteAssignment(int id);

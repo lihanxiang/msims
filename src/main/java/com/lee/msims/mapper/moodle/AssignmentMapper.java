@@ -11,21 +11,29 @@ import java.util.List;
 public interface AssignmentMapper {
 
     // Insert
-    @Insert("INSERT INTO assignment (componentId, title, description, dueStatus" +
-            "VALUES (#{componentId}, #{title}, #{description}, #{dueStatus})")
+    @Insert("INSERT INTO assignment (courseCode, title, description, deadline" +
+            "VALUES (#{courseCode}, #{title}, #{description}, #{deadline})")
     void createAssignment(Assignment assignment);
 
     // Update
-    @Update("UPDATE assignment SET componentId = #{componentId} AND title = #{title} " +
-            "AND description = #{description} AND dueStatus = #{dueStatus}")
+    @Update("UPDATE assignment SET title = #{title} AND description = #{description} AND deadline = #{deadline}")
     void editAssignmentInfo(Assignment assignment);
 
     // Select
     @Select("SELECT * FROM assignment WHERE id = #{id}")
     Assignment getAssignmentById(int id);
 
-    @Select("SELECT * FROM assignment WHERE componentId = #{componentId}")
-    List<Assignment> getAssignmentsInComponent(int componentId);
+    @Select("SELECT * FROM assignment WHERE courseCode = #{courseCode}")
+    List<Assignment> getAssignmentsOfCourse(String courseCode);
+
+    @Select("SELECT assignmentId FROM student_assignment WHERE studentId = #{studentId}")
+    List<String> getAssignmentsByStudentId(int studentId);
+
+    @Select("SELECT studentId FROM student_assignment WHERE assignmentId = #{assignmentId}")
+    List<String> getStudentsWhoAreSubmitted(int assignmentId);
+
+    @Select("SELECT COUNT(*) FROM student_assignment WHERE studentId = #{studentId} AND assignmentId = #{assignmentId}")
+    int checkIfSubmitted(@Param("studentId") int studentId, @Param("assignmentId") int assignmentId);
 
     // Delete
     @Delete("DELETE FROM assignment WHERE id = #{id}")

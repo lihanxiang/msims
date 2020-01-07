@@ -9,10 +9,7 @@ import com.lee.msims.service.coes.GPAService;
 import com.lee.msims.service.common.CourseService;
 import com.lee.msims.service.common.FileService;
 import com.lee.msims.service.common.UserService;
-import com.lee.msims.service.moodle.BulletinBoardService;
-import com.lee.msims.service.moodle.CommentService;
-import com.lee.msims.service.moodle.ComponentService;
-import com.lee.msims.service.moodle.DiscussionService;
+import com.lee.msims.service.moodle.*;
 import com.lee.msims.util.DateFormatter;
 import com.lee.msims.util.GPACalculator;
 import org.apache.shiro.SecurityUtils;
@@ -51,6 +48,12 @@ public class CourseController {
     private UserService userService;
     @Autowired
     private DiscussionService discussionService;
+    @Autowired
+    private AssignmentService assignmentService;
+    @Autowired
+    private SubmissionService submissionService;
+    @Autowired
+    private AssessmentService assessmentService;
     @Autowired
     private DateFormatter dateFormatter;
 
@@ -207,24 +210,47 @@ public class CourseController {
         return "redirect:/course/" + courseCode + "/discussion";
     }
 
-    @RequestMapping("{courseCode}/assessment")
-    public String assessment(Model model, @PathVariable("courseCode") String courseCode){
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
-        model.addAttribute("courseCode", courseCode);
+    @RequestMapping("{courseCode}/{assignmentId}/assignment")
+    public String assessment(Model model, @PathVariable("assignmentId") int assignmentId,
+                             @PathVariable("courseCode") String courseCode){
+
         List<String> studentIdSet = courseService.getStudentsOfCourse(courseCode);
         List<User> students = new ArrayList<>();
         for (String userId : studentIdSet){
             students.add(userService.getUserByUserId(userId));
         }
-        model.addAttribute("students", students);
-        model.addAttribute("assessment", new Assessment());
 
+        List<Submission> submissions = submissionService.getSubmissionInAssignment(assignmentId);
+        Map<User, Submission> submissionMap = new LinkedHashMap<>();
+        for (Submission s : submissions){
+            User student = userService.getUserByUserId(s.getUserId());
+            submissionMap.put(student, s);
+            students.remove(student);
+        }
+        Map<User, Assessment> assessmentMap = new LinkedHashMap<>();
+        List<Assessment> assessments = assessmentService.getAssessmentsInAssignment(assignmentId);
+        for (Assessment a : assessments){
+            assessmentMap.put(userService.getUserByUserId(submissionService.getSubmissionById(
+                    a.getSubmissionId()).getUserId()), a);
+        }
+
+        model.addAttribute("students", students);
+        model.addAttribute("assessmentMap", assessmentMap);
+        model.addAttribute("newAssessment", new Assessment());
+        model.addAttribute("assignment", assignmentService.getAssignmentById(assignmentId));
+        model.addAttribute("submissionMap", submissionMap);
+        model.addAttribute("courseCode", courseCode);
+        model.addAttribute("assignmentId", assignmentId);
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
         return "teacher/assessment";
     }
 
-    @RequestMapping("{courseCode}/write-assessment")
-    public String writeAssessment(Model model, @ModelAttribute Assessment assessment,
-                                  @PathVariable("courseCode") String courseCode)
+    @RequestMapping("{courseCode}/{assignmentId}/write-assessment")
+    public String writeAssessment(Model model, @PathVariable("assignmentId") String assignmentId,
+                                  @ModelAttribute Assessment assessment, @PathVariable("courseCode") String courseCode){
+
+        return "direct:/course/" + courseCode + "/" + assignmentId + "/assignment";
+    }
 
 
     @RequestMapping(value = "post-message-on-board", method = RequestMethod.POST)

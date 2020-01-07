@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Discussion</title>
+    <title>Assignment</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,141 +10,305 @@
     <link rel="stylesheet" href="/css/teacher/course_detail.css">
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class=" navbar-collapse ">
-            <div>
-                <a class="navbar-brand" href="#">&nbsp;
-                    <img src="/image/2.png" width="30" height="30" alt="">
-                    Moodle
-                </a>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class=" navbar-collapse ">
+                <div>
+                    <a class="navbar-brand" href="#">&nbsp;
+                        <img src="/image/2.png" width="30" height="30" alt="">
+                        Moodle
+                    </a>
+                </div>
+                <div>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="course" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Course
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="course">
+                                <a class="dropdown-item" href="/teacher/courses">My Course</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/student/gpa">My GPA</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/course/gpa">My Homework</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">My Assessment</a>
+                            </div>
+                        </li>
+                        <li class="nav-item active dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="message" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Message
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="message">
+                                <a class="dropdown-item" href="/course/courses">Bulletin Board</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/course/gpa">Discussion</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div>
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="course" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Course
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userIdDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userId}">
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="course">
-                            <a class="dropdown-item" href="/teacher/courses">My Course</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userIdDropdown">
+                            <a class="dropdown-item text" href="#">User Info</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/student/gpa">My GPA</a>
+                            <a class="dropdown-item text" href="#">Back to MSIMS Home</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/course/gpa">My Homework</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">My Assessment</a>
+                            <a class="dropdown-item text" href="/auth/logout">Logout</a>
                         </div>
-                    </li>
-                    <li class="nav-item active dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="message" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Message
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="message">
-                            <a class="dropdown-item" href="/course/courses">Bulletin Board</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/course/gpa">Discussion</a>
-                        </div>
-                    </li>
+                    </li>&nbsp;
                 </ul>
             </div>
-        </div>
-        <div>
-            <ul class="navbar-nav mr-auto">
-                <li class="dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userIdDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userId}">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userIdDropdown">
-                        <a class="dropdown-item text" href="#">User Info</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text" href="#">Back to MSIMS Home</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text" href="/auth/logout">Logout</a>
-                    </div>
-                </li>&nbsp;
-            </ul>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
-<main>
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Discussion Area</h1>
-            <p class="lead" th:text="'You are now browsing the discussion area of ' + ${courseCode}"></p>
-        </div>
-    </div>
-
-    <div id="table" class="container-fluid">
-        <div class="row">
-            <div id="component" class="col-6">
-                <ul class="list-group list-group-flush" th:each="student : ${students}">
-                    <li class="list-group-item">
-                        <p th:text="${student.userId}">
-                            <a class="btn btn-primary text-right" data-toggle="collapse"
-                               th:href="'#collapse2' + ${studentStat.index}" role="button" aria-expanded="false">
-                                Write Assessment
-                            </a>
-                        </p>
-                    </li>
-                </ul>
+    <main>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4" th:text="${assignment.title}"></h1>
+                <p class="lead" th:text="${assignment.description}"></p>
             </div>
+        </div>
 
-            <div class="col-1"></div>
+        <!--<div id="table" class="container-fluid">
+            <div class="row">
+                <div id="component" class="col-6">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <ul class="list-group" th:each="student : ${students}">
+                            <li class="list-group-item">
+                                <p th:text="${student.username}">
+                                    <a class="btn btn-primary text-right" data-toggle="collapse"
+                                       th:href="'#collapse' + ${studentStat.index}" role="button"
+                                       aria-expanded="false">
+                                        Check Submission
+                                    </a>
+                                    <a class="btn btn-primary text-right" data-toggle="collapse"
+                                       th:href="'#collapse2' + ${studentStat.index}" role="button"
+                                       th:if="${assessmentMap.get(student)} eq null" aria-expanded="false">
+                                        Write Assessment
+                                    </a>
+                                    <a class="btn btn-primary text-right" data-toggle="collapse"
+                                       th:href="'#collapse3' + ${studentStat.index}" role="button"
+                                       th:if="${assessmentMap.get(student)} ne null" aria-expanded="false">
+                                        Show Assessment
+                                    </a>
+                                </p>
+                                <div class="collapse multi-collapse" th:id="'collapse2' + ${studentStat.index}">
+                                    <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                        <form th:action="@{'/course/' + ${courseCode} + '/' + ${assignmentId} + '/write-assessment'}"
+                                              th:object="${newAssessment}">
 
-            <div class="col">
-                <div class="card border-secondary mb-3" style="max-width: 38rem;">
-                    <div class="card-header">
-                        <p>Create a Discussion</p>
-                    </div>
-                    <div class="card-body text-secondary">
-                        <form th:action="@{'/course/' + ${courseCode} + '/write-assessment'}"
-                              th:object="${assessment}">
-                            <label for="content5">Title</label>
-                            <textarea class="form-control" name="title" id="content5" rows="3" th:field="*{title}"
-                                      placeholder="Title" required="required">
-                                </textarea><br>
-                            <label for="content4">Detail</label>
-                            <textarea class="form-control" name="content" id="content4" rows="3" th:field="*{content}"
-                                      placeholder="Detail" required="required">
-                                </textarea><br>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                                            <label for="score"></label>
+                                            <input type="number" step="0.01" min="0" max="100"
+                                                   class="form-control" id="score" name="score">
+                                            <label for="comment"></label>
+                                            <textarea class="form-control" name="comment" id="comment"
+                                                      th:field="*{comment}" style="white-space: pre-wrap;"
+                                                      rows="3" placeholder="Write your comment" required="required">
+                                                                    </textarea><br>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
-</main>
+    </main>
 
-<footer class="navbar-fixed-bottom page-footer font-small blue pt-4">
-    <div class="container text-center text-md-left">
-        <div class="row">
-            <div class="col-md-6 mt-md-0 mt-3">
-                <h5 class="text-uppercase">MUST Student Information Management System</h5>
-                <p>Something to say</p>
+    <footer class="navbar-fixed-bottom page-footer font-small blue pt-4">
+        <div class="container text-center text-md-left">
+            <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <h5 class="text-uppercase">MUST Student Information Management System</h5>
+                    <p>Something to say</p>
+                </div>
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <div class="col-md-6 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Contact Me</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="mailto:l945457758@email.com">Email</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <hr class="clearfix w-100 d-md-none pb-3">
+        </div>-->
+        <div id="table" class="container-fluid">
+            <div class="row">
+                <div id="component" class="col-6">
+                    <ul class="list-group list-group-flush" th:each="submission : ${submissionMap}">
+                        <li class="list-group-item">
+                            <div class="card">
+                                <div class="card-header" th:text="${submission.getKey().getUsername()} + ' ' + ${submission.getKey().getUsername()}"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title">111</h5>
+                                    <p class="card-text">
+                                        <a th:href="@{'/file/download/' + ${submission.getValue().getFileId()}}">
+                                            <img src="/image/1.png" width="50" height="50" alt="file">
+                                        </a>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted" th:text="${submission.getValue().date}">
+                                        </small>
+                                    </p>
+                                    <a class="btn btn-primary text-right" data-toggle="collapse"
+                                       th:href="'#collapse' + ${submissionStat.index}" role="button"
+                                       aria-expanded="false">
+                                        Check Submission
+                                    </a>
+                                    <a class="btn btn-primary text-right" data-toggle="collapse"
+                                       th:href="'#collapse2' + ${submissionStat.index}" role="button"
+                                       th:if="${submission.getValue()} eq null" aria-expanded="false">
+                                        Write Assessment
+                                    </a>
+                                    <a class="btn btn-primary text-right" data-toggle="collapse"
+                                       th:href="'#collapse3' + ${submissionStat.index}" role="button"
+                                       th:if="${submission.getValue()} ne null" aria-expanded="false">
+                                        Show Assessment
+                                    </a>
+                                </div>
+                                <!--<div class="collapse multi-collapse" th:id="'collapse' + ${disStat.index}">
+                                    <ul class="list-group list-group-flush" th:each="comment : ${dis.getValue()}">
+                                        <li class="list-group-item">
+                                            <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index} + ${commentStat.index}"
+                                               aria-expanded="false" th:text="${comment.commenter} + ': '"></a>
+                                            <p class="text-justify" style="white-space: pre-wrap; margin-left: 2%; margin-right: 2%"
+                                               th:text="${comment.content}"></p>
+                                            <p class="text-right" style="margin-right: 2%" th:text="'posted by ' + ${comment.commenter} + ' in ' + ${comment.date}"></p>
+                                            <div class="collapse multi-collapse" th:id="'collapse' + ${disStat.index} + ${commentStat.index}">
+                                                <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                                    <form th:action="@{'/course/' + ${courseCode} + '/reply-comment'}"
+                                                          th:object="${newComment}">
+                                                        <input type="hidden" class="form-control" name="discussionId"
+                                                               th:value="${comment.getDiscussionId()}">
+                                                        <input type="hidden" class="form-control" name="pid"
+                                                               th:value="${comment.getId()}">
+                                                        <input type="hidden" class="form-control" name="respondent"
+                                                               th:value="${comment.getCommenter()}">
+                                                        <input type="hidden" class="form-control" name="respondentId"
+                                                               th:value="${comment.getCommenterId()}">
+                                                        <label for="content2"></label>
+                                                        <textarea class="form-control" name="content" id="content2"
+                                                                  th:field="*{content}" style="white-space: pre-wrap;"
+                                                                  rows="3" placeholder="Write your comment" required="required">
+                                                            </textarea><br>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div>
+                                                <ul class="list-group list-group-flush" th:each="reply : ${commentMap.get(comment)}">
+                                                    <li class="list-group-item">
+                                                        <p>
+                                                            <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}
+                                                                + ${commentStat.index} + ${replyStat.index}"
+                                                               aria-expanded="false" th:text="'   ' + ${reply.commenter}"></a>
+                                                            &nbsp;@&nbsp;
+                                                            <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}
+                                                                + ${commentStat.index} + ${replyStat.index}"
+                                                               aria-expanded="false" th:text="${reply.respondent}"></a>
+                                                        </p>
+                                                        <p class="text-justify" style="white-space: pre-wrap; margin-left: 2%; margin-right: 2%"
+                                                           th:text="${reply.content}"></p>
+                                                        <p class="text-right" th:text="'posted by ' + ${comment.commenter} + ' in ' + ${comment.date}"></p>
+                                                        <div class="collapse multi-collapse" th:id="'collapse'  + ${disStat.index}
+                                                         + ${commentStat.index} + ${replyStat.index}">
+                                                            <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                                                <form th:action="@{'/course/' + ${courseCode} + '/reply-comment'}"
+                                                                      th:object="${newComment}">
+                                                                    <input type="hidden" class="form-control" name="discussionId"
+                                                                           th:value="${reply.discussionId}">
+                                                                    <input type="hidden" class="form-control" name="pid"
+                                                                           th:value="${comment.getId()}">
+                                                                    <input type="hidden" class="form-control" name="respondent"
+                                                                           th:value="${reply.commenter}">
+                                                                    <input type="hidden" class="form-control" name="respondentId"
+                                                                           th:value="${reply.commenterId}">
+                                                                    <label for="content3"></label>
+                                                                    <textarea class="form-control" id="content3" rows="3"
+                                                                              th:field="*{content}" style="white-space: pre-wrap;"
+                                                                              placeholder="Write your comment" required="required">
+                                                                        </textarea><br>
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        Submit
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
 
-            <div class="col-md-6 mb-md-0 mb-3">
-                <h5 class="text-uppercase">Contact Me</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="mailto:l945457758@email.com">Email</a>
-                    </li>
-                </ul>
+                                <div class="collapse multi-collapse" th:id="'collapse2' + ${disStat.index}">
+                                    <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                        <form th:action="@{'/course/' + ${courseCode} + '/create-comment'}"
+                                              th:object="${newComment}">
+                                            <input type="hidden" class="form-control" name="discussionId"
+                                                   th:value="${dis.getKey().getId()}">
+                                            <input type="hidden" class="form-control" name="commenter"
+                                                   th:value="${dis.getKey().getSponsor()}">
+                                            <input type="hidden" class="form-control" name="commenterId"
+                                                   th:value="${dis.getKey().getSponsorId()}">
+                                            <label for="content1"></label>
+                                            <textarea class="form-control" style="white-space: pre-wrap;" name="content"
+                                                      id="content1" th:field="*{content}" rows="3"
+                                                      placeholder="Write your comment" required="required">
+                                                        </textarea><br>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form><br>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2019 Copyright:
-        <a href="https://lihanxiang.github.io"> LiHanxiang</a>
-    </div>
-</footer>
+    <footer class="navbar-fixed-bottom page-footer font-small blue pt-4">
+        <div class="container text-center text-md-left">
+            <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <h5 class="text-uppercase">MUST Student Information Management System</h5>
+                    <p>Something to say</p>
+                </div>
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <div class="col-md-6 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Contact Me</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="mailto:l945457758@email.com">Email</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="https://lihanxiang.github.io"> LiHanxiang</a>
+        </div>
+    </footer>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -154,6 +318,6 @@
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>>
 </body>
 </html>
