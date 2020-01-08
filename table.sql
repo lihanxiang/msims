@@ -95,10 +95,9 @@ CREATE TABLE comment (
 CREATE TABLE submission (
     id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     assignmentId INT(32) NOT NULL,
-    userId VARCHAR(32) NOT NULL,
+    studentId VARCHAR(32) NOT NULL,
     fileId VARCHAR(32) NOT NULL,
-    author VARCHAR(32) NOT NULL,
-    comment TEXT NOT NULL,
+    comment TEXT,
     date VARCHAR(32) NOT NULL,
     isGraded INT(1) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
@@ -108,7 +107,7 @@ CREATE TABLE assessment (
     assignmentId INT(32) NOT NULL,
     submissionId INT(32) NOT NULL,
     score DOUBLE(5 , 2 ) NOT NULL,
-    comment TEXT NOT NULL,
+    comment TEXT,
     date VARCHAR(32) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
@@ -122,7 +121,7 @@ CREATE TABLE assignment (
 
 CREATE TABLE student_assignment (
 	id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    studentId INT(32) NOT NULL,
+    studentId VARCHAR(32) NOT NULL,
     assignmentId INT(32) NOT NULL
 ) ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 

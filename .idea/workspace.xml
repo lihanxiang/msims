@@ -179,6 +179,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MsimsApplicationTests.addSubmission" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="msims" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lee.msims.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lee.msims" />
+      <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
+      <option name="METHOD_NAME" value="addSubmission" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MsimsApplicationTests.addUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msims" />
       <extension name="coverage">
@@ -227,22 +243,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MsimsApplicationTests.select" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="msims" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.lee.msims.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.lee.msims" />
-      <option name="MAIN_CLASS_NAME" value="com.lee.msims.MsimsApplicationTests" />
-      <option name="METHOD_NAME" value="select" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="MsimsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="msims" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.lee.msims.MsimsApplication" />
@@ -257,17 +257,17 @@
       <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
       <item itemvalue="JUnit.MsimsApplicationTests.addDiscussion" />
       <item itemvalue="JUnit.MsimsApplicationTests.createComment" />
-      <item itemvalue="JUnit.MsimsApplicationTests.select" />
       <item itemvalue="JUnit.MsimsApplicationTests.createReply" />
+      <item itemvalue="JUnit.MsimsApplicationTests.addSubmission" />
       <item itemvalue="Spring Boot.MsimsApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MsimsApplicationTests.addSubmission" />
         <item itemvalue="JUnit.MsimsApplicationTests.addUser" />
         <item itemvalue="JUnit.MsimsApplicationTests.addDiscussion" />
         <item itemvalue="JUnit.MsimsApplicationTests.createReply" />
         <item itemvalue="JUnit.MsimsApplicationTests.createComment" />
-        <item itemvalue="JUnit.MsimsApplicationTests.select" />
       </list>
     </recent_temporary>
   </component>
@@ -346,7 +346,8 @@
       <workItem from="1578038357044" duration="6976000" />
       <workItem from="1578117176983" duration="4884000" />
       <workItem from="1578317514187" duration="11192000" />
-      <workItem from="1578358115327" duration="401000" />
+      <workItem from="1578358115327" duration="7861000" />
+      <workItem from="1578489456046" duration="1834000" />
     </task>
     <servers />
   </component>

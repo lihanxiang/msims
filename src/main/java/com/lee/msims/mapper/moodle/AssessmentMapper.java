@@ -16,7 +16,7 @@ public interface AssessmentMapper {
     void createAssessment(Assessment assessment);
 
     // Update
-    @Update("UPDATE assessment SET score = #{score} AND comment = #{comment} AND date = #{date}")
+    @Update("UPDATE assessment SET score = #{score} AND comment = #{comment} AND date = #{date} WHERE id = #{id}")
     void editAssessment(Assessment assessment);
 
     // Select

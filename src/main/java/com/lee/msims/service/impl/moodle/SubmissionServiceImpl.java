@@ -37,8 +37,8 @@ public class SubmissionServiceImpl implements SubmissionService {
     }
 
     @Override
-    public List<Submission> getSubmissionByUserId(int userId) {
-        return submissionMapper.getSubmissionByUserId(userId);
+    public List<Submission> getSubmissionByStudentId(int studentId) {
+        return submissionMapper.getSubmissionByStudentId(studentId);
     }
 
     @Override

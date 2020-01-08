@@ -5,11 +5,13 @@ import com.lee.msims.pojo.common.User;
 import com.lee.msims.pojo.moodle.Comment;
 import com.lee.msims.pojo.moodle.Component;
 import com.lee.msims.pojo.moodle.Discussion;
+import com.lee.msims.pojo.moodle.Submission;
 import com.lee.msims.service.common.FileService;
 import com.lee.msims.service.common.UserService;
 import com.lee.msims.service.moodle.CommentService;
 import com.lee.msims.service.moodle.ComponentService;
 import com.lee.msims.service.moodle.DiscussionService;
+import com.lee.msims.service.moodle.SubmissionService;
 import com.lee.msims.util.DateFormatter;
 import com.lee.msims.util.FileIDBuilder;
 import org.junit.Test;
@@ -36,6 +38,8 @@ public class MsimsApplicationTests {
     private DateFormatter dateFormatter;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private SubmissionService submissionService;
 
     @Test
     public void addUser(){
@@ -82,6 +86,16 @@ public class MsimsApplicationTests {
                 "xxxxxxxxxxxxxx", "222xxxxxxxxxxxxxxxxx", dateFormatter.formatDateToString(new Date()));
         discussionService.createDiscussion(discussion2);
         discussionService.createDiscussion(discussion1);
+    }
+
+    @Test
+    public void addSubmission(){
+        Submission submission1 = new Submission(1, 8, "e46f428b4ff84454a8f49f49d0831ad9",
+                "commentxxx", dateFormatter.formatDateToString(new Date()), 0);
+        Submission submission2 = new Submission(1, 9, "8975a5eda17c44c8b0c99889215dc1ab",
+                "commentyyy", dateFormatter.formatDateToString(new Date()), 0);
+        submissionService.createSubmission(submission1);
+        submissionService.createSubmission(submission2);
     }
 
     @Test

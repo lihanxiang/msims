@@ -17,7 +17,7 @@ public interface SubmissionService {
 
     List<Submission> getSubmissionInAssignment(int assignmentId);
 
-    List<Submission> getSubmissionByUserId(int userId);
+    List<Submission> getSubmissionByStudentId(int studentId);
 
     // Delete
     void deleteSubmission(int id);

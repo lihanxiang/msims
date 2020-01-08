@@ -210,52 +210,5 @@ public class CourseController {
         return "redirect:/course/" + courseCode + "/discussion";
     }
 
-    @RequestMapping("{courseCode}/{assignmentId}/assignment")
-    public String assessment(Model model, @PathVariable("assignmentId") int assignmentId,
-                             @PathVariable("courseCode") String courseCode){
 
-        List<String> studentIdSet = courseService.getStudentsOfCourse(courseCode);
-        List<User> students = new ArrayList<>();
-        for (String userId : studentIdSet){
-            students.add(userService.getUserByUserId(userId));
-        }
-
-        List<Submission> submissions = submissionService.getSubmissionInAssignment(assignmentId);
-        Map<User, Submission> submissionMap = new LinkedHashMap<>();
-        for (Submission s : submissions){
-            User student = userService.getUserByUserId(s.getUserId());
-            submissionMap.put(student, s);
-            students.remove(student);
-        }
-        Map<User, Assessment> assessmentMap = new LinkedHashMap<>();
-        List<Assessment> assessments = assessmentService.getAssessmentsInAssignment(assignmentId);
-        for (Assessment a : assessments){
-            assessmentMap.put(userService.getUserByUserId(submissionService.getSubmissionById(
-                    a.getSubmissionId()).getUserId()), a);
-        }
-
-        model.addAttribute("students", students);
-        model.addAttribute("assessmentMap", assessmentMap);
-        model.addAttribute("newAssessment", new Assessment());
-        model.addAttribute("assignment", assignmentService.getAssignmentById(assignmentId));
-        model.addAttribute("submissionMap", submissionMap);
-        model.addAttribute("courseCode", courseCode);
-        model.addAttribute("assignmentId", assignmentId);
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
-        return "teacher/assessment";
-    }
-
-    @RequestMapping("{courseCode}/{assignmentId}/write-assessment")
-    public String writeAssessment(Model model, @PathVariable("assignmentId") String assignmentId,
-                                  @ModelAttribute Assessment assessment, @PathVariable("courseCode") String courseCode){
-
-        return "direct:/course/" + courseCode + "/" + assignmentId + "/assignment";
-    }
-
-
-    @RequestMapping(value = "post-message-on-board", method = RequestMethod.POST)
-    public String postMessageOnBoard(@ModelAttribute BulletinBoardMessage bulletinBoardMessage){
-        bulletinBoardService.postMessageOnBoard(bulletinBoardMessage);
-        return "";
-    }
 }

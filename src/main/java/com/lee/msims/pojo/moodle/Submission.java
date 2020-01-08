@@ -7,21 +7,21 @@ public class Submission {
 
     private int id;
     private int assignmentId;
-    private String userId;
+    private int studentId;
     private String fileId;
-    private String author;
     private String comment;
     private String date;
     private int isGraded;
 
-    public Submission(int assignmentId, String userId, String fileId, String author,
-                      String comment, int isGraded, String date) {
+    public Submission(){}
+
+    public Submission(int assignmentId, int studentId, String fileId,
+                      String comment, String date, int isGraded) {
         this.assignmentId = assignmentId;
-        this.userId = userId;
+        this.studentId = studentId;
         this.fileId = fileId;
-        this.author = author;
         this.comment = comment;
-        this.isGraded = isGraded;
         this.date = date;
+        this.isGraded = isGraded;
     }
 }

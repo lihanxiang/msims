@@ -11,12 +11,12 @@ import java.util.List;
 public interface SubmissionMapper {
 
     // Insert
-    @Insert("INSERT INTO submission (id, assignmentId, userId, fileId, author, comment, date, isGraded) " +
-            "VALUES (#{id}, #{assignmentId}, #{userId}, #{fileId}, #{author}, #{comment}, #{date}, #{isGraded})")
+    @Insert("INSERT INTO submission (assignmentId, studentId, fileId, comment, date, isGraded) " +
+            "VALUES (#{assignmentId}, #{studentId}, #{fileId}, #{comment}, #{date}, #{isGraded})")
     void createSubmission(Submission submission);
 
     // Update
-    @Update("UPDATE submission SET fileId = #{fileId} AND author = #{author} AND comment = #{comment}")
+    @Update("UPDATE submission SET fileId = #{fileId} AND comment = #{comment}")
     void editSubmission(Submission submission);
 
     // Select
@@ -26,8 +26,8 @@ public interface SubmissionMapper {
     @Select("SELECT * FROM submission WHERE assignmentId = #{assignmentId}")
     List<Submission> getSubmissionInAssignment(int assignmentId);
 
-    @Select("SELECT * FROM submission WHERE userId = #{userId}")
-    List<Submission> getSubmissionByUserId(int userId);
+    @Select("SELECT * FROM submission WHERE studentId = #{studentId}")
+    List<Submission> getSubmissionByStudentId(int studentId);
 
     // Delete
     @Delete("DELETE FROM submission WHERE id = #{id}")

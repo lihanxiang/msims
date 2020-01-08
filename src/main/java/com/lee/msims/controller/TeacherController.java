@@ -1,19 +1,15 @@
 package com.lee.msims.controller;
 
 import com.lee.msims.pojo.common.Course;
-import com.lee.msims.pojo.common.File;
 import com.lee.msims.pojo.common.User;
-import com.lee.msims.pojo.moodle.BulletinBoardMessage;
-import com.lee.msims.pojo.moodle.Component;
+import com.lee.msims.pojo.moodle.*;
 import com.lee.msims.service.common.CourseService;
 import com.lee.msims.service.common.FileService;
 import com.lee.msims.service.common.UserService;
-import com.lee.msims.service.moodle.BulletinBoardService;
-import com.lee.msims.service.moodle.ComponentService;
+import com.lee.msims.service.moodle.*;
 import com.lee.msims.util.DateFormatter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +35,14 @@ public class TeacherController {
     private FileService fileService;
     @Autowired
     private BulletinBoardService bulletinBoardService;
+    @Autowired
+    private AssignmentService assignmentService;
+    @Autowired
+    private AssessmentService assessmentService;
+    @Autowired
+    private SubmissionService submissionService;
+    @Autowired
+    private DateFormatter dateFormatter;
 
     @RequestMapping(value = "home")
     public String home(Model model){
@@ -101,6 +105,82 @@ public class TeacherController {
         bulletinBoardService.postMessageOnBoard(bulletinBoardMessage);
         return "";
     }*/
+
+    @RequestMapping("{courseCode}/{assignmentId}/assignment")
+    public String assessment(Model model, @PathVariable("assignmentId") int assignmentId,
+                             @PathVariable("courseCode") String courseCode){
+
+        List<String> studentIdSet = courseService.getStudentsOfCourse(courseCode);
+        List<User> students = new ArrayList<>();
+        for (String userId : studentIdSet){
+            students.add(userService.getUserByUserId(userId));
+        }
+
+        List<Submission> submissions = submissionService.getSubmissionInAssignment(assignmentId);
+        Map<User, Submission> submissionMap = new LinkedHashMap<>();
+        for (Submission s : submissions){
+            User student = userService.getUserById(s.getStudentId());
+            submissionMap.put(student, s);
+            students.remove(student);
+        }
+        Map<Submission, Assessment> assessmentMap = new LinkedHashMap<>();
+        List<Assessment> assessments = assessmentService.getAssessmentsInAssignment(assignmentId);
+        for (Assessment a : assessments){
+            assessmentMap.put(submissionService.getSubmissionById(a.getSubmissionId()), a);
+        }
+
+        model.addAttribute("students", students);
+        model.addAttribute("assessmentMap", assessmentMap);
+        model.addAttribute("newAssessment", new Assessment());
+        model.addAttribute("assignment", assignmentService.getAssignmentById(assignmentId));
+        model.addAttribute("submissionMap", submissionMap);
+        model.addAttribute("courseCode", courseCode);
+        model.addAttribute("assignmentId", assignmentId);
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        return "teacher/assignment";
+    }
+
+    @RequestMapping("{courseCode}/{assignmentId}/write-assessment")
+    public String writeAssessment(Model model, @PathVariable("assignmentId") int assignmentId,
+                                  @ModelAttribute Assessment assessment, @PathVariable("courseCode") String courseCode){
+        assessment.setDate(dateFormatter.formatDateToString(new Date()));
+        assessmentService.createAssessment(assessment);
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        return "redirect:/teacher/" + courseCode + "/" + assignmentId + "/assignment";
+    }
+
+    @RequestMapping("{courseCode}/{assignmentId}/update-assessment")
+    public String updateAssessment(Model model, @PathVariable("assignmentId") int assignmentId,
+                                  @ModelAttribute Assessment assessment, @PathVariable("courseCode") String courseCode){
+        assessment.setDate(dateFormatter.formatDateToString(new Date()));
+        assessmentService.editAssessment(assessment);
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        return "redirect:/teacher/" + courseCode + "/" + assignmentId + "/assessments";
+    }
+
+    @RequestMapping("{courseCode}/{assignmentId}/assessments")
+    public String assessments(Model model, @PathVariable("assignmentId") int assignmentId,
+                             @PathVariable("courseCode") String courseCode){
+        Map<Submission, Assessment> assessmentMap = new LinkedHashMap<>();
+        List<Assessment> assessments = assessmentService.getAssessmentsInAssignment(assignmentId);
+        for (Assessment a : assessments){
+            assessmentMap.put(submissionService.getSubmissionById(a.getSubmissionId()), a);
+        }
+        model.addAttribute("title", assignmentService.getAssignmentById(assignmentId).getTitle());
+        model.addAttribute("assessmentMap", assessmentMap);
+        model.addAttribute("courseCode", courseCode);
+        model.addAttribute("assignmentId", assignmentId);
+        model.addAttribute("newAssessment", new Assessment());
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        return "teacher/assessment";
+    }
+
+
+    @RequestMapping(value = "post-message-on-board", method = RequestMethod.POST)
+    public String postMessageOnBoard(@ModelAttribute BulletinBoardMessage bulletinBoardMessage){
+        bulletinBoardService.postMessageOnBoard(bulletinBoardMessage);
+        return "";
+    }
 
     @RequestMapping(value = "my-info", method = RequestMethod.GET)
     public String myInfo(Model model){
