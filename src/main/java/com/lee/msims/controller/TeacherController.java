@@ -1,6 +1,7 @@
 package com.lee.msims.controller;
 
 import com.lee.msims.pojo.common.Course;
+import com.lee.msims.pojo.common.File;
 import com.lee.msims.pojo.common.User;
 import com.lee.msims.pojo.moodle.*;
 import com.lee.msims.service.common.CourseService;
@@ -9,6 +10,7 @@ import com.lee.msims.service.common.UserService;
 import com.lee.msims.service.moodle.*;
 import com.lee.msims.util.DateFormatter;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +45,10 @@ public class TeacherController {
     private SubmissionService submissionService;
     @Autowired
     private DateFormatter dateFormatter;
+    @Autowired
+    private DiscussionService discussionService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(value = "home")
     public String home(Model model){
@@ -50,6 +56,7 @@ public class TeacherController {
         return "teacher/home";
     }
 
+    // COES
     @RequestMapping(value = "courses", method = RequestMethod.GET)
     public String courses(Model model){
         String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
@@ -57,6 +64,34 @@ public class TeacherController {
         model.addAttribute("courses", courses);
         model.addAttribute("userId", userId);
         return "teacher/course";
+    }
+
+    // Moodle
+    @RequestMapping(value = "{courseCode}/course-detail", method = RequestMethod.GET)
+    public String courseDetail(Model model, @PathVariable("courseCode") String courseCode){
+        // course detail
+        List<Component> components = componentService.getAllComponentsOfCourse(courseCode);
+        Map<Component, List<File>> fileMap = new LinkedHashMap<>();
+        for (Component component : components){
+            List<String> fileName = componentService.getAllFilesOfComponent(component.getId());
+            List<File> files = new ArrayList<>();
+            for (String fileId : fileName){
+                File file = fileService.getFileByFileId(fileId);
+                files.add(file);
+            }
+            fileMap.put(component, files);
+        }
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("course", courseService.getCourseInfoByCourseCode(courseCode));
+        model.addAttribute("fileMap", fileMap);
+
+        //bulletin board
+        model.addAttribute("messages", bulletinBoardService.getAllMessagesOnBoard(courseCode));
+
+        //discussion
+        model.addAttribute("discussion", discussionService.getLatestFiveDiscussion(courseCode));
+
+        return "teacher/course_detail";
     }
 
     @RequestMapping(value = "{courseCode}/component", method = RequestMethod.GET)
@@ -75,36 +110,53 @@ public class TeacherController {
         return "redirect:/teacher/" + courseCode + "/course-detail";
     }
 
-    /*@RequestMapping(value = "{courseCode}/course-detail", method = RequestMethod.GET)
-    public String courseDetail(Model model, @PathVariable("courseCode") String courseCode){
-        List<Component> components = componentService.getAllComponentsOfCourse(courseCode);
-        Map<Component, List<File>> fileMap = new LinkedHashMap<>();
-        for (Component component : components){
-            List<String> fileName = componentService.getAllFilesOfComponent(component.getId());
-            List<File> files = new ArrayList<>();
-            for (String fileId : fileName){
-                File file = fileService.getFileByFileId(fileId);
-                files.add(file);
+    @RequestMapping(value = "{courseCode}/discussion", method = RequestMethod.GET)
+    public String discussion(Model model, @PathVariable("courseCode") String courseCode) {
+        List<Discussion> discussions = discussionService.getAllDiscussionOfCourse(courseCode);
+        Map<Comment, List<Comment>> commentMap = new LinkedHashMap<>();
+        Map<Discussion, List<Comment>> discussionMap = new LinkedHashMap<>();
+        for(Discussion discussion : discussions) {
+            List<Comment> comments = commentService.getAllCommentsOfDiscussion(discussion.getId());
+            discussionMap.put(discussion, comments);
+            for (Comment comment : comments){
+                List<Comment> replies = commentService.getAllRepliesOfComment(discussion.getId(), comment.getId());
+                commentMap.put(comment, replies);
             }
-            fileMap.put(component, files);
+            /*if (!comments.isEmpty()){
+                model.addAttribute("haveComment", 1);
+            }*/
         }
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
-        model.addAttribute("course", courseService.getCourseInfoByCourseCode(courseCode));
-        model.addAttribute("fileMap", fileMap);
-        return "teacher/course_detail";
-    }*/
 
-    /*@RequestMapping(value = "#{courseCode}/bulletin-board", method = RequestMethod.GET)
-    public String bulletinBoard(@PathVariable String courseCode, Model model){
-        model.addAttribute("bulletin-board", bulletinBoardService.getBoard(courseCode));
-        return "";
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("discussionMap", discussionMap);
+        model.addAttribute("commentMap", commentMap);
+        model.addAttribute("courseCode", courseCode);
+        model.addAttribute("newComment", new Comment());
+        model.addAttribute("newDiscussion", new Discussion());
+        return "teacher/discussion";
     }
 
-    @RequestMapping(value = "post-message-on-board", method = RequestMethod.POST)
-    public String postMessageOnBoard(@ModelAttribute BulletinBoardMessage bulletinBoardMessage){
-        bulletinBoardService.postMessageOnBoard(bulletinBoardMessage);
-        return "";
-    }*/
+    @RequestMapping(value = "{courseCode}/create-discussion")
+    public String createDiscussion(Model model, @ModelAttribute("discussion") Discussion discussion,
+                                   @PathVariable("courseCode") String courseCode){
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        User user = userService.getUserByUserId(userId);
+        discussion.setSponsor(user.getUsername());
+        discussion.setSponsorId(user.getId());
+        discussion.setCourseCode(courseCode);
+        String snapshot = discussion.getContent();
+        if (snapshot.length() > 30){
+            discussion.setSnapshot(snapshot.substring(0, 49));
+        } else {
+            discussion.setSnapshot(snapshot + "...");
+        }
+        discussion.setDate(dateFormatter.formatDateToString(new Date()));
+        discussionService.createDiscussion(discussion);
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("courseCode", courseCode);
+        model.addAttribute("msg", "Successfully create a discussion");
+        return "redirect:/teacher/" + courseCode + "/discussion";
+    }
 
     @RequestMapping("{courseCode}/{assignmentId}/assignment")
     public String assessment(Model model, @PathVariable("assignmentId") int assignmentId,
@@ -175,10 +227,51 @@ public class TeacherController {
         return "teacher/assessment";
     }
 
+    @RequestMapping(value = "{courseCode}/create-comment")
+    public String createComment(Model model, @ModelAttribute Comment comment,
+                                @PathVariable("courseCode") String courseCode){
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        User user = userService.getUserByUserId(userId);
+        comment.setCommenter(user.getUsername());
+        comment.setCommenterId(user.getId());
+        comment.setDate(dateFormatter.formatDateToString(new Date()));
+        commentService.createComment(comment);
+        return "redirect:/teacher/" + courseCode + "/discussion";
+    }
 
-    @RequestMapping(value = "post-message-on-board", method = RequestMethod.POST)
-    public String postMessageOnBoard(@ModelAttribute BulletinBoardMessage bulletinBoardMessage){
+    @RequestMapping(value = "{courseCode}/reply-comment")
+    public String replyComment(Model model, @ModelAttribute Comment comment,
+                               @PathVariable("courseCode") String courseCode){
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        User user = userService.getUserByUserId(userId);
+        comment.setCommenter(user.getUsername());
+        comment.setCommenterId(user.getId());
+        comment.setDate(dateFormatter.formatDateToString(new Date()));
+        commentService.replyComment(comment);
+
+        return "redirect:/teacher/" + courseCode + "/discussion";
+    }
+
+    @RequestMapping(value = "{courseCode}/bulletin-board")
+    public String bulletinBoard(@PathVariable String courseCode, Model model){
+        model.addAttribute("courseCode", courseCode);
+        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("messages", bulletinBoardService.getAllMessagesOnBoard(courseCode));
+        model.addAttribute("newMessage", new BulletinBoardMessage());
+        return "teacher/bulletin_board";
+    }
+
+    @RequestMapping(value = "post-message", method = RequestMethod.POST)
+    public String postMessage(@ModelAttribute BulletinBoardMessage bulletinBoardMessage, Model model){
+        bulletinBoardMessage.setDate(dateFormatter.formatDateToString(new Date()));
         bulletinBoardService.postMessageOnBoard(bulletinBoardMessage);
+        return "";
+    }
+
+    @RequestMapping(value = "edit-message", method = RequestMethod.POST)
+    public String editMessage(@ModelAttribute BulletinBoardMessage bulletinBoardMessage){
+        bulletinBoardMessage.setDate(dateFormatter.formatDateToString(new Date()));
+        bulletinBoardService.editMessage(bulletinBoardMessage);
         return "";
     }
 

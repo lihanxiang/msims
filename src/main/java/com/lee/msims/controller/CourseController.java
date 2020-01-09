@@ -83,34 +83,6 @@ public class CourseController {
         return "gpa";
     }
 
-    @RequiresRoles(value = {"student", "teacher"}, logical = Logical.OR)
-    @RequestMapping(value = "{courseCode}/course-detail", method = RequestMethod.GET)
-    public String courseDetail(Model model, @PathVariable("courseCode") String courseCode){
-        // course detail
-        List<Component> components = componentService.getAllComponentsOfCourse(courseCode);
-        Map<Component, List<File>> fileMap = new LinkedHashMap<>();
-        for (Component component : components){
-            List<String> fileName = componentService.getAllFilesOfComponent(component.getId());
-            List<File> files = new ArrayList<>();
-            for (String fileId : fileName){
-                File file = fileService.getFileByFileId(fileId);
-                files.add(file);
-            }
-            fileMap.put(component, files);
-        }
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
-        model.addAttribute("course", courseService.getCourseInfoByCourseCode(courseCode));
-        model.addAttribute("fileMap", fileMap);
-
-        //bulletin board
-        model.addAttribute("board-messages", bulletinBoardService.getAllMessagesOnBoard(courseCode));
-
-        //discussion
-        model.addAttribute("discussion", discussionService.getLatestFiveDiscussion(courseCode));
-
-        return "teacher/course_detail";
-    }
-
     /*
         List<Comment> comments = commentService.getAllCommentsOfDiscussion();
         Map<Comment, List<Comment>> commentMap = new LinkedHashMap<>();
@@ -132,83 +104,6 @@ public class CourseController {
         return "teacher/create_discussion";
     }
 
-    @RequiresRoles(value = {"student", "teacher"}, logical = Logical.OR)
-    @RequestMapping(value = "{courseCode}/create-discussion")
-    public String createDiscussion(Model model, @ModelAttribute("discussion") Discussion discussion,
-                                    @PathVariable("courseCode") String courseCode){
-        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
-        User user = userService.getUserByUserId(userId);
-        discussion.setSponsor(user.getUsername());
-        discussion.setSponsorId(user.getId());
-        discussion.setCourseCode(courseCode);
-        String snapshot = discussion.getContent();
-        if (snapshot.length() > 50){
-            discussion.setSnapshot(snapshot.substring(0, 49));
-        } else {
-            discussion.setSnapshot(snapshot + "...");
-        }
-        discussion.setDate(dateFormatter.formatDateToString(new Date()));
-        discussionService.createDiscussion(discussion);
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
-        model.addAttribute("courseCode", courseCode);
-        model.addAttribute("msg", "Successfully create a discussion");
-        return "redirect:/course/" + courseCode + "/discussion";
-    }
-
-
-    @RequiresRoles(value = {"student", "teacher"}, logical = Logical.OR)
-    @RequestMapping(value = "{courseCode}/discussion", method = RequestMethod.GET)
-    public String discussion(Model model, @PathVariable("courseCode") String courseCode) {
-        List<Discussion> discussions = discussionService.getAllDiscussionOfCourse(courseCode);
-        Map<Comment, List<Comment>> commentMap = new LinkedHashMap<>();
-        Map<Discussion, List<Comment>> discussionMap = new LinkedHashMap<>();
-        for(Discussion discussion : discussions) {
-            List<Comment> comments = commentService.getAllCommentsOfDiscussion(discussion.getId());
-            discussionMap.put(discussion, comments);
-            for (Comment comment : comments){
-                List<Comment> replies = commentService.getAllRepliesOfComment(discussion.getId(), comment.getId());
-                commentMap.put(comment, replies);
-            }
-            /*if (!comments.isEmpty()){
-                model.addAttribute("haveComment", 1);
-            }*/
-        }
-
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
-        model.addAttribute("discussionMap", discussionMap);
-        model.addAttribute("commentMap", commentMap);
-        model.addAttribute("courseCode", courseCode);
-        model.addAttribute("newComment", new Comment());
-        model.addAttribute("newDiscussion", new Discussion());
-        return "teacher/discussion";
-    }
-
-    @RequiresRoles(value = {"student", "teacher"}, logical = Logical.OR)
-    @RequestMapping(value = "{courseCode}/create-comment")
-    public String createComment(Model model, @ModelAttribute Comment comment,
-                                @PathVariable("courseCode") String courseCode){
-        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
-        User user = userService.getUserByUserId(userId);
-        comment.setCommenter(user.getUsername());
-        comment.setCommenterId(user.getId());
-        comment.setDate(dateFormatter.formatDateToString(new Date()));
-        commentService.createComment(comment);
-        return "redirect:/course/" + courseCode + "/discussion";
-    }
-
-    @RequiresRoles(value = {"student", "teacher"}, logical = Logical.OR)
-    @RequestMapping(value = "{courseCode}/reply-comment")
-    public String replyComment(Model model, @ModelAttribute Comment comment,
-                                @PathVariable("courseCode") String courseCode){
-        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
-        User user = userService.getUserByUserId(userId);
-        comment.setCommenter(user.getUsername());
-        comment.setCommenterId(user.getId());
-        comment.setDate(dateFormatter.formatDateToString(new Date()));
-        commentService.replyComment(comment);
-
-        return "redirect:/course/" + courseCode + "/discussion";
-    }
 
 
 }

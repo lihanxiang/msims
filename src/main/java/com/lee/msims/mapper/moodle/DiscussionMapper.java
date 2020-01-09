@@ -22,10 +22,10 @@ public interface DiscussionMapper {
     void editDiscussion(Discussion discussion);
 
     // Select
-    @Select("SELECT * FROM discussion WHERE courseCode = #{courseCode}")
+    @Select("SELECT * FROM discussion WHERE courseCode = #{courseCode} ORDER BY date DESC")
     List<Discussion> getAllDiscussionOfCourse(String courseCode);
 
-    @Select("SELECT * FROM discussion WHERE courseCode = #{courseCode} ORDER BY date LIMIT 5")
+    @Select("SELECT * FROM discussion WHERE courseCode = #{courseCode} ORDER BY date DESC LIMIT 5")
     List<Discussion> getLatestFiveDiscussion(String courseCode);
 
     @Select("SELECT * FROM comment WHERE discussionId = #{discussionId}")

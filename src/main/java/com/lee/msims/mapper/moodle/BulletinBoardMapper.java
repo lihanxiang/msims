@@ -20,7 +20,7 @@ public interface BulletinBoardMapper {
     void editMessage(BulletinBoardMessage message);
 
     // Select
-    @Select("SELECT * FROM bulletin_board_message WHERE courseCode = #{courseCode}")
+    @Select("SELECT * FROM bulletin_board_message WHERE courseCode = #{courseCode} ORDER BY date DESC")
     List<BulletinBoardMessage> getAllMessagesOnBoard(String courseCode);
 
     // Delete

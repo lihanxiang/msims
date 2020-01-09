@@ -10,6 +10,8 @@ public class BulletinBoardMessage {
     private String content;
     private String date;
 
+    public BulletinBoardMessage(){}
+
     public BulletinBoardMessage(String courseCode, String content, String date) {
         this.courseCode = courseCode;
         this.content = content;

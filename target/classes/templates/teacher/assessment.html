@@ -77,74 +77,6 @@
             </div>
         </div>
 
-        <!--<div id="table" class="container-fluid">
-            <div class="row">
-                <div id="component" class="col-6">
-                    <div class="card-header"></div>
-                    <div class="card-body">
-                        <ul class="list-group" th:each="student : ${students}">
-                            <li class="list-group-item">
-                                <p th:text="${student.username}">
-                                    <a class="btn btn-primary text-right" data-toggle="collapse"
-                                       th:href="'#collapse' + ${studentStat.index}" role="button"
-                                       aria-expanded="false">
-                                        Check Submission
-                                    </a>
-                                    <a class="btn btn-primary text-right" data-toggle="collapse"
-                                       th:href="'#collapse2' + ${studentStat.index}" role="button"
-                                       th:if="${assessmentMap.get(student)} eq null" aria-expanded="false">
-                                        Write Assessment
-                                    </a>
-                                    <a class="btn btn-primary text-right" data-toggle="collapse"
-                                       th:href="'#collapse3' + ${studentStat.index}" role="button"
-                                       th:if="${assessmentMap.get(student)} ne null" aria-expanded="false">
-                                        Show Assessment
-                                    </a>
-                                </p>
-                                <div class="collapse multi-collapse" th:id="'collapse2' + ${studentStat.index}">
-                                    <div style="width: 90%; margin-left: 2%; margin-right: 2%">
-                                        <form th:action="@{'/course/' + ${courseCode} + '/' + ${assignmentId} + '/write-assessment'}"
-                                              th:object="${newAssessment}">
-
-                                            <label for="score"></label>
-                                            <input type="number" step="0.01" min="0" max="100"
-                                                   class="form-control" id="score" name="score">
-                                            <label for="comment"></label>
-                                            <textarea class="form-control" name="comment" id="comment"
-                                                      th:field="*{comment}" style="white-space: pre-wrap;"
-                                                      rows="3" placeholder="Write your comment" required="required">
-                                                                    </textarea><br>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="navbar-fixed-bottom page-footer font-small blue pt-4">
-        <div class="container text-center text-md-left">
-            <div class="row">
-                <div class="col-md-6 mt-md-0 mt-3">
-                    <h5 class="text-uppercase">MUST Student Information Management System</h5>
-                    <p>Something to say</p>
-                </div>
-                <hr class="clearfix w-100 d-md-none pb-3">
-
-                <div class="col-md-6 mb-md-0 mb-3">
-                    <h5 class="text-uppercase">Contact Me</h5>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="mailto:l945457758@email.com">Email</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>-->
         <div id="table" class="container-fluid">
             <div class="row">
                 <div id="component" class="col-6">
@@ -184,6 +116,17 @@
                             </div>
                         </li>
                     </ul>
+                </div>
+                <div class="col-1"></div>
+                <div class="col">
+                    <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                        <div class="card-header">
+                            <p>Create a Discussion</p>
+                        </div>
+                        <div class="card-body text-secondary">
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

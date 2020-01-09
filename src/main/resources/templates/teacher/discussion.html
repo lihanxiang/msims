@@ -107,7 +107,7 @@
                                             <p class="text-right" style="margin-right: 2%" th:text="'posted by ' + ${comment.commenter} + ' in ' + ${comment.date}"></p>
                                             <div class="collapse multi-collapse" th:id="'collapse' + ${disStat.index} + ${commentStat.index}">
                                                 <div style="width: 90%; margin-left: 2%; margin-right: 2%">
-                                                    <form th:action="@{'/course/' + ${courseCode} + '/reply-comment'}"
+                                                    <form th:action="@{'/teacher/' + ${courseCode} + '/reply-comment'}"
                                                           th:object="${newComment}">
                                                         <input type="hidden" class="form-control" name="discussionId"
                                                                 th:value="${comment.getDiscussionId()}">
@@ -146,7 +146,7 @@
                                                         <div class="collapse multi-collapse" th:id="'collapse'  + ${disStat.index}
                                                      + ${commentStat.index} + ${replyStat.index}">
                                                             <div style="width: 90%; margin-left: 2%; margin-right: 2%">
-                                                                <form th:action="@{'/course/' + ${courseCode} + '/reply-comment'}"
+                                                                <form th:action="@{'/teacher/' + ${courseCode} + '/reply-comment'}"
                                                                       th:object="${newComment}">
                                                                     <input type="hidden" class="form-control" name="discussionId"
                                                                            th:value="${reply.discussionId}">
@@ -176,7 +176,7 @@
 
                                 <div class="collapse multi-collapse" th:id="'collapse2' + ${disStat.index}">
                                     <div style="width: 90%; margin-left: 2%; margin-right: 2%">
-                                        <form th:action="@{'/course/' + ${courseCode} + '/create-comment'}"
+                                        <form th:action="@{'/teacher/' + ${courseCode} + '/create-comment'}"
                                               th:object="${newComment}">
                                             <input type="hidden" class="form-control" name="discussionId"
                                                    th:value="${dis.getKey().getId()}">
@@ -217,7 +217,7 @@
                             <p>Create a Discussion</p>
                         </div>
                         <div class="card-body text-secondary">
-                            <form th:action="@{'/course/' + ${courseCode} + '/create-discussion'}"
+                            <form th:action="@{'/teacher/' + ${courseCode} + '/create-discussion'}"
                                   th:object="${newDiscussion}">
                                 <label for="content5">Title</label>
                                 <textarea class="form-control" name="title" id="content5" rows="3" th:field="*{title}"
@@ -225,13 +225,12 @@
                                 </textarea><br>
                                 <label for="content4">Detail</label>
                                 <textarea class="form-control" name="content" id="content4" rows="3" th:field="*{content}"
-                                          placeholder="Detail" required="required">
+                                          placeholder="Detail">
                                 </textarea><br>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
