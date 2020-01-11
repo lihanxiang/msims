@@ -7,6 +7,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -33,7 +37,7 @@ public class AuthController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(@ModelAttribute User user, Model model){
+    public String login(@ModelAttribute User user, Model model, HttpServletRequest request){
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUserId(), user.getPassword());
         Set<String> roleSet;
@@ -48,9 +52,9 @@ public class AuthController {
             return "login";
         }
         if (roleSet.contains("student")){
-            return "student/home";
+            return "redirect:/student/home";
         } else if (roleSet.contains("teacher")){
-            return "teacher/home";
+            return "redirect:/teacher/home";
         } else {
             return "admin/home";
         }

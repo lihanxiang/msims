@@ -69,8 +69,8 @@ CREATE TABLE discussion (
     sponsor VARCHAR(32) NOT NULL,
     sponsorId INT(32) NOT NULL,
     title TEXT NOT NULL,
-    content TEXT NOT NULL,
-    snapshot TEXT NOT NULL,
+    content TEXT,
+    snapshot TEXT,
     date VARCHAR(32) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 

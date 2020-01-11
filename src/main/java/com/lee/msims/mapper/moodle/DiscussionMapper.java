@@ -17,8 +17,8 @@ public interface DiscussionMapper {
     void createDiscussion(Discussion discussion);
 
     // Update
-    @Update("UPDATE discussion SET title = #{title} AND content = #{content} " +
-            "AND snapshot = #{snapshot} AND date = #{date} WHERE id = #{id}")
+    @Update("UPDATE discussion SET title = #{title}, content = #{content}, " +
+            "snapshot = #{snapshot} WHERE id = #{id}")
     void editDiscussion(Discussion discussion);
 
     // Select

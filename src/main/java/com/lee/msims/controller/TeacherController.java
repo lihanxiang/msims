@@ -127,7 +127,9 @@ public class TeacherController {
             }*/
         }
 
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        model.addAttribute("userId", userId);
+        model.addAttribute("id", userService.getUserByUserId(userId).getId());
         model.addAttribute("discussionMap", discussionMap);
         model.addAttribute("commentMap", commentMap);
         model.addAttribute("courseCode", courseCode);
@@ -147,14 +149,29 @@ public class TeacherController {
         String snapshot = discussion.getContent();
         if (snapshot.length() > 30){
             discussion.setSnapshot(snapshot.substring(0, 49));
-        } else {
+        } else if (!snapshot.isEmpty()){
             discussion.setSnapshot(snapshot + "...");
         }
         discussion.setDate(dateFormatter.formatDateToString(new Date()));
         discussionService.createDiscussion(discussion);
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
-        model.addAttribute("courseCode", courseCode);
-        model.addAttribute("msg", "Successfully create a discussion");
+        return "redirect:/teacher/" + courseCode + "/discussion";
+    }
+
+    @RequestMapping(value = "{courseCode}/edit-discussion")
+    public String editDiscussion(Model model, @ModelAttribute("discussion") Discussion discussion,
+                                   @PathVariable("courseCode") String courseCode) {
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        User user = userService.getUserByUserId(userId);
+        discussion.setSponsor(user.getUsername());
+        discussion.setSponsorId(user.getId());
+        discussion.setCourseCode(courseCode);
+        String snapshot = discussion.getContent();
+        if (snapshot.length() > 30){
+            discussion.setSnapshot(snapshot.substring(0, 49));
+        } else if (!snapshot.isEmpty()){
+            discussion.setSnapshot(snapshot + "...");
+        }
+        discussionService.editDiscussion(discussion);
         return "redirect:/teacher/" + courseCode + "/discussion";
     }
 

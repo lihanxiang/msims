@@ -70,6 +70,9 @@
     </header>
 
     <main>
+        <div th:if="${msg} ne null" class="alert alert-secondary" role="alert" th:text="${msg}">
+        </div>
+
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1 class="display-4">Discussion Area</h1>
@@ -83,19 +86,44 @@
                     <ul class="list-group list-group-flush" th:each="dis : ${discussionMap}">
                         <li class="list-group-item">
                             <div class="card">
-                                <div class="card-header" th:text="'Proposed by ' + ${dis.getKey().sponsor}"></div>
+                                <div class="card-header" th:text="'Proposed by ' + ${dis.getKey().sponsor}">
+                                </div>
                                 <div class="card-body">
                                     <h5 class="card-title" th:text="${dis.getKey().title}"></h5>
                                     <p class="card-text" th:text="${dis.getKey().content}"></p>
+                                    <a href="#" data-toggle="collapse" th:href="'#editDiscussion' + ${disStat.index}">
+                                        <p class="card-text" th:if="${dis.getKey().sponsorId} eq ${id}">
+                                            <img src="/image/edit.png" width="20" height="20" alt="">
+                                            Edit
+                                        </p>
+                                    </a>
                                     <p class="card-text"><small class="text-muted" th:text="${dis.getKey().date}"></small></p>
                                     <a class="btn btn-primary" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}"
-                                       th:if="${dis.value.size()} gt 0" role="button" aria-expanded="false">
-                                        Show All Comment
+                                       th:if="${dis.value.size()} gt 0" role="button" aria-expanded="false"
+                                       th:text="'Show All Comments (' + ${dis.getValue().size()} + ')'">
                                     </a>
                                     <a class="btn btn-primary" data-toggle="collapse" th:href="'#collapse2' + ${disStat.index}"
                                        role="button" aria-expanded="false">
                                         Write comments
                                     </a>
+                                </div>
+                                <div class="collapse multi-collapse" th:id="'editDiscussion' + ${disStat.index}">
+                                    <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                        <form th:action="@{'/teacher/' + ${courseCode} + '/edit-discussion'}"
+                                              th:object="${newDiscussion}">
+                                            <input type="hidden" class="form-control" name="id"
+                                                   th:value="${dis.getKey().id}">
+                                            <label for="content6">Title</label>
+                                            <textarea class="form-control" th:name="title" id="content6" rows="3"
+                                                      th:text="${dis.getKey().title}" th:value="${dis.getKey().title}">
+                                        </textarea><br>
+                                            <label for="content7">Detail</label>
+                                            <textarea class="form-control" th:name="content" id="content7" rows="3"
+                                                      th:text="${dis.getKey().content}" th:value="${dis.getKey().content}">
+                                        </textarea><br>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form><br>
+                                    </div>
                                 </div>
                                 <div class="collapse multi-collapse" th:id="'collapse' + ${disStat.index}">
                                     <ul class="list-group list-group-flush" th:each="comment : ${dis.getValue()}">
@@ -104,7 +132,7 @@
                                                aria-expanded="false" th:text="${comment.commenter} + ': '"></a>
                                             <p class="text-justify" style="white-space: pre-wrap; margin-left: 2%; margin-right: 2%"
                                                th:text="${comment.content}"></p>
-                                            <p class="text-right" style="margin-right: 2%" th:text="'posted by ' + ${comment.commenter} + ' in ' + ${comment.date}"></p>
+                                            <p class="card-text"><small class="text-muted" th:text="${comment.date}"></small></p>
                                             <div class="collapse multi-collapse" th:id="'collapse' + ${disStat.index} + ${commentStat.index}">
                                                 <div style="width: 90%; margin-left: 2%; margin-right: 2%">
                                                     <form th:action="@{'/teacher/' + ${courseCode} + '/reply-comment'}"
@@ -142,7 +170,7 @@
                                                         </p>
                                                         <p class="text-justify" style="white-space: pre-wrap; margin-left: 2%; margin-right: 2%"
                                                            th:text="${reply.content}"></p>
-                                                        <p class="text-right" th:text="'posted by ' + ${comment.commenter} + ' in ' + ${comment.date}"></p>
+                                                        <p class="card-text"><small class="text-muted" th:text="${reply.date}"></small></p>
                                                         <div class="collapse multi-collapse" th:id="'collapse'  + ${disStat.index}
                                                      + ${commentStat.index} + ${replyStat.index}">
                                                             <div style="width: 90%; margin-left: 2%; margin-right: 2%">

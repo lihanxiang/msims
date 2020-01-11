@@ -120,7 +120,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/student" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/image" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -135,19 +135,19 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\工作\msims\src\main\resources\templates\student" />
-      <recent name="C:\工作\msims\src\main\resources\templates\teacher" />
-      <recent name="C:\工作\msims\src\main\resources\static\image" />
-      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\static\image" />
-      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\templates" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\工作\msims\src\main\resources\static\image" />
       <recent name="C:\工作\msims\src\main\resources\templates\admin" />
       <recent name="C:\工作\msims\src\main\resources\static\css\error" />
       <recent name="C:\工作\msims\src\main\resources\templates" />
       <recent name="C:\工作\msims\src\main\resources\templates\student" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\工作\msims\src\main\resources\static\image" />
+      <recent name="C:\工作\msims\src\main\resources\templates\student" />
+      <recent name="C:\工作\msims\src\main\resources\templates\teacher" />
+      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\static\image" />
+      <recent name="C:\Users\94545\Desktop\msims\src\main\resources\templates" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -349,6 +349,7 @@
       <workItem from="1578358115327" duration="7861000" />
       <workItem from="1578489456046" duration="2676000" />
       <workItem from="1578572786871" duration="5450000" />
+      <workItem from="1578723242050" duration="8791000" />
     </task>
     <servers />
   </component>
