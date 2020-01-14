@@ -16,12 +16,15 @@ public interface AssessmentMapper {
     void createAssessment(Assessment assessment);
 
     // Update
-    @Update("UPDATE assessment SET score = #{score} AND comment = #{comment} AND date = #{date} WHERE id = #{id}")
+    @Update("UPDATE assessment SET score = #{score}, comment = #{comment}, date = #{date} WHERE id = #{id}")
     void editAssessment(Assessment assessment);
 
     // Select
     @Select("SELECT * FROM assessment WHERE id = #{id}")
     Assessment getAssessmentById(int id);
+
+    @Select("SELECT * FROM assessment WHERE submissionId = #{submissionId}")
+    Assessment getAssessmentBySubmissionId(int submissionId);
 
     @Select("SELECT * FROM assessment WHERE assignmentId = #{assignmentId}")
     List<Assessment> getAssessmentsInAssignment(int assignmentId);

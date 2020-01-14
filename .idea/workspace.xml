@@ -135,19 +135,19 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\工作\msims\src\main\resources\static\image" />
-      <recent name="C:\工作\msims\src\main\resources\templates\admin" />
-      <recent name="C:\工作\msims\src\main\resources\static\css\error" />
-      <recent name="C:\工作\msims\src\main\resources\templates" />
-      <recent name="C:\工作\msims\src\main\resources\templates\student" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\工作\msims\src\main\resources\static\image" />
       <recent name="C:\工作\msims\src\main\resources\templates\student" />
       <recent name="C:\工作\msims\src\main\resources\templates\teacher" />
       <recent name="C:\Users\94545\Desktop\msims\src\main\resources\static\image" />
       <recent name="C:\Users\94545\Desktop\msims\src\main\resources\templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\工作\msims\src\main\resources\static\image" />
+      <recent name="C:\工作\msims\src\main\resources\templates\admin" />
+      <recent name="C:\工作\msims\src\main\resources\static\css\error" />
+      <recent name="C:\工作\msims\src\main\resources\templates" />
+      <recent name="C:\工作\msims\src\main\resources\templates\student" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -350,6 +350,8 @@
       <workItem from="1578489456046" duration="2676000" />
       <workItem from="1578572786871" duration="5450000" />
       <workItem from="1578723242050" duration="8791000" />
+      <workItem from="1578898725736" duration="15199000" />
+      <workItem from="1578984982606" duration="19841000" />
     </task>
     <servers />
   </component>

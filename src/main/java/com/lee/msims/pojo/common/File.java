@@ -12,6 +12,8 @@ public class File {
     private String path;
     private String time;
 
+    public File(){}
+
     public File(String faculty, String fileId, String name, String path, String time) {
         this.faculty = faculty;
         this.fileId = fileId;

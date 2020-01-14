@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Discussion</title>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/teacher/course_detail.css">
 </head>
 <body>
     <header>
@@ -22,28 +23,15 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="course" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               data-toggle="dropdown">
                                 Course
                             </a>
                             <div class="dropdown-menu" aria-labelledby="course">
-                                <a class="dropdown-item" href="/student/courses">My Course</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/student/gpa">My GPA</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/course/gpa">My Homework</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">My Assessment</a>
-                            </div>
-                        </li>
-                        <li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="message" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Message
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="message">
-                                <a class="dropdown-item" href="/course/courses">Bulletin Board</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/course/gpa">Discussion</a>
+                                <div th:each="course : ${courses}">
+                                    <a class="dropdown-item" th:text="${course.courseCode} + ' ' + ${course.courseName}"
+                                       th:href="@{'/student/' + ${course.courseCode} + '/course-detail'}">
+                                    </a>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -56,10 +44,6 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userId}">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userIdDropdown">
-                            <a class="dropdown-item text" href="/student/my-info">User Info</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text" href="/student/home">Back to Home Page</a>
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item text" href="/auth/logout">Logout</a>
                         </div>
                     </li>&nbsp;
@@ -71,81 +55,203 @@
     <main>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4" th:text="${course.getCourseName()}"></h1>
-                <p class="lead" th:text="${course.getDescription()}"></p>
+                <h1 class="display-4">Discussion Area</h1>
+                <p class="lead" th:text="'You are now browsing the discussion area of ' + ${courseCode}"></p>
             </div>
         </div>
 
         <div id="table" class="container-fluid">
             <div class="row">
                 <div id="component" class="col-6">
-                    <ul class="list-group" th:each="component : ${}">
+                    <ul class="list-group list-group-flush" th:each="dis : ${discussionMap}">
                         <li class="list-group-item">
-                            <h5 class="mb-2" th:text="${component.getKey().type}"></h5>
-                            <ul class="list-group file-group" th:each="file : ${component.getValue()}">
-                                <li class="list-group-item">
-                                    <a th:href="@{'/file/download/' + ${file.getFileId()}}">
-                                        <img src="/image/1.png" width="20" height="20" alt="file"
-                                             th:text="${' ' + file.getName()}">
+                            <div class="card">
+                                <div class="card-header" th:text="'Proposed by ' + ${dis.getKey().sponsor}">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${dis.getKey().title}"></h5>
+                                    <p class="card-text" th:text="${dis.getKey().content}"></p>
+                                    <a href="#" data-toggle="collapse" th:href="'#editDiscussion' + ${disStat.index}">
+                                        <p class="card-text" th:if="${dis.getKey().sponsorId} eq ${id}">
+                                            <img src="/image/edit.png" width="20" height="20" alt="">
+                                            Edit
+                                        </p>
                                     </a>
-                                </li>
-                            </ul>
-                        </li>&nbsp;
+                                    <p class="card-text"><small class="text-muted" th:text="${dis.getKey().date}"></small></p>
+                                    <a class="btn btn-primary" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}"
+                                       th:if="${dis.value.size()} gt 0" role="button" aria-expanded="false">
+                                        Show All Comments
+                                    </a>
+                                    <a class="btn btn-primary" data-toggle="collapse" th:href="'#collapse2' + ${disStat.index}"
+                                       role="button" aria-expanded="false">
+                                        Write comments
+                                    </a>
+                                </div>
+                                <div class="collapse multi-collapse" th:id="'editDiscussion' + ${disStat.index}">
+                                    <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                        <form th:action="@{'/teacher/' + ${courseCode} + '/edit-discussion'}"
+                                              th:object="${newDiscussion}">
+                                            <input type="hidden" class="form-control" name="id"
+                                                   th:value="${dis.getKey().id}">
+                                            <label for="content6">Title</label>
+                                            <textarea class="form-control" th:name="title" id="content6" rows="3"
+                                                      th:text="${dis.getKey().title}" th:value="${dis.getKey().title}">
+                                            </textarea><br>
+                                            <label for="content7">Detail</label>
+                                            <textarea class="form-control" th:name="content" id="content7" rows="3"
+                                                      th:text="${dis.getKey().content}" th:value="${dis.getKey().content}">
+                                            </textarea><br>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form><br>
+                                    </div>
+                                </div>
+                                <div class="collapse multi-collapse" th:id="'collapse' + ${disStat.index}">
+                                    <ul class="list-group list-group-flush" th:each="comment : ${dis.getValue()}">
+                                        <li class="list-group-item">
+                                            <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index} + ${commentStat.index}"
+                                               aria-expanded="false" th:text="${comment.commenter} + ': '"></a>
+                                            <p class="text-justify" style="white-space: pre-wrap; margin-left: 2%; margin-right: 2%"
+                                               th:text="${comment.content}"></p>
+                                            <p class="card-text"><small class="text-muted" th:text="${comment.date}"></small></p>
+                                            <div class="collapse multi-collapse" th:id="'collapse' + ${disStat.index} + ${commentStat.index}">
+                                                <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                                    <form th:action="@{'/teacher/' + ${courseCode} + '/reply-comment'}"
+                                                          th:object="${newComment}">
+                                                        <input type="hidden" class="form-control" name="discussionId"
+                                                                th:value="${comment.getDiscussionId()}">
+                                                        <input type="hidden" class="form-control" name="pid"
+                                                               th:value="${comment.getId()}">
+                                                        <input type="hidden" class="form-control" name="respondent"
+                                                               th:value="${comment.getCommenter()}">
+                                                        <input type="hidden" class="form-control" name="respondentId"
+                                                               th:value="${comment.getCommenterId()}">
+                                                        <label for="content2"></label>
+                                                        <textarea class="form-control" name="content" id="content2"
+                                                                  th:field="*{content}" style="white-space: pre-wrap;"
+                                                                  rows="3" placeholder="Write your comment" required="required">
+                                                        </textarea><br>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div>
+                                                <ul class="list-group list-group-flush" th:each="reply : ${commentMap.get(comment)}">
+                                                    <li class="list-group-item">
+                                                        <p>
+                                                            <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}
+                                                            + ${commentStat.index} + ${replyStat.index}"
+                                                               aria-expanded="false" th:text="'   ' + ${reply.commenter}"></a>
+                                                            &nbsp;@&nbsp;
+                                                            <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}
+                                                            + ${commentStat.index} + ${replyStat.index}"
+                                                               aria-expanded="false" th:text="${reply.respondent}"></a>
+                                                        </p>
+                                                        <p class="text-justify" style="white-space: pre-wrap; margin-left: 2%; margin-right: 2%"
+                                                           th:text="${reply.content}"></p>
+                                                        <p class="card-text"><small class="text-muted" th:text="${reply.date}"></small></p>
+                                                        <div class="collapse multi-collapse" th:id="'collapse'  + ${disStat.index}
+                                                     + ${commentStat.index} + ${replyStat.index}">
+                                                            <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                                                <form th:action="@{'/teacher/' + ${courseCode} + '/reply-comment'}"
+                                                                      th:object="${newComment}">
+                                                                    <input type="hidden" class="form-control" name="discussionId"
+                                                                           th:value="${reply.discussionId}">
+                                                                    <input type="hidden" class="form-control" name="pid"
+                                                                           th:value="${comment.getId()}">
+                                                                    <input type="hidden" class="form-control" name="respondent"
+                                                                           th:value="${reply.commenter}">
+                                                                    <input type="hidden" class="form-control" name="respondentId"
+                                                                           th:value="${reply.commenterId}">
+                                                                    <label for="content3"></label>
+                                                                    <textarea class="form-control" id="content3" rows="3"
+                                                                              th:field="*{content}" style="white-space: pre-wrap;"
+                                                                              placeholder="Write your comment" required="required">
+                                                                    </textarea><br>
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        Submit
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="collapse multi-collapse" th:id="'collapse2' + ${disStat.index}">
+                                    <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                        <form th:action="@{'/teacher/' + ${courseCode} + '/create-comment'}"
+                                              th:object="${newComment}">
+                                            <input type="hidden" class="form-control" name="discussionId"
+                                                   th:value="${dis.getKey().getId()}">
+                                            <input type="hidden" class="form-control" name="commenter"
+                                                   th:value="${dis.getKey().getSponsor()}">
+                                            <input type="hidden" class="form-control" name="commenterId"
+                                                   th:value="${dis.getKey().getSponsorId()}">
+                                            <label for="content1"></label>
+                                            <textarea class="form-control" style="white-space: pre-wrap;" name="content"
+                                                      id="content1" th:field="*{content}" rows="3"
+                                                      placeholder="Write your comment" required="required">
+                                                    </textarea><br>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form><br>
+                                    </div>
+                                </div>
+
+                                <!--<div class="collapse multi-collapse" th:id="'collapse2' + ${disStat.index}">
+                                    <form action="#" th:action="@{'/course/' + ${courseCode} + '/create-comment'}"
+                                          th:object="${emptyComment}" method="post">
+                                        <label for="content3"></label>
+                                        <textarea class="form-control" id="content3" rows="3" th:field="*{content}"
+                                                  placeholder="Write your comment" required>
+                                        </textarea><br>
+                                    </form>
+                                </div>-->
+                            </div>
+
+                        </li>
                     </ul>
                 </div>
-                <div class="col-2"></div>
-                <div id="side" class="col">
-                    <div id="bulletin-board">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
-                            <div class="card-header">Bulletin Board</div>
-                            <div class="card-body text-secondary">
-                                <div>
-                                    <h5 class="card-title">Check your unread message</h5>&nbsp;
-                                    <h5>Student Portal</h5>
-                                    <p>XXX</p>
-                                    <h5>Moodle</h5>
-                                    <p>XXX</p>
-                                    <h5>COES</h5>
-                                    <p>XXX</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="list-group">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
-                            <div class="card-header">Discussion</div>
-                            <div class="card-body text-secondary">
-                                <ul th:each="comment : ${com}">
-                                    <li>
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Topic xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</h5>
-                                            <small>3 days ago</small>
-                                        </div>
-                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                        <small>Donec id elit non mi porta.</small>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-1"></div>
 
-                    <div id="timeline">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
-                            <div class="card-header">Timeline</div>
-                            <div class="card-body text-secondary">
-                                <div>&nbsp;
-                                    <h5>Assignment xxx</h5>
-                                    <p>XXX</p>
-                                    <h5>Project xxx</h5>
-                                    <p>XXX</p>
-                                </div>
-                            </div>
+                <div class="col">
+                    <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                        <div class="card-header">
+                            Create a Discussion
+                        </div>
+                        <div class="card-body text-secondary">
+                            <form th:action="@{'/teacher/' + ${courseCode} + '/create-discussion'}"
+                                  th:object="${newDiscussion}">
+                                <label for="content5">Title</label>
+                                <textarea class="form-control" name="title" id="content5" rows="3" th:field="*{title}"
+                                          placeholder="Title" required="required">
+                                </textarea><br>
+                                <label for="content4">Detail</label>
+                                <textarea class="form-control" name="content" id="content4" rows="3" th:field="*{content}"
+                                          placeholder="Detail">
+                                </textarea><br>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"
+            integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9+4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </body>
 </html>

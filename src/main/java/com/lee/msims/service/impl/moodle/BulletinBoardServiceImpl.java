@@ -33,6 +33,11 @@ public class BulletinBoardServiceImpl implements BulletinBoardService {
     }
 
     @Override
+    public List<BulletinBoardMessage> getFiveLatestMessagesOnBoard(String courseCode) {
+        return bulletinBoardMapper.getFiveLatestMessagesOnBoard(courseCode);
+    }
+
+    @Override
     public void deleteMessageOnBoard(int id) {
         bulletinBoardMapper.deleteMessageOnBoard(id);
     }

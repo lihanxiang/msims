@@ -14,37 +14,24 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class=" navbar-collapse ">
                 <div>
-                    <a class="navbar-brand" href="#">&nbsp;
+                    <a class="navbar-brand" href="/teacher/home">&nbsp;
                         <img src="/image/2.png" width="30" height="30" alt="">
-                        Moodle
+                        MSIMS
                     </a>
                 </div>
                 <div>
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="course" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               data-toggle="dropdown">
                                 Course
                             </a>
                             <div class="dropdown-menu" aria-labelledby="course">
-                                <a class="dropdown-item" href="/teacher/courses">My Course</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/student/gpa">My GPA</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/course/gpa">My Homework</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">My Assessment</a>
-                            </div>
-                        </li>
-                        <li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="message" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Message
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="message">
-                                <a class="dropdown-item" href="/course/courses">Bulletin Board</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/course/gpa">Discussion</a>
+                                <div th:each="course : ${courses}">
+                                    <a class="dropdown-item" th:text="${course.courseCode} + ' ' + ${course.courseName}"
+                                       th:href="@{'/student/' + ${course.courseCode} + '/course-detail'}">
+                                    </a>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -57,10 +44,6 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userId}">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userIdDropdown">
-                            <a class="dropdown-item text" href="#">User Info</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text" href="#">Back to MSIMS Home</a>
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item text" href="/auth/logout">Logout</a>
                         </div>
                     </li>&nbsp;
@@ -80,123 +63,138 @@
         <div id="table" class="container-fluid">
             <div class="row">
                 <div id="component" class="col-6">
-                    <ul class="list-group" th:each="component : ${fileMap}">
-                        <li class="list-group-item">
-                            <h5 class="mb-2" th:text="${component.getKey().type}"></h5>
-                            <ul class="list-group file-group" th:each="file : ${component.getValue()}">
-                                <li class="list-group-item">
-                                    <a th:href="@{'/file/download/' + ${file.getFileId()}}">
-                                        <img src="/image/1.png" width="20" height="20" alt="file"
-                                             th:text="${' ' + file.getName()}">
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>&nbsp;
-                    </ul>
+                    <div class="alert alert-secondary" role="alert">
+                        <h4>Course material</h4>
+                    </div>
+                    <div>
+                        <ul class="list-group list-group-flush" style="border: 0 solid transparent" th:each="component : ${fileMap}">
+                            <li class="list-group-item">
+                                <div class="card">
+                                    <div class="card-header" th:text="${component.getKey().type}"></div>
+                                    <div class="card-body">
+                                        <div>
+                                            <table class="table" th:each="file : ${component.getValue()}">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <a th:href="@{'/file/download/' + ${file.getFileId()}}">
+                                                                <img src="/image/1.png" width="20" height="20" alt="file"
+                                                                     th:text="${' ' + file.getName()}">
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>&nbsp;
+                        </ul>
+                    </div>
+                    <div class="alert alert-secondary" role="alert">
+                        <h4>Assessment</h4>
+                    </div>
+                    <div th:if="${assessmentMap.size()} ne 0">
+                        <ul class="list-group list-group-flush" th:each="assessment : ${assessmentMap}">
+                            <li class="list-group-item">
+                                <div class="card">
+                                    <div class="card-header" th:text="${files.get(assessment.getKey().fileId).name}"></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"></h5>
+                                        <p class="card-text">
+                                            <a th:href="@{'/file/download/' + ${assessment.getKey().getFileId()}}">
+                                                <img src="/image/1.png" width="50" height="50" alt="file">
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div style="margin-left: 2%; margin-right: 2%">
+                                        <form>
+                                            <input type="hidden" class="form-control" name="assignmentId"
+                                                   th:value="${assessment.getKey().assignmentId}">
+                                            <input type="hidden" class="form-control" name="submissionId"
+                                                   th:value="${assessment.getKey().id}">
+                                            <label for="score2"></label>
+                                            <input type="number" id="score2" class="form-control" name="score"
+                                                   step="0.01" min="0" max="100" th:value="${assessment.getValue().score}"
+                                                   disabled>
+                                            <label for="comment2"></label>
+                                            <textarea class="form-control" name="comment" id="comment2"
+                                                      th:text="${assessment.getValue().comment}"
+                                                      style="white-space: pre-wrap;"
+                                                      rows="3" disabled>
+                                        </textarea><br>
+                                        </form><br>
+                                        <p class="text-right" th:text="${assessment.getValue().getDate()}"></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-2"></div>
                 <div id="side" class="col">
                     <div id="bulletin-board">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
-                            <div class="card-header">Bulletin Board</div>
-                            <div class="card-body text-secondary">
-                                <div>
-                                    <h5 class="card-title">Check your unread message</h5>&nbsp;
-                                    <h5>Student Portal</h5>
-                                    <p>XXX</p>
-                                    <h5>Moodle</h5>
-                                    <p>XXX</p>
-                                    <h5>COES</h5>
-                                    <p>XXX</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="list-group">
-                        <div class="card border-secondary mb-3" style="max-width: 30rem;">
+                        <div class="card border-secondary mb-3" style="width: 30rem;">
                             <div class="card-header">
-                                Discussion
-                                <a style="text-align: right" th:href="@{'/course/' + ${courseCode} + '/discussion'}">111</a>
+                                Bulletin Board
                             </div>
                             <div class="card-body text-secondary">
-                                <ul th:each="dis : ${discussion}">
-                                    <li>
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1" th:text="${dis.title}"></h5>
-                                            <small th:text="${dis.date}"></small>
+                                <ul class="list-group list-group-flush" th:each="message : ${messages}">
+                                    <li class="list-group-item">
+                                        <div>
+                                            <p class="mb-1" th:text="${message.content}"></p>
+                                            <p class="text-right" th:text="${message.date}"></p>
                                         </div>
-                                        <p class="mb-1" th:text="${dis.snapshot}"></p>
-                                        <small></small>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!--<div>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Sign In
-                        </button>
-
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <form class="form-signin" action="#" th:action="@{/auth/login}" th:object="${user}" method="post">
-                                            <p class="form-signin-heading" style="text-align: center" th:text="${message}"></p>
-                                            <div class="form-group">
-                                                <label for="userId" class="col-form-label">User ID:</label>
-                                                <input type="text" class="form-control" id="userId" name="userId" required
-                                                        th:field="*{userId}">
+                    <div>
+                        <div class="card border-secondary mb-3" style="width: 30rem;">
+                            <div class="card-header">
+                                Assignment
+                            </div>
+                            <div class="card-body text-secondary">
+                                <ul class="list-group list-group-flush" th:each="assignment : ${assignmentMap}">
+                                    <li class="list-group-item">
+                                        <a th:href="@{'/file/download/' + ${assignment.getKey().fileId}}">
+                                            <img src="/image/1.png" width="20" height="20" alt="file"
+                                                 th:text="${' ' + assignment.getValue().name}">
+                                        </a><br>
+                                        <a data-toggle="collapse" aria-expanded="false" th:href="'#submit' + ${assignmentStat.index}"
+                                           th:if="${submittedAnswer.get(assignment.getKey().id)} eq null">
+                                            <img src="/image/enter.png" width="20" height="20" alt="">
+                                            Submit
+                                        </a>
+                                        <div class="collapse multi-collapse" th:id="'submit' + ${assignmentStat.index}">
+                                            <div style="width: 90%; margin-left: 2%; margin-right: 2%"><br>
+                                                <form action="" th:action="@{'/student/' + ${courseCode} + '/' + ${assignment.getKey().id}
+                                                + '/upload-file'}" enctype="multipart/form-data" method="post">
+                                                    <input type="file" name="file" class="form-control"><br>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </form><br>
                                             </div>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-
-                                    </div>
-                                </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </div>-->
+                    </div>
 
-                    <!--<div id="discussion">
-                        <div class="card border-secondary mb-3" style="max-width: 20rem;">
-                            <div class="card-header">Discussion</div>
-                            <div class="card-body text-secondary">
-                                <div>&nbsp;
-                                    <ul th:each="comment : ${comments}">
-                                        <li>
-                                            <ul th:each="content : ${comment.value}">
-                                                <li >
-                                                    <p th:text="${content.commenter} + ' : ' + ${content.content}"></p>
-                                                </li>
-                                            </ul>
-                                        </li>&nbsp;
-                                    </ul>
-                                </div>
+                    <div class="list-group">
+                        <div class="card border-secondary mb-3" style="width: 30rem;">
+                            <div class="card-header">
+                                <a th:href="@{'/student/' + ${courseCode} + '/discussion'}">Discussion</a>
                             </div>
-                        </div>
-                    </div>-->
-
-                    <div id="timeline">
-                        <div class="card border-secondary mb-3" style="max-width: 38rem;">
-                            <div class="card-header">Timeline</div>
                             <div class="card-body text-secondary">
-                                <div>&nbsp;
-                                    <h5>Assignment xxx</h5>
-                                    <p>XXX</p>
-                                    <h5>Project xxx</h5>
-                                    <p>XXX</p>
-                                </div>
+                                <ul class="list-group list-group-flush" th:each="dis : ${discussion}">
+                                    <li class="list-group-item">
+                                        <p class="card-text" th:text="${dis.title}"></p>
+                                        <p class="text-right" th:text="${dis.date}"></p>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -204,32 +202,6 @@
             </div>
         </div>
     </main>
-
-    <footer class="navbar-fixed-bottom page-footer font-small blue pt-4">
-        <div class="container text-center text-md-left">
-            <div class="row">
-                <div class="col-md-6 mt-md-0 mt-3">
-                    <h5 class="text-uppercase">MUST Student Information Management System</h5>
-                    <p>Something to say</p>
-                </div>
-                <hr class="clearfix w-100 d-md-none pb-3">
-
-                <div class="col-md-6 mb-md-0 mb-3">
-                    <h5 class="text-uppercase">Contact Me</h5>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="mailto:l945457758@email.com">Email</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2019 Copyright:
-            <a href="https://lihanxiang.github.io"> LiHanxiang</a>
-        </div>
-    </footer>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

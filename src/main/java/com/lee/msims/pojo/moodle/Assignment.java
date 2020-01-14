@@ -8,14 +8,12 @@ public class Assignment {
 
     private int id;
     private String courseCode;
-    private String title;
-    private String description;
-    private String deadline;
+    private String fileId;
 
-    public Assignment(String courseCode, String title, String description, String deadline) {
+    public Assignment(){}
+
+    public Assignment(String courseCode, String fileId) {
         this.courseCode = courseCode;
-        this.title = title;
-        this.description = description;
-        this.deadline = deadline;
+        this.fileId = fileId;
     }
 }

@@ -20,31 +20,18 @@
                 </a>
             </div>
             <div>
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto" th:if="${courses.size()} ne 0">
                     <li class="nav-item active dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="course" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           data-toggle="dropdown">
                             Course
                         </a>
                         <div class="dropdown-menu" aria-labelledby="course">
-                            <a class="dropdown-item" href="/teacher/courses">My Course</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/student/gpa">My GPA</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/course/gpa">My Homework</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">My Assessment</a>
-                        </div>
-                    </li>
-                    <li class="nav-item active dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="message" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Message
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="message">
-                            <a class="dropdown-item" href="/course/courses">Bulletin Board</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/course/gpa">Discussion</a>
+                            <div th:each="course : ${courses}">
+                                <a class="dropdown-item" th:text="${course.courseCode} + ' ' + ${course.courseName}"
+                                   th:href="@{'/teacher/' + ${course.courseCode} + '/course-detail'}">
+                                </a>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -57,10 +44,6 @@
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userId}">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userIdDropdown">
-                        <a class="dropdown-item text" href="#">User Info</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text" href="#">Back to MSIMS Home</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item text" href="/auth/logout">Logout</a>
                     </div>
                 </li>&nbsp;
@@ -72,18 +55,17 @@
 <main>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-4">Discussion Area</h1>
+            <h1 class="display-4">Bulletin Board</h1>
             <p class="lead" th:text="'You are now checking the bulletin board of ' + ${courseCode}"></p>
         </div>
     </div>
 
     <div id="table" class="container-fluid">
         <div class="row">
-            <div id="component" class="col-6">
+            <div id="component" class="col-5">
                 <ul class="list-group list-group-flush" th:each="message : ${messages}">
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header"></div>
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
                                 <p class="card-text" th:text="${message.content}"></p>
@@ -94,28 +76,34 @@
                                 </a>
                             </div>
                             <div class="collapse multi-collapse" th:id="'collapse' + ${messageStat.index}">
-                                <form th:action="@{'/teacher/' + ${courseCode} + '/edit-message'}"
-                                      th:object="${newMessage}">
-                                    <input type="hidden" class="form-control" name="courseCode"
-                                           th:value="${courseCode}">
-                                    <label for="content"></label>
-                                    <textarea class="form-control" name="content" id="content"
-                                              th:text="${message.content}" style="white-space: pre-wrap;"
-                                              rows="3" placeholder="Write your comment" required="required">
-                                                        </textarea><br>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
+                                <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                    <form th:action="@{'/teacher/' + ${courseCode} + '/edit-message'}"
+                                          th:object="${newMessage}">
+                                        <input type="hidden" class="form-control" name="id"
+                                               th:value="${message.id}">
+                                        <input type="hidden" class="form-control" name="courseCode"
+                                               th:value="${courseCode}">
+                                        <label for="content"></label>
+                                        <textarea class="form-control" name="content" id="content"
+                                                  th:text="${message.content}" th:value="${message.content}"
+                                                  style="white-space: pre-wrap;" rows="3"
+                                                  placeholder="Write your comment" required="required">
+                                        </textarea><br>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form><br>
+                                </div>
                             </div>
+                        </div>
                     </li>
                 </ul>
             </div>
 
-            <div class="col-1"></div>
+            <div class="col-2"></div>
 
             <div class="col">
                 <div class="card border-secondary mb-3" style="max-width: 38rem;">
                     <div class="card-header">
-                        <p>Create a Message</p>
+                        Create a Message
                     </div>
                     <div class="card-body text-secondary">
                         <form th:action="@{'/teacher/' + ${courseCode} + '/post-message'}"
@@ -125,7 +113,7 @@
                             <label for="content2"></label>
                             <textarea class="form-control" name="content" id="content2"
                                       th:field="*{content}" style="white-space: pre-wrap;"
-                                      rows="3" placeholder="Write your comment" required="required">
+                                      rows="3" placeholder="Write here" required="required">
                                                         </textarea><br>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -137,31 +125,6 @@
     </div>
 </main>
 
-<footer class="navbar-fixed-bottom page-footer font-small blue pt-4">
-    <div class="container text-center text-md-left">
-        <div class="row">
-            <div class="col-md-6 mt-md-0 mt-3">
-                <h5 class="text-uppercase">MUST Student Information Management System</h5>
-                <p>Something to say</p>
-            </div>
-            <hr class="clearfix w-100 d-md-none pb-3">
-
-            <div class="col-md-6 mb-md-0 mb-3">
-                <h5 class="text-uppercase">Contact Me</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="mailto:l945457758@email.com">Email</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2019 Copyright:
-        <a href="https://lihanxiang.github.io"> LiHanxiang</a>
-    </div>
-</footer>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

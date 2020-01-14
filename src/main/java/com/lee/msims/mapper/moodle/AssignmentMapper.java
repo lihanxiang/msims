@@ -11,12 +11,11 @@ import java.util.List;
 public interface AssignmentMapper {
 
     // Insert
-    @Insert("INSERT INTO assignment (courseCode, title, description, deadline" +
-            "VALUES (#{courseCode}, #{title}, #{description}, #{deadline})")
+    @Insert("INSERT INTO assignment (courseCode, fileId) VALUES (#{courseCode}, #{fileId})")
     void createAssignment(Assignment assignment);
 
     // Update
-    @Update("UPDATE assignment SET title = #{title} AND description = #{description} AND deadline = #{deadline}")
+    @Update("UPDATE assignment SET fileId = #{fileId} WHERE id = #{id}")
     void editAssignmentInfo(Assignment assignment);
 
     // Select

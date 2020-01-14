@@ -15,6 +15,8 @@ public interface AssessmentService {
     // Select
     Assessment getAssessmentById(int id);
 
+    Assessment getAssessmentBySubmissionId(int submissionId);
+
     List<Assessment> getAssessmentsInAssignment(int assignmentId);
 
     List<Assessment> getAssessmentByScore(double min, double max);

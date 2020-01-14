@@ -1,6 +1,5 @@
 package com.lee.msims.controller;
 
-import com.lee.msims.pojo.common.Course;
 import com.lee.msims.pojo.common.File;
 import com.lee.msims.pojo.common.User;
 import com.lee.msims.pojo.moodle.*;
@@ -9,17 +8,15 @@ import com.lee.msims.service.common.FileService;
 import com.lee.msims.service.common.UserService;
 import com.lee.msims.service.moodle.*;
 import com.lee.msims.util.DateFormatter;
+import com.lee.msims.util.FileIDBuilder;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 import java.util.*;
 
 @Controller
@@ -49,27 +46,20 @@ public class TeacherController {
     private DiscussionService discussionService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private FileIDBuilder fileIDBuilder;
 
     @RequestMapping(value = "home")
     public String home(Model model){
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        model.addAttribute("userId", userId);
+        model.addAttribute("courses", courseService.getCourseListByTeacher(userId));
         return "teacher/home";
     }
 
-    // COES
-    @RequestMapping(value = "courses", method = RequestMethod.GET)
-    public String courses(Model model){
-        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
-        List<Course> courses = courseService.getCourseListByTeacher(userId);
-        model.addAttribute("courses", courses);
-        model.addAttribute("userId", userId);
-        return "teacher/course";
-    }
-
-    // Moodle
     @RequestMapping(value = "{courseCode}/course-detail", method = RequestMethod.GET)
     public String courseDetail(Model model, @PathVariable("courseCode") String courseCode){
-        // course detail
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
         List<Component> components = componentService.getAllComponentsOfCourse(courseCode);
         Map<Component, List<File>> fileMap = new LinkedHashMap<>();
         for (Component component : components){
@@ -81,25 +71,28 @@ public class TeacherController {
             }
             fileMap.put(component, files);
         }
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("userId", userId);
         model.addAttribute("course", courseService.getCourseInfoByCourseCode(courseCode));
         model.addAttribute("fileMap", fileMap);
+        model.addAttribute("newComponent", new Component());
+        model.addAttribute("newFile", new File());
+        model.addAttribute("newAssignment", new Assignment());
+        model.addAttribute("courses", courseService.getCourseListByTeacher(userId));
 
         //bulletin board
-        model.addAttribute("messages", bulletinBoardService.getAllMessagesOnBoard(courseCode));
+        model.addAttribute("messages", bulletinBoardService.getFiveLatestMessagesOnBoard(courseCode));
 
         //discussion
         model.addAttribute("discussion", discussionService.getLatestFiveDiscussion(courseCode));
 
+        // assignment
+        List<Assignment> assignments = assignmentService.getAssignmentsOfCourse(courseCode);
+        Map<Assignment, File> assignmentMap = new LinkedHashMap<>();
+        for (Assignment a : assignments){
+            assignmentMap.put(a, fileService.getFileByFileId(a.getFileId()));
+        }
+        model.addAttribute("assignmentMap", assignmentMap);
         return "teacher/course_detail";
-    }
-
-    @RequestMapping(value = "{courseCode}/component", method = RequestMethod.GET)
-    public String fileComponent(@PathVariable("courseCode") String courseCode, Model model){
-        model.addAttribute("component", new Component());
-        model.addAttribute("courseCode", courseCode);
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
-        return "teacher/component";
     }
 
     @RequestMapping(value = "{courseCode}/add-component")
@@ -108,6 +101,41 @@ public class TeacherController {
         component.setTime(new DateFormatter().formatDateToString(new Date()));
         componentService.addComponentToCourse(component);
         return "redirect:/teacher/" + courseCode + "/course-detail";
+    }
+
+    @RequestMapping(value = "{courseCode}/{componentId}/upload-file")
+    public String upload(@PathVariable("courseCode") String courseCode,
+                         @PathVariable("componentId") int componentId,
+                         @RequestParam("file") MultipartFile file, Model model){
+        User user = userService.getUserByUserId(
+                (String)SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        String faculty = user.getFaculty();
+        if (!file.isEmpty()){
+            StringBuffer sb = new StringBuffer("C:\\Users\\94545\\Desktop\\file");
+            sb.append("\\").append(faculty);
+            String fileId = fileIDBuilder.generateFileId();
+            String fileName = file.getOriginalFilename();
+            sb.append("\\").append(fileName);
+            String storePath = sb.toString();
+            java.io.File filePath = new java.io.File(storePath);
+            if (!filePath.getParentFile().exists()){
+                filePath.getParentFile().mkdirs();
+            }
+            try {
+                file.transferTo(new java.io.File(storePath));
+                com.lee.msims.pojo.common.File databaseFile =
+                        new com.lee.msims.pojo.common.File(faculty, fileId, fileName, storePath,
+                                dateFormatter.formatDateToString(new Date()));
+                fileService.createFile(databaseFile);
+                componentService.addFileToComponent(componentId, fileId);
+            } catch (IOException e){
+                e.printStackTrace();
+                return "file/500";
+            }
+            return "redirect:/teacher/" + courseCode + "/course-detail";
+        } else {
+            return "file/uploadFail";
+        }
     }
 
     @RequestMapping(value = "{courseCode}/discussion", method = RequestMethod.GET)
@@ -128,6 +156,7 @@ public class TeacherController {
         }
 
         String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        model.addAttribute("courses", courseService.getCourseListByTeacher(userId));
         model.addAttribute("userId", userId);
         model.addAttribute("id", userService.getUserByUserId(userId).getId());
         model.addAttribute("discussionMap", discussionMap);
@@ -184,11 +213,12 @@ public class TeacherController {
         for (String userId : studentIdSet){
             students.add(userService.getUserByUserId(userId));
         }
+        model.addAttribute("students", students);
 
         List<Submission> submissions = submissionService.getSubmissionInAssignment(assignmentId);
         Map<User, Submission> submissionMap = new LinkedHashMap<>();
         for (Submission s : submissions){
-            User student = userService.getUserById(s.getStudentId());
+            User student = userService.getUserByUserId(s.getStudentId());
             submissionMap.put(student, s);
             students.remove(student);
         }
@@ -198,15 +228,53 @@ public class TeacherController {
             assessmentMap.put(submissionService.getSubmissionById(a.getSubmissionId()), a);
         }
 
-        model.addAttribute("students", students);
+        Assignment assignment = assignmentService.getAssignmentById(assignmentId);
+
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
         model.addAttribute("assessmentMap", assessmentMap);
         model.addAttribute("newAssessment", new Assessment());
-        model.addAttribute("assignment", assignmentService.getAssignmentById(assignmentId));
+        model.addAttribute("file", fileService.getFileByFileId(assignment.getFileId()));
+        model.addAttribute("assignment", assignment);
         model.addAttribute("submissionMap", submissionMap);
         model.addAttribute("courseCode", courseCode);
         model.addAttribute("assignmentId", assignmentId);
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("userId", userId);
+        model.addAttribute("courses", courseService.getCourseListByTeacher(userId));
         return "teacher/assignment";
+    }
+
+    @RequestMapping("{courseCode}/add-assignment")
+    public String addAssignment(Model model, @PathVariable("courseCode") String courseCode,
+                                @RequestParam("file") MultipartFile file){
+        User user = userService.getUserByUserId(
+                (String)SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        String faculty = user.getFaculty();
+        if (!file.isEmpty()){
+            StringBuffer sb = new StringBuffer("C:\\Users\\94545\\Desktop\\file");
+            sb.append("\\").append(faculty);
+            String fileId = fileIDBuilder.generateFileId();
+            String fileName = file.getOriginalFilename();
+            sb.append("\\").append(fileName);
+            String storePath = sb.toString();
+            java.io.File filePath = new java.io.File(storePath);
+            if (!filePath.getParentFile().exists()){
+                filePath.getParentFile().mkdirs();
+            }
+            try {
+                file.transferTo(new java.io.File(storePath));
+                com.lee.msims.pojo.common.File databaseFile =
+                        new com.lee.msims.pojo.common.File(faculty, fileId, fileName, storePath,
+                                dateFormatter.formatDateToString(new Date()));
+                fileService.createFile(databaseFile);
+                assignmentService.createAssignment(new Assignment(courseCode, fileId));
+            } catch (IOException e){
+                e.printStackTrace();
+                return "file/500";
+            }
+            return "redirect:/teacher/" + courseCode + "/course-detail";
+        } else {
+            return "file/uploadFail";
+        }
     }
 
     @RequestMapping("{courseCode}/{assignmentId}/write-assessment")
@@ -214,6 +282,7 @@ public class TeacherController {
                                   @ModelAttribute Assessment assessment, @PathVariable("courseCode") String courseCode){
         assessment.setDate(dateFormatter.formatDateToString(new Date()));
         assessmentService.createAssessment(assessment);
+        submissionService.gradeSubmission(submissionService.getSubmissionById(assessment.getSubmissionId()));
         model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
         return "redirect:/teacher/" + courseCode + "/" + assignmentId + "/assignment";
     }
@@ -225,23 +294,6 @@ public class TeacherController {
         assessmentService.editAssessment(assessment);
         model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
         return "redirect:/teacher/" + courseCode + "/" + assignmentId + "/assessments";
-    }
-
-    @RequestMapping("{courseCode}/{assignmentId}/assessments")
-    public String assessments(Model model, @PathVariable("assignmentId") int assignmentId,
-                             @PathVariable("courseCode") String courseCode){
-        Map<Submission, Assessment> assessmentMap = new LinkedHashMap<>();
-        List<Assessment> assessments = assessmentService.getAssessmentsInAssignment(assignmentId);
-        for (Assessment a : assessments){
-            assessmentMap.put(submissionService.getSubmissionById(a.getSubmissionId()), a);
-        }
-        model.addAttribute("title", assignmentService.getAssignmentById(assignmentId).getTitle());
-        model.addAttribute("assessmentMap", assessmentMap);
-        model.addAttribute("courseCode", courseCode);
-        model.addAttribute("assignmentId", assignmentId);
-        model.addAttribute("newAssessment", new Assessment());
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
-        return "teacher/assessment";
     }
 
     @RequestMapping(value = "{courseCode}/create-comment")
@@ -271,32 +323,28 @@ public class TeacherController {
 
     @RequestMapping(value = "{courseCode}/bulletin-board")
     public String bulletinBoard(@PathVariable String courseCode, Model model){
+        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
         model.addAttribute("courseCode", courseCode);
-        model.addAttribute("userId", SecurityUtils.getSubject().getSession().getAttribute("userId"));
+        model.addAttribute("userId", userId);
         model.addAttribute("messages", bulletinBoardService.getAllMessagesOnBoard(courseCode));
         model.addAttribute("newMessage", new BulletinBoardMessage());
+        model.addAttribute("courses", courseService.getCourseListByTeacher(userId));
         return "teacher/bulletin_board";
     }
 
-    @RequestMapping(value = "post-message", method = RequestMethod.POST)
-    public String postMessage(@ModelAttribute BulletinBoardMessage bulletinBoardMessage, Model model){
+    @RequestMapping(value = "{courseCode}/post-message")
+    public String postMessage(@PathVariable String courseCode, Model model,
+                              @ModelAttribute BulletinBoardMessage bulletinBoardMessage){
         bulletinBoardMessage.setDate(dateFormatter.formatDateToString(new Date()));
         bulletinBoardService.postMessageOnBoard(bulletinBoardMessage);
-        return "";
+        return "redirect:/teacher/" + courseCode + "/bulletin-board";
     }
 
-    @RequestMapping(value = "edit-message", method = RequestMethod.POST)
-    public String editMessage(@ModelAttribute BulletinBoardMessage bulletinBoardMessage){
+    @RequestMapping(value = "{courseCode}/edit-message")
+    public String editMessage(@PathVariable String courseCode, Model model,
+                              @ModelAttribute BulletinBoardMessage bulletinBoardMessage){
         bulletinBoardMessage.setDate(dateFormatter.formatDateToString(new Date()));
         bulletinBoardService.editMessage(bulletinBoardMessage);
-        return "";
-    }
-
-    @RequestMapping(value = "my-info", method = RequestMethod.GET)
-    public String myInfo(Model model){
-        String userId = (String)SecurityUtils.getSubject().getSession().getAttribute("userId");
-        User user = userService.getUserByUserId(userId);
-        model.addAttribute("user", user);
-        return "teacher/my_info";
+        return "redirect:/teacher/" + courseCode + "/bulletin-board";
     }
 }

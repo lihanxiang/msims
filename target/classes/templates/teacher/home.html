@@ -1,63 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Home</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MUST SIMS</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/login.css">
 </head>
 <body>
+<header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class=" navbar-collapse">
+        <div class=" navbar-collapse ">
             <div>
-                <a class="navbar-brand" href="/">&nbsp;
-                    <img src="/static/image/2.png" width="30" height="30" alt="">
-                    Must SIMS
+                <a class="navbar-brand" href="/teacher/home">&nbsp;
+                    <img src="/image/2.png" width="30" height="30" alt="">
+                    MSIMS
                 </a>
             </div>
             <div>
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">&nbsp;COES</a>
-                    </li>&nbsp;
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">&nbsp;Moodle</a>
-                    </li>&nbsp;
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">&nbsp;TOS</a>
-                    </li>&nbsp;
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">&nbsp;Student Portal</a>
-                    </li>&nbsp;
+                <ul class="navbar-nav mr-auto" th:if="${courses.size()} ne 0">
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="course" role="button"
+                           data-toggle="dropdown">
+                            Course
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="course">
+                            <div th:each="course : ${courses}">
+                                <a class="dropdown-item" th:text="${course.courseCode} + ' ' + ${course.courseName}"
+                                   th:href="@{'/teacher/' + ${course.courseCode} + '/course-detail'}">
+                                </a>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
         <div>
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" th:text="${userId}">
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userIdDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userId}">
                     </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userIdDropdown">
+                        <a class="dropdown-item text" href="/auth/logout">Logout</a>
+                    </div>
                 </li>&nbsp;
             </ul>
         </div>
     </nav>
+</header>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous">
-
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous">
-    </script>
-
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"
+        integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9+4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

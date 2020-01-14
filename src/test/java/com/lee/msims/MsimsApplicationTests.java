@@ -90,12 +90,12 @@ public class MsimsApplicationTests {
 
     @Test
     public void addSubmission(){
-        Submission submission1 = new Submission(1, 8, "e46f428b4ff84454a8f49f49d0831ad9",
+        /*Submission submission1 = new Submission(1, 8, "e46f428b4ff84454a8f49f49d0831ad9",
                 "commentxxx", dateFormatter.formatDateToString(new Date()), 0);
         Submission submission2 = new Submission(1, 9, "8975a5eda17c44c8b0c99889215dc1ab",
                 "commentyyy", dateFormatter.formatDateToString(new Date()), 0);
         submissionService.createSubmission(submission1);
-        submissionService.createSubmission(submission2);
+        submissionService.createSubmission(submission2);*/
     }
 
     @Test

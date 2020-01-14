@@ -23,6 +23,9 @@ public interface BulletinBoardMapper {
     @Select("SELECT * FROM bulletin_board_message WHERE courseCode = #{courseCode} ORDER BY date DESC")
     List<BulletinBoardMessage> getAllMessagesOnBoard(String courseCode);
 
+    @Select("SELECT * FROM bulletin_board_message WHERE courseCode = #{courseCode} ORDER BY date DESC LIMIT 5")
+    List<BulletinBoardMessage> getFiveLatestMessagesOnBoard(String courseCode);
+
     // Delete
     @Delete("Delete FROM bulletin_board_message WHERE id = #{id}")
     void deleteMessageOnBoard(int id);

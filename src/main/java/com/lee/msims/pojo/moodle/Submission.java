@@ -7,7 +7,7 @@ public class Submission {
 
     private int id;
     private int assignmentId;
-    private int studentId;
+    private String studentId;
     private String fileId;
     private String comment;
     private String date;
@@ -15,7 +15,7 @@ public class Submission {
 
     public Submission(){}
 
-    public Submission(int assignmentId, int studentId, String fileId,
+    public Submission(int assignmentId, String studentId, String fileId,
                       String comment, String date, int isGraded) {
         this.assignmentId = assignmentId;
         this.studentId = studentId;

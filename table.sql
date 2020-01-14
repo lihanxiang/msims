@@ -39,7 +39,7 @@ CREATE TABLE file (
 # Moddle tables
 create table student_course(
 	id INT(32) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    studentId VARCHAR(32) NOT NULL,
+    studentId VARCHAR(32) NOT NULL, 
     courseCode VARCHAR(32) NOT NULL
 ) ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
@@ -110,13 +110,11 @@ CREATE TABLE assessment (
     comment TEXT,
     date VARCHAR(32) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
-
+drop table assignment;
 CREATE TABLE assignment (
     id INT(32) PRIMARY KEY AUTO_INCREMENT,
     courseCode VARCHAR(32) NOT NULL,
-    title VARCHAR(32) not null,
-    description TEXT NOT NULL,
-    deadline VARCHAR(32) NOT NULL
+    fileId VARCHAR(32) NOT NULL
 )  ENGINE=INNODB , AUTO_INCREMENT=1 , CHARSET=UTF8;
 
 CREATE TABLE student_assignment (

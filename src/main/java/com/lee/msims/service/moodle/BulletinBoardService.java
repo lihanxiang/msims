@@ -16,6 +16,8 @@ public interface BulletinBoardService {
     // Select
     List<BulletinBoardMessage> getAllMessagesOnBoard(String courseCode);
 
+    List<BulletinBoardMessage> getFiveLatestMessagesOnBoard(String courseCode);
+
     // Delete
     void deleteMessageOnBoard(int id);
 }

@@ -20,31 +20,18 @@
                     </a>
                 </div>
                 <div>
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto" th:if="${courses.size()} ne 0">
                         <li class="nav-item active dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="course" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               data-toggle="dropdown">
                                 Course
                             </a>
                             <div class="dropdown-menu" aria-labelledby="course">
-                                <a class="dropdown-item" href="/teacher/courses">My Course</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/student/gpa">My GPA</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/course/gpa">My Homework</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">My Assessment</a>
-                            </div>
-                        </li>
-                        <li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="message" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Message
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="message">
-                                <a class="dropdown-item" href="/course/courses">Bulletin Board</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/course/gpa">Discussion</a>
+                                <div th:each="course : ${courses}">
+                                    <a class="dropdown-item" th:text="${course.courseCode} + ' ' + ${course.courseName}"
+                                       th:href="@{'/teacher/' + ${course.courseCode} + '/course-detail'}">
+                                    </a>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -57,10 +44,6 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userId}">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userIdDropdown">
-                            <a class="dropdown-item text" href="#">User Info</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text" href="#">Back to MSIMS Home</a>
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item text" href="/auth/logout">Logout</a>
                         </div>
                     </li>&nbsp;
@@ -70,9 +53,6 @@
     </header>
 
     <main>
-        <div th:if="${msg} ne null" class="alert alert-secondary" role="alert" th:text="${msg}">
-        </div>
-
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1 class="display-4">Discussion Area</h1>
@@ -99,8 +79,8 @@
                                     </a>
                                     <p class="card-text"><small class="text-muted" th:text="${dis.getKey().date}"></small></p>
                                     <a class="btn btn-primary" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}"
-                                       th:if="${dis.value.size()} gt 0" role="button" aria-expanded="false"
-                                       th:text="'Show All Comments (' + ${dis.getValue().size()} + ')'">
+                                       th:if="${dis.value.size()} gt 0" role="button" aria-expanded="false">
+                                        Show All Comments
                                     </a>
                                     <a class="btn btn-primary" data-toggle="collapse" th:href="'#collapse2' + ${disStat.index}"
                                        role="button" aria-expanded="false">
@@ -116,11 +96,11 @@
                                             <label for="content6">Title</label>
                                             <textarea class="form-control" th:name="title" id="content6" rows="3"
                                                       th:text="${dis.getKey().title}" th:value="${dis.getKey().title}">
-                                        </textarea><br>
+                                            </textarea><br>
                                             <label for="content7">Detail</label>
                                             <textarea class="form-control" th:name="content" id="content7" rows="3"
                                                       th:text="${dis.getKey().content}" th:value="${dis.getKey().content}">
-                                        </textarea><br>
+                                            </textarea><br>
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </form><br>
                                     </div>
@@ -242,7 +222,7 @@
                 <div class="col">
                     <div class="card border-secondary mb-3" style="max-width: 38rem;">
                         <div class="card-header">
-                            <p>Create a Discussion</p>
+                            Create a Discussion
                         </div>
                         <div class="card-body text-secondary">
                             <form th:action="@{'/teacher/' + ${courseCode} + '/create-discussion'}"
@@ -264,31 +244,6 @@
         </div>
     </main>
 
-    <footer class="navbar-fixed-bottom page-footer font-small blue pt-4">
-        <div class="container text-center text-md-left">
-            <div class="row">
-                <div class="col-md-6 mt-md-0 mt-3">
-                    <h5 class="text-uppercase">MUST Student Information Management System</h5>
-                    <p>Something to say</p>
-                </div>
-                <hr class="clearfix w-100 d-md-none pb-3">
-
-                <div class="col-md-6 mb-md-0 mb-3">
-                    <h5 class="text-uppercase">Contact Me</h5>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="mailto:l945457758@email.com">Email</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2019 Copyright:
-            <a href="https://lihanxiang.github.io"> LiHanxiang</a>
-        </div>
-    </footer>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

@@ -2,15 +2,12 @@ html {
     position: relative;
     min-height: 100%;
 }
-.file-group{
-    margin-top: 5%;
+.table>tbody>tr>td{
+    border:0;
 }
 #component{
     margin-left: 5%;
     margin-bottom: 10%;
-}
-#side{
-
 }
 #table {
     margin-top: 5%;

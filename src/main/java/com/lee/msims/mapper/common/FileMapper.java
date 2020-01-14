@@ -15,7 +15,7 @@ public interface FileMapper {
     void createFile(File file);
 
     // Update
-    @Update("UPDATE file SET name = #{name} AND path = #{path}")
+    @Update("UPDATE file SET name = #{name}, path = #{path}")
     void editFileInfo(File file);
 
     // Select

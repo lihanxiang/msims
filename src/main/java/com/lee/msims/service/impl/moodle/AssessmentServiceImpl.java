@@ -32,6 +32,11 @@ public class AssessmentServiceImpl implements AssessmentService {
     }
 
     @Override
+    public Assessment getAssessmentBySubmissionId(int submissionId) {
+        return assessmentMapper.getAssessmentBySubmissionId(submissionId);
+    }
+
+    @Override
     public List<Assessment> getAssessmentsInAssignment(int assignmentId) {
         return assessmentMapper.getAssessmentsInAssignment(assignmentId);
     }
