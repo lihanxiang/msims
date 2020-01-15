@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="collapse multi-collapse" th:id="'editDiscussion' + ${disStat.index}">
                                     <div style="width: 90%; margin-left: 2%; margin-right: 2%">
-                                        <form th:action="@{'/teacher/' + ${courseCode} + '/edit-discussion'}"
+                                        <form th:action="@{'/student/' + ${courseCode} + '/edit-discussion'}"
                                               th:object="${newDiscussion}">
                                             <input type="hidden" class="form-control" name="id"
                                                    th:value="${dis.getKey().id}">
@@ -115,7 +115,7 @@
                                             <p class="card-text"><small class="text-muted" th:text="${comment.date}"></small></p>
                                             <div class="collapse multi-collapse" th:id="'collapse' + ${disStat.index} + ${commentStat.index}">
                                                 <div style="width: 90%; margin-left: 2%; margin-right: 2%">
-                                                    <form th:action="@{'/teacher/' + ${courseCode} + '/reply-comment'}"
+                                                    <form th:action="@{'/student/' + ${courseCode} + '/reply-comment'}"
                                                           th:object="${newComment}">
                                                         <input type="hidden" class="form-control" name="discussionId"
                                                                 th:value="${comment.getDiscussionId()}">
@@ -144,7 +144,7 @@
                                                             + ${commentStat.index} + ${replyStat.index}"
                                                                aria-expanded="false" th:text="'   ' + ${reply.commenter}"></a>
                                                             &nbsp;@&nbsp;
-                                                            <a href="#" data-toggle="collapse" th:href="'#collapse' + ${disStat.index}
+                                                            <a href="#" data-toggle="collapse" th:href="'#collapse1' + ${disStat.index}
                                                             + ${commentStat.index} + ${replyStat.index}"
                                                                aria-expanded="false" th:text="${reply.respondent}"></a>
                                                         </p>
@@ -154,7 +154,7 @@
                                                         <div class="collapse multi-collapse" th:id="'collapse'  + ${disStat.index}
                                                      + ${commentStat.index} + ${replyStat.index}">
                                                             <div style="width: 90%; margin-left: 2%; margin-right: 2%">
-                                                                <form th:action="@{'/teacher/' + ${courseCode} + '/reply-comment'}"
+                                                                <form th:action="@{'/student/' + ${courseCode} + '/reply-comment'}"
                                                                       th:object="${newComment}">
                                                                     <input type="hidden" class="form-control" name="discussionId"
                                                                            th:value="${reply.discussionId}">
@@ -175,6 +175,30 @@
                                                                 </form>
                                                             </div>
                                                         </div>
+                                                        <div class="collapse multi-collapse" th:id="'collapse1'  + ${disStat.index}
+                                                     + ${commentStat.index} + ${replyStat.index}">
+                                                            <div style="width: 90%; margin-left: 2%; margin-right: 2%">
+                                                                <form th:action="@{'/student/' + ${courseCode} + '/reply-comment'}"
+                                                                      th:object="${newComment}">
+                                                                    <input type="hidden" class="form-control" name="discussionId"
+                                                                           th:value="${reply.discussionId}">
+                                                                    <input type="hidden" class="form-control" name="pid"
+                                                                           th:value="${comment.getId()}">
+                                                                    <input type="hidden" class="form-control" name="respondent"
+                                                                           th:value="${reply.respondent}">
+                                                                    <input type="hidden" class="form-control" name="respondentId"
+                                                                           th:value="${reply.respondentId}">
+                                                                    <label for="content8"></label>
+                                                                    <textarea class="form-control" id="content8" rows="3"
+                                                                              th:field="*{content}" style="white-space: pre-wrap;"
+                                                                              placeholder="Write your comment" required="required">
+                                                                    </textarea><br>
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        Submit
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -184,7 +208,7 @@
 
                                 <div class="collapse multi-collapse" th:id="'collapse2' + ${disStat.index}">
                                     <div style="width: 90%; margin-left: 2%; margin-right: 2%">
-                                        <form th:action="@{'/teacher/' + ${courseCode} + '/create-comment'}"
+                                        <form th:action="@{'/student/' + ${courseCode} + '/create-comment'}"
                                               th:object="${newComment}">
                                             <input type="hidden" class="form-control" name="discussionId"
                                                    th:value="${dis.getKey().getId()}">
@@ -201,18 +225,7 @@
                                         </form><br>
                                     </div>
                                 </div>
-
-                                <!--<div class="collapse multi-collapse" th:id="'collapse2' + ${disStat.index}">
-                                    <form action="#" th:action="@{'/course/' + ${courseCode} + '/create-comment'}"
-                                          th:object="${emptyComment}" method="post">
-                                        <label for="content3"></label>
-                                        <textarea class="form-control" id="content3" rows="3" th:field="*{content}"
-                                                  placeholder="Write your comment" required>
-                                        </textarea><br>
-                                    </form>
-                                </div>-->
                             </div>
-
                         </li>
                     </ul>
                 </div>
@@ -220,12 +233,12 @@
                 <div class="col-1"></div>
 
                 <div class="col">
-                    <div class="card border-secondary mb-3" style="max-width: 38rem;">
+                    <div class="card border-secondary mb-3" style="max-width: 30rem;">
                         <div class="card-header">
                             Create a Discussion
                         </div>
                         <div class="card-body text-secondary">
-                            <form th:action="@{'/teacher/' + ${courseCode} + '/create-discussion'}"
+                            <form th:action="@{'/student/' + ${courseCode} + '/create-discussion'}"
                                   th:object="${newDiscussion}">
                                 <label for="content5">Title</label>
                                 <textarea class="form-control" name="title" id="content5" rows="3" th:field="*{title}"

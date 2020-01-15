@@ -36,7 +36,6 @@ public class ShiroConfig {
         definition.addPathDefinition("/auth/logout", "logout");
         definition.addPathDefinition("/student/**", "authc");
         definition.addPathDefinition("/teacher/**", "authc");
-        definition.addPathDefinition("/admin/**", "authc");
         return definition;
     }
 

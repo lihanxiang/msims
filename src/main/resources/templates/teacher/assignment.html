@@ -20,31 +20,18 @@
                     </a>
                 </div>
                 <div>
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto" th:if="${courses.size()} ne 0">
                         <li class="nav-item active dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="course" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               data-toggle="dropdown">
                                 Course
                             </a>
                             <div class="dropdown-menu" aria-labelledby="course">
-                                <a class="dropdown-item" href="/teacher/courses">My Course</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/student/gpa">My GPA</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/course/gpa">My Homework</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">My Assessment</a>
-                            </div>
-                        </li>
-                        <li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="message" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Message
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="message">
-                                <a class="dropdown-item" href="/course/courses">Bulletin Board</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/course/gpa">Discussion</a>
+                                <div th:each="course : ${courses}">
+                                    <a class="dropdown-item" th:text="${course.courseCode} + ' ' + ${course.courseName}"
+                                       th:href="@{'/teacher/' + ${course.courseCode} + '/course-detail'}">
+                                    </a>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -57,10 +44,6 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userId}">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userIdDropdown">
-                            <a class="dropdown-item text" href="#">User Info</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text" href="#">Back to MSIMS Home</a>
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item text" href="/auth/logout">Logout</a>
                         </div>
                     </li>&nbsp;
@@ -182,7 +165,7 @@
                 </div>
                 <div class="col-3"></div>
                 <div class="col">
-                    <div class="card border-secondary mb-3" style="max-width: 38rem; margin-right: 5%">
+                    <div class="card border-secondary mb-3" style="max-width: 30rem; margin-right: 5%">
                         <div class="card-header">
                             Haven't submitted yet
                         </div>
